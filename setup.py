@@ -36,6 +36,7 @@ setup(name='ftw.theming',
 
       install_requires=[
         'Plone',
+        'path.py',
         'setuptools',
         ],
       tests_require=tests_require,
