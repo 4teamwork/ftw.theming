@@ -13,7 +13,7 @@ class SassResource(object):
     """
     implements(ISassResource)
 
-    def __init__(self, package, relative_path, slot,
+    def __init__(self, package, relative_path, slot='addon',
                  profile=None, for_=INavigationRoot, layer=Interface):
         if slot not in SLOTS:
             raise ValueError('Invalid slot "{0}". Valid slots: {1}'.format(

@@ -5,6 +5,7 @@ from zope.interface import Interface
 SLOTS = ('top',
          'variables',
          'ftw.theming',
+         'addon',
          'theme',
          'policy',
          'bottom')
@@ -15,7 +16,7 @@ class ISassResource(Interface):
     It holds the relevant information for building the sass pipeline.
     """
 
-    def __init__(package, relative_path, slot,
+    def __init__(package, relative_path, slot='addon',
                  profile=None, for_=INavigationRoot, layer=Interface):
         """Initialize a sass resource.
 

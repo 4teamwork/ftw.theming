@@ -15,7 +15,7 @@ class TestSassResource(MockTestCase):
         verifyClass(ISassResource, SassResource)
 
     def test_create_resource(self):
-        resource = SassResource('ftw.theming.tests', 'resources/foo.sass', 'top')
+        resource = SassResource('ftw.theming.tests', 'resources/foo.sass')
         self.assertTrue(resource)
 
     def test_requires_valid_slot(self):
@@ -24,16 +24,16 @@ class TestSassResource(MockTestCase):
 
     def test_package_must_exist(self):
         with self.assertRaises(ImportError):
-            SassResource('some.package.that.does.not.exist', 'foo.sass', 'top')
+            SassResource('some.package.that.does.not.exist', 'foo.sass')
 
     def test_full_path_is_generated(self):
-        resource = SassResource('ftw.theming.tests', 'resources/foo.sass', 'top')
+        resource = SassResource('ftw.theming.tests', 'resources/foo.sass')
         self.assertEquals(Path(__file__).parent.joinpath('resources/foo.sass'),
                           resource.path)
 
     def test_file_must_exist(self):
         with self.assertRaises(OSError) as cm:
-            SassResource('ftw.theming.tests', 'missing.file.sass', 'top')
+            SassResource('ftw.theming.tests', 'missing.file.sass')
         self.assertEquals(
             "[Errno 2] No such file or directory: '{0}/missing.file.sass'".format(
                 Path(__file__).parent),
@@ -45,7 +45,7 @@ class TestSassResource(MockTestCase):
         request = self.providing_stub(Interface)
         self.replay()
 
-        resource = SassResource('ftw.theming.tests', 'resources/foo.sass', 'top',
+        resource = SassResource('ftw.theming.tests', 'resources/foo.sass',
                                 for_=INavigationRoot, layer=Interface)
         self.assertTrue(resource.available(matching_context, request))
         self.assertFalse(resource.available(not_matching_context, request))
@@ -56,7 +56,7 @@ class TestSassResource(MockTestCase):
         not_matching_request = self.providing_stub(Interface)
         self.replay()
 
-        resource = SassResource('ftw.theming.tests', 'resources/foo.sass', 'top',
+        resource = SassResource('ftw.theming.tests', 'resources/foo.sass',
                                 for_=Interface, layer=IDefaultBrowserLayer)
         self.assertTrue(resource.available(context, matching_request))
         self.assertFalse(resource.available(context, not_matching_request))
@@ -66,7 +66,7 @@ class TestSassResource(MockTestCase):
         request = self.providing_stub(Interface)
         self.replay()
 
-        resource = SassResource('ftw.theming.tests', 'resources/foo.sass', 'top',
+        resource = SassResource('ftw.theming.tests', 'resources/foo.sass',
                                 for_=Interface, layer=Interface,
                                 profile='foo.bar:default')
 
