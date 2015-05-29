@@ -11,16 +11,16 @@ SLOTS = ('top',
          'bottom')
 
 
-class ISassRegistry(Interface):
-    """The sass registry holds all registered ISassResource objects.
+class ISCSSRegistry(Interface):
+    """The scss registry holds all registered ISCSSResource objects.
     It decides which resources are used for compiling to CSS.
     """
 
     def add_resource(resource):
-        """Add a sass resource to the registry.
+        """Add a scss resource to the registry.
 
-        :param resource: A sass resource object.
-        :type resource: :py:class:`ftw.theming.interfaces.ISassResource`
+        :param resource: A scss resource object.
+        :type resource: :py:class:`ftw.theming.interfaces.ISCSSResource`
         """
 
     def get_resources(context, request, profileinfo=None,
@@ -37,29 +37,29 @@ class ISassRegistry(Interface):
         :type profile: :py:class:`ftw.theming.profileinfo.ProfileInfo`
         :param include_unavailable: Disable filtering unavailable resources.
         :type include_unavailable: bool (default: False)
-        :returns: A list of sass resource objects.
-        :rtype: list of :py:class:`ftw.theming.interfaces.ISassResource`
+        :returns: A list of scss resource objects.
+        :rtype: list of :py:class:`ftw.theming.interfaces.ISCSSResource`
         """
 
 
-class ISassResource(Interface):
-    """A sass resource represents a sass file for registering in the sass registry.
-    It holds the relevant information for building the sass pipeline.
+class ISCSSResource(Interface):
+    """A scss resource represents a scss file for registering in the scss registry.
+    It holds the relevant information for building the scss pipeline.
 
     Resources are identified by name. The name of the resource contains the
     package dottedname and the relative path to the file,
-    e.g. "my.package.browser/resources/style.sass"
+    e.g. "my.package.browser/resources/style.scss"
     """
 
     def __init__(package, relative_path, slot='addon',
                  profile=None, for_=INavigationRoot, layer=Interface,
                  before=None, after=None):
-        """Initialize a sass resource.
+        """Initialize a scss resource.
 
         :param package: The name of the python package where the resource is
           registered.
         :type package: string
-        :param relative_path: The path to the sass file relative to the
+        :param relative_path: The path to the scss file relative to the
           package directory.
         :type relative_path: string
         :param slot: The slot where the resource belongs. This must be one of

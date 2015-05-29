@@ -1,13 +1,13 @@
 from collections import OrderedDict
 from ftw.theming.exceptions import CyclicResourceOrder
-from ftw.theming.interfaces import ISassRegistry
+from ftw.theming.interfaces import ISCSSRegistry
 from ftw.theming.interfaces import SLOTS
 from tarjan import tarjan
 from zope.interface import implements
 
 
-class SassRegistry(object):
-    implements(ISassRegistry)
+class SCSSRegistry(object):
+    implements(ISCSSRegistry)
 
     def __init__(self):
         self.resources = []

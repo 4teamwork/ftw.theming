@@ -1,6 +1,6 @@
 from ftw.testing import MockTestCase
-from ftw.theming.interfaces import ISassResource
-from ftw.theming.resource import SassResource
+from ftw.theming.interfaces import ISCSSResource
+from ftw.theming.resource import SCSSResource
 from ftw.theming.tests.profileinfo_stub import ProfileInfoStub
 from path import Path
 from plone.app.layout.navigation.interfaces import INavigationRoot
@@ -9,33 +9,33 @@ from zope.interface.verify import verifyClass
 from zope.publisher.interfaces.browser import IDefaultBrowserLayer
 
 
-class TestSassResource(MockTestCase):
+class TestSCSSResource(MockTestCase):
 
     def test_implements_interface(self):
-        verifyClass(ISassResource, SassResource)
+        verifyClass(ISCSSResource, SCSSResource)
 
     def test_create_resource(self):
-        resource = SassResource('ftw.theming.tests', 'resources/foo.sass')
+        resource = SCSSResource('ftw.theming.tests', 'resources/foo.scss')
         self.assertTrue(resource)
 
     def test_requires_valid_slot(self):
         with self.assertRaises(ValueError):
-            SassResource('ftw.theming.tests', 'resource/foo.sass', 'not existing slot')
+            SCSSResource('ftw.theming.tests', 'resource/foo.scss', 'not existing slot')
 
     def test_package_must_exist(self):
         with self.assertRaises(ImportError):
-            SassResource('some.package.that.does.not.exist', 'foo.sass')
+            SCSSResource('some.package.that.does.not.exist', 'foo.scss')
 
     def test_full_path_is_generated(self):
-        resource = SassResource('ftw.theming.tests', 'resources/foo.sass')
-        self.assertEquals(Path(__file__).parent.joinpath('resources/foo.sass'),
+        resource = SCSSResource('ftw.theming.tests', 'resources/foo.scss')
+        self.assertEquals(Path(__file__).parent.joinpath('resources/foo.scss'),
                           resource.path)
 
     def test_file_must_exist(self):
         with self.assertRaises(OSError) as cm:
-            SassResource('ftw.theming.tests', 'missing.file.sass')
+            SCSSResource('ftw.theming.tests', 'missing.file.scss')
         self.assertEquals(
-            "[Errno 2] No such file or directory: '{0}/missing.file.sass'".format(
+            "[Errno 2] No such file or directory: '{0}/missing.file.scss'".format(
                 Path(__file__).parent),
             str(cm.exception))
 
@@ -45,7 +45,7 @@ class TestSassResource(MockTestCase):
         request = self.providing_stub(Interface)
         self.replay()
 
-        resource = SassResource('ftw.theming.tests', 'resources/foo.sass',
+        resource = SCSSResource('ftw.theming.tests', 'resources/foo.scss',
                                 for_=INavigationRoot, layer=Interface)
         self.assertTrue(resource.available(matching_context, request))
         self.assertFalse(resource.available(not_matching_context, request))
@@ -56,7 +56,7 @@ class TestSassResource(MockTestCase):
         not_matching_request = self.providing_stub(Interface)
         self.replay()
 
-        resource = SassResource('ftw.theming.tests', 'resources/foo.sass',
+        resource = SCSSResource('ftw.theming.tests', 'resources/foo.scss',
                                 for_=Interface, layer=IDefaultBrowserLayer)
         self.assertTrue(resource.available(context, matching_request))
         self.assertFalse(resource.available(context, not_matching_request))
@@ -66,7 +66,7 @@ class TestSassResource(MockTestCase):
         request = self.providing_stub(Interface)
         self.replay()
 
-        resource = SassResource('ftw.theming.tests', 'resources/foo.sass',
+        resource = SCSSResource('ftw.theming.tests', 'resources/foo.scss',
                                 for_=Interface, layer=Interface,
                                 profile='foo.bar:default')
 

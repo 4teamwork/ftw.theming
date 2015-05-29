@@ -1,4 +1,4 @@
-from ftw.theming.interfaces import ISassResource
+from ftw.theming.interfaces import ISCSSResource
 from ftw.theming.interfaces import SLOTS
 from ftw.theming.profileinfo import ProfileInfo
 from path import Path
@@ -7,11 +7,11 @@ from zope.interface import implements
 from zope.interface import Interface
 
 
-class SassResource(object):
-    """A sass resource represents a sass file for registering in the sass registry.
-    It holds the relevant information for building the sass pipeline.
+class SCSSResource(object):
+    """A scss resource represents a scss file for registering in the scss registry.
+    It holds the relevant information for building the scss pipeline.
     """
-    implements(ISassResource)
+    implements(ISCSSResource)
 
     def __init__(self, package, relative_path, slot='addon',
                  profile=None, for_=INavigationRoot, layer=Interface,
