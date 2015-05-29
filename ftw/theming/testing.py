@@ -2,11 +2,23 @@ from ftw.builder.testing import BUILDER_LAYER
 from ftw.builder.testing import functional_session_factory
 from ftw.builder.testing import set_builder_session_factory
 from ftw.testing.layer import COMPONENT_REGISTRY_ISOLATION
+from ftw.testing.layer import ComponentRegistryLayer
 from ftw.testing.layer import TEMP_DIRECTORY
 from plone.app.testing import applyProfile
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import PloneSandboxLayer
 from zope.configuration import xmlconfig
+
+
+class MetaZCMLLayer(ComponentRegistryLayer):
+
+    def setUp(self):
+        super(MetaZCMLLayer, self).setUp()
+        import ftw.theming
+        self.load_zcml_file('meta.zcml', ftw.theming)
+
+
+META_ZCML = MetaZCMLLayer()
 
 
 class ThemingLayer(PloneSandboxLayer):
