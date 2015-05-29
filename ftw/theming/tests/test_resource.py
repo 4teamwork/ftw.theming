@@ -1,15 +1,17 @@
-from ftw.testing import MockTestCase
 from ftw.theming.interfaces import ISCSSResource
 from ftw.theming.resource import SCSSResource
-from ftw.theming.tests.profileinfo_stub import ProfileInfoStub
+from ftw.theming.tests.stubs import CONTEXT
+from ftw.theming.tests.stubs import ProfileInfoStub
+from ftw.theming.tests.stubs import REQUEST
+from ftw.theming.tests.stubs import Stub
 from path import Path
 from plone.app.layout.navigation.interfaces import INavigationRoot
-from zope.interface import Interface
+from unittest2 import TestCase
 from zope.interface.verify import verifyClass
 from zope.publisher.interfaces.browser import IDefaultBrowserLayer
 
 
-class TestSCSSResource(MockTestCase):
+class TestSCSSResource(TestCase):
 
     def test_implements_interface(self):
         verifyClass(ISCSSResource, SCSSResource)
@@ -40,36 +42,21 @@ class TestSCSSResource(MockTestCase):
             str(cm.exception))
 
     def test_available__context_must_match_for_interface(self):
-        matching_context = self.providing_stub(INavigationRoot)
-        not_matching_context = self.providing_stub(Interface)
-        request = self.providing_stub(Interface)
-        self.replay()
-
         resource = SCSSResource('ftw.theming.tests', 'resources/foo.scss',
-                                for_=INavigationRoot, layer=Interface)
-        self.assertTrue(resource.available(matching_context, request))
-        self.assertFalse(resource.available(not_matching_context, request))
+                                for_=INavigationRoot)
+        self.assertTrue(resource.available(Stub(INavigationRoot), REQUEST))
+        self.assertFalse(resource.available(Stub(), REQUEST))
 
     def test_available__request_must_match_layer_interface(self):
-        context = self.providing_stub(Interface)
-        matching_request = self.providing_stub(IDefaultBrowserLayer)
-        not_matching_request = self.providing_stub(Interface)
-        self.replay()
-
         resource = SCSSResource('ftw.theming.tests', 'resources/foo.scss',
-                                for_=Interface, layer=IDefaultBrowserLayer)
-        self.assertTrue(resource.available(context, matching_request))
-        self.assertFalse(resource.available(context, not_matching_request))
+                                layer=IDefaultBrowserLayer)
+        self.assertTrue(resource.available(CONTEXT, Stub(IDefaultBrowserLayer)))
+        self.assertFalse(resource.available(CONTEXT, Stub()))
 
     def test_available__profile_must_be_installed_when_defined(self):
-        context = self.providing_stub(Interface)
-        request = self.providing_stub(Interface)
-        self.replay()
-
         resource = SCSSResource('ftw.theming.tests', 'resources/foo.scss',
-                                for_=Interface, layer=Interface,
                                 profile='foo.bar:default')
 
-        self.assertTrue(resource.available(context, request,
+        self.assertTrue(resource.available(CONTEXT, REQUEST,
                                            ProfileInfoStub('foo.bar:default')))
-        self.assertFalse(resource.available(context, request, ProfileInfoStub()))
+        self.assertFalse(resource.available(CONTEXT, REQUEST, ProfileInfoStub()))
