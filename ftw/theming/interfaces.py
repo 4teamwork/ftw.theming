@@ -11,6 +11,37 @@ SLOTS = ('top',
          'bottom')
 
 
+class ISassRegistry(Interface):
+    """The sass registry holds all registered ISassResource objects.
+    It decides which resources are used for compiling to CSS.
+    """
+
+    def add_resource(resource):
+        """Add a sass resource to the registry.
+
+        :param resource: A sass resource object.
+        :type resource: :py:class:`ftw.theming.interfaces.ISassResource`
+        """
+
+    def get_resources(context, request, profileinfo=None,
+                      include_unavailable=False):
+        """Return the resources for a context and a request.
+        The resources are filtered and sorted by slots.
+
+        :param context: A acquisition wrapped context object.
+        :type context: object
+        :param request: The request object.
+        :param request: object
+        :param profileinfo: A profileinfo object for checking whether
+          the profile is installed.
+        :type profile: :py:class:`ftw.theming.profileinfo.ProfileInfo`
+        :param include_unavailable: Disable filtering unavailable resources.
+        :type include_unavailable: bool (default: False)
+        :returns: A list of sass resource objects.
+        :rtype: list of :py:class:`ftw.theming.interfaces.ISassResource`
+        """
+
+
 class ISassResource(Interface):
     """A sass resource represents a sass file for registering in the sass registry.
     It holds the relevant information for building the sass pipeline.
@@ -57,6 +88,7 @@ class ISassResource(Interface):
         :param profileinfo: A profileinfo object for checking whether
           the profile is installed.
         :type profile: :py:class:`ftw.theming.profileinfo.ProfileInfo`
-        :returns: ``True`` when the resource is available and should be included.
+        :returns: ``True`` when the resource is available and should be
+          included.
         :rtype: bool
         """
