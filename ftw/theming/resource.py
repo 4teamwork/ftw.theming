@@ -1,5 +1,6 @@
 from ftw.theming.interfaces import ISassResource
 from ftw.theming.interfaces import SLOTS
+from ftw.theming.profileinfo import ProfileInfo
 from path import Path
 from plone.app.layout.navigation.interfaces import INavigationRoot
 from zope.interface import implements
@@ -25,6 +26,20 @@ class SassResource(object):
         self.profile = profile
         self.for_ = for_
         self.layer = layer
+
+    def available(self, context, request, profileinfo=None):
+        if not self.for_.providedBy(context):
+            return False
+
+        if not self.layer.providedBy(request):
+            return False
+
+        if self.profile is not None:
+            profileinfo = profileinfo or ProfileInfo(context)
+            if not profileinfo.is_profile_installed(self.profile):
+                return False
+
+        return True
 
     @staticmethod
     def _resolve_path(package, relative_path):

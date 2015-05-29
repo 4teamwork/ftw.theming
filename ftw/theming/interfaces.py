@@ -39,3 +39,23 @@ class ISassResource(Interface):
           is registered.
         :type layer: :py:class:`zope.interface.Interface`
         """
+
+    def available(context, request, profileinfo=None):
+        """Check whether the resource is available for this context.
+
+        Checks applied:
+
+        - ``context`` must provide the ``for_``-interface of the resorce
+        - ``request`` must provide the ``layer``-interface of the resorce
+        - the profile must be installed.
+
+        :param context: A acquisition wrapped context object.
+        :type context: object
+        :param request: The request object.
+        :type request: object
+        :param profileinfo: A profileinfo object for checking whether
+          the profile is installed.
+        :type profile: :py:class:`ftw.theming.profileinfo.ProfileInfo`
+        :returns: ``True`` when the resource is available and should be included.
+        :rtype: bool
+        """
