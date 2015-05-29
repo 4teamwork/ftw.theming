@@ -45,10 +45,15 @@ class ISassRegistry(Interface):
 class ISassResource(Interface):
     """A sass resource represents a sass file for registering in the sass registry.
     It holds the relevant information for building the sass pipeline.
+
+    Resources are identified by name. The name of the resource contains the
+    package dottedname and the relative path to the file,
+    e.g. "my.package.browser/resources/style.sass"
     """
 
     def __init__(package, relative_path, slot='addon',
-                 profile=None, for_=INavigationRoot, layer=Interface):
+                 profile=None, for_=INavigationRoot, layer=Interface,
+                 before=None, after=None):
         """Initialize a sass resource.
 
         :param package: The name of the python package where the resource is
@@ -70,6 +75,12 @@ class ISassResource(Interface):
         :param layer: The request layer interface for which this resource
           is registered.
         :type layer: :py:class:`zope.interface.Interface`
+        :param before: Move this resource before the other resource with that
+          name within the same slot.
+        :type before: string (name of other resource)
+        :param after: Move this resource after the other resource with that
+          name within the same slot.
+        :type after: string (name of other resource)
         """
 
     def available(context, request, profileinfo=None):

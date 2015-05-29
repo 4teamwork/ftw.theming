@@ -14,11 +14,13 @@ class SassResource(object):
     implements(ISassResource)
 
     def __init__(self, package, relative_path, slot='addon',
-                 profile=None, for_=INavigationRoot, layer=Interface):
+                 profile=None, for_=INavigationRoot, layer=Interface,
+                 before=None, after=None):
         if slot not in SLOTS:
             raise ValueError('Invalid slot "{0}". Valid slots: {1}'.format(
                     slot, SLOTS))
 
+        self.name = self._make_resource_name(package, relative_path)
         self.package = package
         self.relative_path = relative_path
         self.path = self._resolve_path(package, relative_path)
@@ -26,6 +28,8 @@ class SassResource(object):
         self.profile = profile
         self.for_ = for_
         self.layer = layer
+        self.before = before and self._make_resource_name(package, before)
+        self.after = after and self._make_resource_name(package, after)
 
     def available(self, context, request, profileinfo=None):
         if not self.for_.providedBy(context):
@@ -48,3 +52,9 @@ class SassResource(object):
         with absolute_path.open():
             pass  # test if file exists
         return absolute_path
+
+    @staticmethod
+    def _make_resource_name(package, relative_path):
+        if ':' in relative_path:
+            return relative_path
+        return ':'.join((package, relative_path))

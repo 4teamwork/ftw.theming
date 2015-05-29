@@ -1,8 +1,9 @@
-from ftw.theming.tests.profileinfo_stub import ProfileInfoStub
 from ftw.testing import MockTestCase
+from ftw.theming.exceptions import CyclicResourceOrder
 from ftw.theming.interfaces import ISassRegistry
 from ftw.theming.registry import SassRegistry
 from ftw.theming.resource import SassResource
+from ftw.theming.tests.profileinfo_stub import ProfileInfoStub
 from operator import attrgetter
 from zope.interface import Interface
 from zope.interface.verify import verifyClass
@@ -97,3 +98,49 @@ class TestSassRegistry(MockTestCase):
             ['resources/foo.sass', 'resources/bar.sass'],
             paths(registry.get_resources(object(), object(), ProfileInfoStub(),
                                          include_unavailable=True)))
+
+    def test_reordering_resources_within_slot_with_before(self):
+        registry = SassRegistry()
+        registry.add_resource(TestingResource('ftw.theming.tests',
+                                              'resources/foo.sass'))
+        registry.add_resource(TestingResource('ftw.theming.tests',
+                                              'resources/bar.sass'))
+        registry.add_resource(TestingResource('ftw.theming.tests',
+                                              'resources/baz.sass',
+                                              before='resources/bar.sass'))
+
+        self.assertEquals(
+            ['resources/foo.sass', 'resources/baz.sass', 'resources/bar.sass'],
+            paths(registry.get_resources(object(), object())))
+
+    def test_reordering_resources_within_slot_with_after(self):
+        registry = SassRegistry()
+        registry.add_resource(TestingResource('ftw.theming.tests',
+                                              'resources/foo.sass',
+                                              after='resources/bar.sass'))
+        registry.add_resource(TestingResource('ftw.theming.tests',
+                                              'resources/bar.sass'))
+        registry.add_resource(TestingResource('ftw.theming.tests',
+                                              'resources/baz.sass'))
+
+        self.assertEquals(
+            ['resources/bar.sass', 'resources/foo.sass', 'resources/baz.sass'],
+            paths(registry.get_resources(object(), object())))
+
+    def test_conflicting_order(self):
+        registry = SassRegistry()
+        registry.add_resource(TestingResource('ftw.theming.tests',
+                                              'resources/foo.sass',
+                                              after='resources/bar.sass'))
+        registry.add_resource(TestingResource('ftw.theming.tests',
+                                              'resources/bar.sass',
+                                              after='resources/foo.sass'))
+        registry.add_resource(TestingResource('ftw.theming.tests',
+                                              'resources/baz.sass'))
+
+        with self.assertRaises(CyclicResourceOrder) as cm:
+            registry.get_resources(object(), object())
+        self.assertEquals(
+            "Cyclic resource order: [['ftw.theming.tests:resources/bar.sass', "
+            "'ftw.theming.tests:resources/foo.sass']]",
+            str(cm.exception))
