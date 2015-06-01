@@ -1,4 +1,5 @@
 from ftw.theming.interfaces import ISCSSCompiler
+from Products.CMFCore.utils import getToolByName
 from Products.Five import BrowserView
 from zope.component import getMultiAdapter
 
@@ -12,5 +13,7 @@ class ThemingCSSView(BrowserView):
         return self.get_css()
 
     def get_css(self):
+        cssregistry = getToolByName(self.context, 'portal_css')
+        debug = bool(cssregistry.getDebugMode())
         compiler = getMultiAdapter((self.context, self.request), ISCSSCompiler)
-        return compiler.compile()
+        return compiler.compile(debug=debug)

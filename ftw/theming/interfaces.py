@@ -19,10 +19,13 @@ class ISCSSCompiler(Interface):
         """A multi-adapter, adapting a context and a request.
         """
 
-    def compile():
+    def compile(debug=False):
         """Compile the scss files looked up from the SCSS registry
         into one CSS file.
 
+        :param debug: Enabling debug mode adds sass debug infos for
+          browser plugins.
+        :type debug: bool (default: ``False``)
         :returns: The compiled CSS.
         :rtype: utf-8 encoded bytestring
         """

@@ -16,3 +16,8 @@ class TestCompiler(FunctionalTestCase):
         self.assertTrue(result, 'Compiled CSS should be empty.')
         self.assertEquals(str, type(result),
                           'Compiled CSS should be an utf-8 bytestring.')
+
+    def test_compiling_with_debug_mode(self):
+        compiler = getMultiAdapter((self.portal, self.request), ISCSSCompiler)
+        self.assertTrue(compiler.compile(debug=True),
+                        'Compiled CSS should be empty.')
