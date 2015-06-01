@@ -11,6 +11,23 @@ SLOTS = ('top',
          'bottom')
 
 
+class ISCSSCompiler(Interface):
+    """Converts the SCSS to CSS.
+    """
+
+    def __init__(context, request):
+        """A multi-adapter, adapting a context and a request.
+        """
+
+    def compile():
+        """Compile the scss files looked up from the SCSS registry
+        into one CSS file.
+
+        :returns: The compiled CSS.
+        :rtype: utf-8 encoded bytestring
+        """
+
+
 class ISCSSRegistry(Interface):
     """The scss registry holds all registered ISCSSResource objects.
     It decides which resources are used for compiling to CSS.

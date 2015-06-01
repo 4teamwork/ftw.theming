@@ -1,11 +1,15 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:theme="http://namespaces.zope.org/ftw.theming"
     xmlns:upgrade-step="http://namespaces.zope.org/ftw.upgrade"
     xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="ftw.theming">
 
     <include package="ftw.upgrade" file="meta.zcml" />
+    <include file="meta.zcml" />
+
+    <adapter factory=".compiler.SCSSCompiler" />
 
     <genericsetup:registerProfile
         title="ftw.theming"
@@ -18,5 +22,7 @@
         profile="ftw.theming:default"
         directory="upgrades"
         />
+
+    <theme:scss file="resources/scss/reset.scss" slot="theme" profile="ftw.theming:default" />
 
 </configure>
