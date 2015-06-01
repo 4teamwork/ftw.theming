@@ -7,7 +7,9 @@
     i18n_domain="ftw.theming">
 
     <include package="ftw.upgrade" file="meta.zcml" />
+
     <include file="meta.zcml" />
+    <include package=".browser" />
 
     <adapter factory=".compiler.SCSSCompiler" />
 

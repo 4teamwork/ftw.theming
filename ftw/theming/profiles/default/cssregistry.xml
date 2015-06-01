@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<object name="portal_css">
+
+    <stylesheet
+        id="theming.css"
+        title=""
+        authenticated="False"
+        cacheable="True"
+        compression="safe"
+        conditionalcomment=""
+        cookable="True"
+        enabled="True"
+        expression=""
+        media=""
+        rel="stylesheet"
+        rendering="link"
+        applyPrefix="True"
+        />
+
+</object>
