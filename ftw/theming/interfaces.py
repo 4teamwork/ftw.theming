@@ -103,3 +103,10 @@ class ISCSSResource(Interface):
           included.
         :rtype: bool
         """
+
+    def get_source():
+        """Returns the raw SCSS of this resource as string.
+
+        :returns: The raw SCSS
+        :rtype: string
+        """

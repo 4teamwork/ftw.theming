@@ -60,3 +60,13 @@ class TestSCSSResource(TestCase):
         self.assertTrue(resource.available(CONTEXT, REQUEST,
                                            ProfileInfoStub('foo.bar:default')))
         self.assertFalse(resource.available(CONTEXT, REQUEST, ProfileInfoStub()))
+
+    def test_get_source(self):
+        resource = SCSSResource('ftw.theming.tests', 'resources/foo.scss')
+        self.assertMultiLineEqual(
+            '\n'.join(('#foo {',
+                       '  display: none;',
+                       '}')),
+            resource.get_source())
+        self.assertEquals(unicode, type(resource.get_source()),
+                          'Source should be unicode.')

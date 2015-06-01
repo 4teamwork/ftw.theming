@@ -45,6 +45,9 @@ class SCSSResource(object):
 
         return True
 
+    def get_source(self):
+        return self.path.text()
+
     @staticmethod
     def _resolve_path(package, relative_path):
         package_path = Path(__import__(package, fromlist=package).__path__[0])
