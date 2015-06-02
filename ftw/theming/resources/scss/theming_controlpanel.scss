@@ -1,0 +1,17 @@
+body.template-theming-resources {
+
+  table.theming-resources {
+    margin-top: 2em;
+
+    tbody tr.not-available td {
+      &.col-available, &.col-profile, &.col-for, &.col-layer {
+        color: red;
+      }
+    }
+
+    tbody tr.available td.col-available {
+      color: #33AA33;
+    }
+  }
+
+}

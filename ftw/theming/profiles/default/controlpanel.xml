@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<object xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+        name="portal_controlpanel"
+        meta_type="Plone Control Panel Tool"
+        i18n:domain="ftw.theming">
+
+    <configlet
+        title="Theming Resources"
+        action_id="ThemingResources"
+        appId="ftw.theming"
+        category="Products"
+        condition_expr=""
+        icon_expr="string:$portal_url/++resource++ftw.theming/icons/theming-resources.png"
+        url_expr="string:$portal_url/@@theming-resources"
+        visible="True"
+        i18n:attributes="title"
+        >
+        <permission>cmf.ManagePortal</permission>
+    </configlet>
+
+</object>

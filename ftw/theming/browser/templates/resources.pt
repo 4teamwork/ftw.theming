@@ -1,0 +1,62 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="here/prefs_main_template/macros/master"
+      i18n:domain="ftw.theming">
+
+    <div metal:fill-slot="prefs_configlet_main">
+
+        <h1 class="documentFirstHeading"
+            i18n:translate="title_theming_resources">Theming Resources</h1>
+
+        <a href=""
+           class="link-parent"
+           tal:attributes="href string:$portal_url/@@overview-controlpanel"
+           i18n:translate="label_up_to_plone_setup"
+           i18n:domain="plone">
+            Up to Site Setup
+        </a>
+
+        <table class="theming-resources listing">
+
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>#</th>
+                    <th i18n:translate="">Slot</th>
+                    <th i18n:translate="">Name</th>
+                    <th i18n:translate="">Package</th>
+                    <th i18n:translate="">Profile</th>
+                    <th i18n:translate="">For</th>
+                    <th i18n:translate="">Layer</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr tal:repeat="item view/resource_items"
+                    tal:attributes="class item/cssclasses">
+                    <td tal:condition="item/available" class="col-available">&#10003;</td>
+                    <td tal:condition="not:item/available" class="col-available"
+                        i18n:attributes="title"
+                        title="This resources is currently not included.">&#10008;</td>
+                    <td class="col-index" tal:content="item/index" />
+                    <td class="col-slot" tal:content="item/slot" />
+                    <td class="col-name" tal:content="item/name"
+                        tal:attributes="title item/path"/>
+                    <td class="col-package" tal:content="item/package" />
+                    <td class="col-profile" tal:content="item/profile" />
+                    <td class="col-for" tal:content="item/for_name"
+                        tal:attributes="title item/for_path"/>
+                    <td class="col-layer" tal:content="item/layer_name"
+                        tal:attributes="title item/layer_path" />
+                </tr>
+            </tbody>
+
+        </table>
+
+    </div>
+
+</html>
