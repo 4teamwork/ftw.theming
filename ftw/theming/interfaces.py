@@ -39,7 +39,7 @@ class ISCSSCompiler(Interface):
 
 
 class ISCSSRegistry(Interface):
-    """The scss registry holds all registered ISCSSResource objects.
+    """The scss registry holds all registered ISCSSFileResource objects.
     It decides which resources are used for compiling to CSS.
     """
 
@@ -47,7 +47,7 @@ class ISCSSRegistry(Interface):
         """Add a scss resource to the registry.
 
         :param resource: A scss resource object.
-        :type resource: :py:class:`ftw.theming.interfaces.ISCSSResource`
+        :type resource: :py:class:`ftw.theming.interfaces.ISCSSFileResource`
         """
 
     def get_resources(context, request, profileinfo=None,
@@ -65,11 +65,11 @@ class ISCSSRegistry(Interface):
         :param include_unavailable: Disable filtering unavailable resources.
         :type include_unavailable: bool (default: False)
         :returns: A list of scss resource objects.
-        :rtype: list of :py:class:`ftw.theming.interfaces.ISCSSResource`
+        :rtype: list of :py:class:`ftw.theming.interfaces.ISCSSFileResource`
         """
 
 
-class ISCSSResource(Interface):
+class ISCSSFileResource(Interface):
     """A scss resource represents a scss file for registering in the scss registry.
     It holds the relevant information for building the scss pipeline.
 

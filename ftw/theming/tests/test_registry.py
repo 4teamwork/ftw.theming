@@ -1,7 +1,7 @@
 from ftw.theming.exceptions import CyclicResourceOrder
 from ftw.theming.interfaces import ISCSSRegistry
 from ftw.theming.registry import SCSSRegistry
-from ftw.theming.resource import SCSSResource
+from ftw.theming.resource import SCSSFileResource
 from ftw.theming.tests.stubs import CONTEXT
 from ftw.theming.tests.stubs import ProfileInfoStub
 from ftw.theming.tests.stubs import REQUEST
@@ -24,7 +24,7 @@ class TestSCSSRegistry(TestCase):
         verifyClass(ISCSSRegistry, SCSSRegistry)
 
     def test_add_resources(self):
-        foo = SCSSResource('ftw.theming.tests', 'resources/foo.scss')
+        foo = SCSSFileResource('ftw.theming.tests', 'resources/foo.scss')
         registry = SCSSRegistry()
         registry.add_resource(foo)
         self.assertEquals([foo], registry.get_resources(CONTEXT, REQUEST))
@@ -32,9 +32,9 @@ class TestSCSSRegistry(TestCase):
     def test_resources_are_ordered_by_slot_order(self):
         registry = SCSSRegistry()
         for slotname in ('policy', 'variables', 'addon', 'theme', 'top'):
-            registry.add_resource(SCSSResource('ftw.theming.tests',
-                                               'resources/foo.scss',
-                                               slot=slotname))
+            registry.add_resource(SCSSFileResource('ftw.theming.tests',
+                                                   'resources/foo.scss',
+                                                   slot=slotname))
 
         self.assertEquals(
             ['top', 'variables', 'addon', 'theme', 'policy'],
@@ -42,12 +42,12 @@ class TestSCSSRegistry(TestCase):
 
     def test_resource_order_is_kept_within_slot(self):
         registry = SCSSRegistry()
-        registry.add_resource(SCSSResource('ftw.theming.tests',
-                                           'resources/baz.scss'))
-        registry.add_resource(SCSSResource('ftw.theming.tests',
-                                           'resources/foo.scss'))
-        registry.add_resource(SCSSResource('ftw.theming.tests',
-                                           'resources/bar.scss'))
+        registry.add_resource(SCSSFileResource('ftw.theming.tests',
+                                               'resources/baz.scss'))
+        registry.add_resource(SCSSFileResource('ftw.theming.tests',
+                                               'resources/foo.scss'))
+        registry.add_resource(SCSSFileResource('ftw.theming.tests',
+                                               'resources/bar.scss'))
 
         self.assertEquals(
             ['resources/baz.scss', 'resources/foo.scss', 'resources/bar.scss'],
@@ -55,11 +55,11 @@ class TestSCSSRegistry(TestCase):
 
     def test_only_available_resources_are_returned(self):
         registry = SCSSRegistry()
-        registry.add_resource(SCSSResource('ftw.theming.tests',
-                                           'resources/foo.scss'))
-        registry.add_resource(SCSSResource('ftw.theming.tests',
-                                           'resources/bar.scss',
-                                           profile='bar:default'))
+        registry.add_resource(SCSSFileResource('ftw.theming.tests',
+                                               'resources/foo.scss'))
+        registry.add_resource(SCSSFileResource('ftw.theming.tests',
+                                               'resources/bar.scss',
+                                               profile='bar:default'))
 
         self.assertEquals(
             ['resources/foo.scss'],
@@ -72,11 +72,11 @@ class TestSCSSRegistry(TestCase):
 
     def test_include_unavailable_resources(self):
         registry = SCSSRegistry()
-        registry.add_resource(SCSSResource('ftw.theming.tests',
-                                           'resources/foo.scss'))
-        registry.add_resource(SCSSResource('ftw.theming.tests',
-                                           'resources/bar.scss',
-                                           profile='bar:default'))
+        registry.add_resource(SCSSFileResource('ftw.theming.tests',
+                                               'resources/foo.scss'))
+        registry.add_resource(SCSSFileResource('ftw.theming.tests',
+                                               'resources/bar.scss',
+                                               profile='bar:default'))
 
         self.assertEquals(
             ['resources/foo.scss'],
@@ -89,13 +89,13 @@ class TestSCSSRegistry(TestCase):
 
     def test_reordering_resources_within_slot_with_before(self):
         registry = SCSSRegistry()
-        registry.add_resource(SCSSResource('ftw.theming.tests',
-                                           'resources/foo.scss'))
-        registry.add_resource(SCSSResource('ftw.theming.tests',
-                                           'resources/bar.scss'))
-        registry.add_resource(SCSSResource('ftw.theming.tests',
-                                           'resources/baz.scss',
-                                           before='resources/bar.scss'))
+        registry.add_resource(SCSSFileResource('ftw.theming.tests',
+                                               'resources/foo.scss'))
+        registry.add_resource(SCSSFileResource('ftw.theming.tests',
+                                               'resources/bar.scss'))
+        registry.add_resource(SCSSFileResource('ftw.theming.tests',
+                                               'resources/baz.scss',
+                                               before='resources/bar.scss'))
 
         self.assertEquals(
             ['resources/foo.scss', 'resources/baz.scss', 'resources/bar.scss'],
@@ -103,13 +103,13 @@ class TestSCSSRegistry(TestCase):
 
     def test_reordering_resources_within_slot_with_after(self):
         registry = SCSSRegistry()
-        registry.add_resource(SCSSResource('ftw.theming.tests',
-                                           'resources/foo.scss',
-                                           after='resources/bar.scss'))
-        registry.add_resource(SCSSResource('ftw.theming.tests',
-                                           'resources/bar.scss'))
-        registry.add_resource(SCSSResource('ftw.theming.tests',
-                                           'resources/baz.scss'))
+        registry.add_resource(SCSSFileResource('ftw.theming.tests',
+                                               'resources/foo.scss',
+                                               after='resources/bar.scss'))
+        registry.add_resource(SCSSFileResource('ftw.theming.tests',
+                                               'resources/bar.scss'))
+        registry.add_resource(SCSSFileResource('ftw.theming.tests',
+                                               'resources/baz.scss'))
 
         self.assertEquals(
             ['resources/bar.scss', 'resources/foo.scss', 'resources/baz.scss'],
@@ -117,14 +117,14 @@ class TestSCSSRegistry(TestCase):
 
     def test_conflicting_order(self):
         registry = SCSSRegistry()
-        registry.add_resource(SCSSResource('ftw.theming.tests',
-                                           'resources/foo.scss',
-                                           after='resources/bar.scss'))
-        registry.add_resource(SCSSResource('ftw.theming.tests',
-                                           'resources/bar.scss',
-                                           after='resources/foo.scss'))
-        registry.add_resource(SCSSResource('ftw.theming.tests',
-                                           'resources/baz.scss'))
+        registry.add_resource(SCSSFileResource('ftw.theming.tests',
+                                               'resources/foo.scss',
+                                               after='resources/bar.scss'))
+        registry.add_resource(SCSSFileResource('ftw.theming.tests',
+                                               'resources/bar.scss',
+                                               after='resources/foo.scss'))
+        registry.add_resource(SCSSFileResource('ftw.theming.tests',
+                                               'resources/baz.scss'))
 
         with self.assertRaises(CyclicResourceOrder) as cm:
             registry.get_resources(CONTEXT, REQUEST)

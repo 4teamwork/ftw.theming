@@ -1,6 +1,6 @@
 from ftw.theming.interfaces import ISCSSRegistry
 from ftw.theming.registry import SCSSRegistry
-from ftw.theming.resource import SCSSResource
+from ftw.theming.resource import SCSSFileResource
 from path import Path
 from zope.component import provideUtility
 from zope.component import queryUtility
@@ -72,7 +72,7 @@ def add_scss(context, **kwargs):
         if name in kwargs:
             resource_args[name] = kwargs[name]
 
-    registry.add_resource(SCSSResource(**resource_args))
+    registry.add_resource(SCSSFileResource(**resource_args))
 
 
 class Resources(object):
