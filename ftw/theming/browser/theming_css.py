@@ -16,9 +16,10 @@ def compute_css_bundle_hash(context):
     our cache key.
     """
     portal_css = getToolByName(context, 'portal_css')
-    theme_resources = dict(reduce(list.__add__,
-                                  map(methodcaller('items'),
-                                      portal_css.concatenatedResourcesByTheme.values())))
+    theme_resources = dict(
+        reduce(list.__add__,
+               map(methodcaller('items'),
+                   portal_css.concatenatedResourcesByTheme.values())))
     keys = theme_resources.keys()
     map(keys.extend, theme_resources.values())
     return str(hash(frozenset(keys)))

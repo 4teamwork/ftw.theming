@@ -26,7 +26,6 @@ class ThemingResources(BrowserView):
                 'layer_path': resource.layer.__identifier__,
                 }
 
-
     def resources(self):
         registry = getUtility(ISCSSRegistry)
         return registry.get_resources(self.context, self.request,
