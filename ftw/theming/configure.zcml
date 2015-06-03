@@ -28,8 +28,9 @@
         directory="upgrades"
         />
 
-    <theme:scss file="resources/scss/reset.scss" slot="ftw.theming" profile="ftw.theming:default" />
-
-    <theme:scss file="resources/scss/theming_controlpanel.scss" slot="addon" profile="ftw.theming:default" />
+    <theme:resources slot="ftw.theming" profile="ftw.theming:default">
+        <theme:scss file="resources/scss/reset.scss"  />
+        <theme:scss file="resources/scss/theming_controlpanel.scss" />
+    </theme:resources>
 
 </configure>

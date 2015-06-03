@@ -2,11 +2,26 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:meta="http://namespaces.zope.org/meta">
 
-    <meta:directive
-        namespace="http://namespaces.zope.org/ftw.theming"
-        name="scss"
-        schema=".meta.IAddSCSSDirective"
-        handler=".meta.add_scss"
-        />
+    <meta:directives namespace="http://namespaces.zope.org/ftw.theming">
+
+        <meta:directive
+            name="scss"
+            schema=".meta.IAddSCSSDirective"
+            handler=".meta.add_scss"
+            />
+
+        <meta:complexDirective
+            name="resources"
+            schema=".meta.IResourcesDirective"
+            handler=".meta.Resources">
+
+            <meta:subdirective
+                name="scss"
+                schema=".meta.IAddSCSSSubDirective"
+                />
+
+        </meta:complexDirective>
+
+    </meta:directives>
 
 </configure>

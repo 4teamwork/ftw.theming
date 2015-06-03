@@ -9,11 +9,7 @@ from zope.interface import Interface
 from zope.schema import TextLine
 
 
-class IAddSCSSDirective(Interface):
-
-    file = fields.Path(
-        title=u'Relative path to the .scss file.',
-        required=True)
+class IResourcesDirective(Interface):
 
     slot = TextLine(
         title=u'The name of the slot where the resource should be'
@@ -33,6 +29,13 @@ class IAddSCSSDirective(Interface):
         title=u'The interface the request should provide.',
         required=False)
 
+
+class IAddSCSSSubDirective(Interface):
+
+    file = fields.Path(
+        title=u'Relative path to the .scss file.',
+        required=True)
+
     before = TextLine(
         title=u'The name of the resource after which this resource should'
         ' be ordered.',
@@ -44,6 +47,10 @@ class IAddSCSSDirective(Interface):
         ' be ordered.',
         description=u'The name consists of "package:relative file path"',
         required=False)
+
+
+class IAddSCSSDirective(IResourcesDirective, IAddSCSSSubDirective):
+    pass
 
 
 def add_scss(context, **kwargs):
@@ -66,3 +73,14 @@ def add_scss(context, **kwargs):
             resource_args[name] = kwargs[name]
 
     registry.add_resource(SCSSResource(**resource_args))
+
+
+class Resources(object):
+
+    def __init__(self, context, **kwargs):
+        self.context = context
+        self.kwargs = kwargs
+
+    def scss(self, context, **kwargs):
+        kwargs.update(self.kwargs)
+        add_scss(context, **kwargs)

@@ -77,6 +77,31 @@ class TestSCSSDirective(TestCase):
         self.assertDictContainsSubset({'after': 'bar:bar.scss'},
                                       self.get_resource_vars())
 
+    def test_complex_directive(self):
+        self.load_zcml(
+            '<theme:resources'
+            '      slot="theme"'
+            '      profile="foo:default"'
+            '      for="Products.CMFPlone.interfaces.siteroot.IPloneSiteRoot"'
+            '      layer="zope.publisher.interfaces.browser.IDefaultBrowserLayer">'
+            '  <theme:scss'
+            '        file="resources/foo.scss"'
+            '        before="bar:bar.scss"'
+            '        after="baz:baz.scss" />'
+            '</theme:resources>')
+
+        self.assertDictContainsSubset(
+            {'name': 'ftw.theming.tests:resources/foo.scss',
+             'package': 'ftw.theming.tests',
+             'relative_path': 'resources/foo.scss',
+             'slot': 'theme',
+             'profile': 'foo:default',
+             'for_': IPloneSiteRoot,
+             'layer': IDefaultBrowserLayer,
+             'before': 'bar:bar.scss',
+             'after': 'baz:baz.scss'},
+            self.get_resource_vars())
+
     def load_zcml(self, *lines):
         self.layer.load_zcml_string('\n'.join((
                     '<configure ',
