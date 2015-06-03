@@ -1,4 +1,5 @@
 from plone.app.layout.navigation.interfaces import INavigationRoot
+from plone.theme.interfaces import IDefaultPloneLayer
 from zope.interface import Interface
 
 
@@ -9,6 +10,12 @@ SLOTS = ('top',
          'theme',
          'policy',
          'bottom')
+
+
+class IThemingLayer(IDefaultPloneLayer):
+    """A browser layer provided by the request when the ftw.theming
+    Generic Setup profile is installed.
+    """
 
 
 class ISCSSCompiler(Interface):

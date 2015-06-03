@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<layers>
+
+    <layer name="ftw.theming" interface="ftw.theming.interfaces.IThemingLayer" />
+
+</layers>
