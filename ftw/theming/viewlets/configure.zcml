@@ -1,0 +1,14 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="ftw.theming">
+
+    <browser:viewlet
+        name="ftw.theming.css"
+        manager="plone.app.layout.viewlets.interfaces.IPortalTop"
+        class=".theming_css.ThemingCSS"
+        permission="zope2.View"
+        layer="ftw.theming.interfaces.IThemingLayer"
+        />
+
+</configure>

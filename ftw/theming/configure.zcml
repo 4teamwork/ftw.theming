@@ -11,6 +11,7 @@
 
     <include file="meta.zcml" />
     <include package=".browser" />
+    <include package=".viewlets" />
 
     <browser:resourceDirectory name="ftw.theming" directory="resources" />
 

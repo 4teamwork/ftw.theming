@@ -1,10 +1,13 @@
+from ftw.builder import Builder
+from ftw.builder import create
 from ftw.testbrowser import browsing
 from ftw.theming.interfaces import ISCSSCompiler
 from ftw.theming.tests import FunctionalTestCase
+from plone.app.layout.navigation.interfaces import INavigationRoot
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces.siteroot import IPloneSiteRoot
 from zope.component import adapts
-from zope.component import provideAdapter
+from zope.interface import alsoProvides
 from zope.interface import implements
 from zope.interface import Interface
 import transaction
@@ -30,13 +33,22 @@ class TestThemingCSSView(FunctionalTestCase):
         self.assertNotEquals('', browser.contents)
 
     @browsing
-    def test_css_is_registered(self, browser):
-        self.portal_css.setDebugMode(True)
+    def test_css_included_in_html(self, browser):
         browser.open()
-        css_urls = [node.attrib.get('href') for node in browser.css('link')]
-        self.assertEquals(
-            ['http://nohost/plone/portal_css/Sunburst%20Theme/theming.css'],
-            filter(lambda url: url.endswith('theming.css'), css_urls))
+        self.assertIn('http://nohost/plone/theming.css', self.get_css_urls(browser))
+
+    @browsing
+    def test_css_included_relative_to_navigation_root(self, browser):
+        self.grant('Manager')
+        folder = create(Builder('folder').titled('Folder'))
+
+        browser.login().open(folder)
+        self.assertIn('http://nohost/plone/theming.css', self.get_css_urls(browser))
+
+        alsoProvides(folder, INavigationRoot)
+        transaction.commit()
+        browser.reload()
+        self.assertIn('http://nohost/plone/folder/theming.css', self.get_css_urls(browser))
 
     def test_css_is_cached(self):
         self.register_compiler_mock()
@@ -94,3 +106,6 @@ class TestThemingCSSView(FunctionalTestCase):
             def compile(self, debug=False):
                 COMPILER_MOCK_DATA['counter'] += 1
                 return COMPILER_MOCK_DATA['counter']
+
+    def get_css_urls(self, browser):
+        return [node.attrib.get('href') for node in browser.css('link')]
