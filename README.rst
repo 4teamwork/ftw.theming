@@ -24,6 +24,143 @@ or to your buildout configuration:
 and rerun buildout.
 
 
+SCSS Registry
+=============
+
+The SCSS registry is configured with ZCML and contains all SCSS resources from
+``ftw.theming``, addons, the theme and policy packages.
+
+
+Inspecting the SCSS registry
+----------------------------
+
+The ``@@theming-resources`` (on any navigation root) lists all resources.
+
+
+Resource slots
+--------------
+
+The registry allows to register resources to a list of fix slots.
+Theese are the available slots, sorted by inclusion order:
+
+- ``top``
+- ``variables``
+- ``ftw.theming``
+- ``addon``
+- ``theme``
+- ``policy``
+- ``bottom``
+
+Adding resources
+----------------
+
+Adding SCSS resources is done in the ZCML of a package.
+The SCSS should always go into the same package where the styled templates are.
+
+Registering a resource
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: xml
+
+    <configure
+        xmlns:theme="http://namespaces.zope.org/ftw.theming"
+        xmlns:zcml="http://namespaces.zope.org/zcml"
+        i18n_domain="ftw.tabbedview">
+
+        <configure zcml:condition="installed ftw.theming">
+          <include package="ftw.theming" />
+
+          <theme:scss
+              file="resources/tabbed.scss"
+              slot="addon"
+              profile="ftw.tabbedview:default"
+              />
+        </configure>
+
+    </configure>
+
+
+Options for standalone ``theme:scss``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- ``file``: relative path to the SCSS file (required)
+- ``slot``: name of the slot (see slots section, default: ``addon``)
+- ``profile``: Generic Setup profile required to be installed (default:
+  no profile, e.g. ``my.package:default``)
+- ``for``: context interface (default: ``INavigationRoot``)
+- ``layer``: request layer interface (default: ``Interface``)
+- ``before``: name of the resource after which this resource should be ordered
+  (within the same slot).
+- ``after``: name of the resource before which this resource should be ordered
+  (within the same slot)
+
+
+Registering multiple resources
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: xml
+
+    <configure
+        xmlns:theme="http://namespaces.zope.org/ftw.theming"
+        xmlns:zcml="http://namespaces.zope.org/zcml"
+        i18n_domain="plonetheme.fancy">
+
+        <include package="ftw.theming" />
+
+        <theme:resources
+            slot="theme"
+            profile="plonetheme.fancy:default"
+            layer="plonetheme.fancy.interfaces.IFancyTheme">
+
+            <theme:scss file="resources/foo.scss" />
+            <theme:scss file="resources/bar.scss" />
+
+        </theme:resources>
+
+    </configure>
+
+Options for ``theme:resources``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- ``slot``: name of the slot (see slots section, default: ``addon``)
+- ``profile``: Generic Setup profile required to be installed (default:
+  no profile, e.g. ``my.package:default``)
+- ``for``: context interface (default: ``INavigationRoot``)
+- ``layer``: request layer interface (default: ``Interface``)
+
+Options for ``theme:scss`` within ``theme:resources``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- ``file``: relative path to the SCSS file (required)
+- ``before``: name of the resource after which this resource should be ordered
+  (within the same slot).
+- ``after``: name of the resource before which this resource should be ordered
+  (within the same slot)
+
+
+Resource names
+~~~~~~~~~~~~~~
+
+Each resource has an automatically generated name, which can be looked up in the
+``@@theming-resources``-view.
+The resource has the format ``[package]:[relative path]``.
+
+
+Resource Ordering
+-----------------
+
+The SCSS resources are ordered when retrieved from the registry, so that the
+order is as consistent as possible.
+
+Ordering priority:
+
+1. the resource's ``slot`` (see the slot section below)
+1. the ``before`` and ``after`` options (topological graph sorting), within each slot.
+1. the ZCML load order of the resources
+
+Be aware that the ZCML load order is usally random.
+
+
 
 Links
 =====
