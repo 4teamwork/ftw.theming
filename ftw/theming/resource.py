@@ -1,4 +1,5 @@
 from ftw.theming.interfaces import ISCSSFileResource
+from ftw.theming.interfaces import ISCSSResource
 from ftw.theming.interfaces import SLOTS
 from ftw.theming.profileinfo import ProfileInfo
 from path import Path
@@ -7,7 +8,28 @@ from zope.interface import implements
 from zope.interface import Interface
 
 
-class SCSSFileResource(object):
+class SCSSResource(object):
+    """A basic SCSS resource to be extended.
+    """
+    implements(ISCSSResource)
+
+    def __init__(self, name, slot='addon', source=u''):
+        if slot not in SLOTS:
+            raise ValueError('Invalid slot "{0}". Valid slots: {1}'.format(
+                    slot, SLOTS))
+
+        self.name = name
+        self.slot = slot
+        self.source = source
+
+    def available(self, context, request, profileinfo=None):
+        return True
+
+    def get_source(self, context, request):
+        return self.source
+
+
+class SCSSFileResource(SCSSResource):
     """A scss resource represents a scss file for registering in the scss registry.
     It holds the relevant information for building the scss pipeline.
     """
@@ -16,15 +38,12 @@ class SCSSFileResource(object):
     def __init__(self, package, relative_path, slot='addon',
                  profile=None, for_=INavigationRoot, layer=Interface,
                  before=None, after=None):
-        if slot not in SLOTS:
-            raise ValueError('Invalid slot "{0}". Valid slots: {1}'.format(
-                    slot, SLOTS))
+        name = self._make_resource_name(package, relative_path)
+        super(SCSSFileResource, self).__init__(name, slot=slot)
 
-        self.name = self._make_resource_name(package, relative_path)
         self.package = package
         self.relative_path = relative_path
         self.path = self._resolve_path(package, relative_path)
-        self.slot = slot
         self.profile = profile
         self.for_ = for_
         self.layer = layer
@@ -45,7 +64,7 @@ class SCSSFileResource(object):
 
         return True
 
-    def get_source(self):
+    def get_source(self, context, request):
         return self.path.text()
 
     @staticmethod

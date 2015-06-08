@@ -1,5 +1,6 @@
 from plone.app.layout.navigation.interfaces import INavigationRoot
 from plone.theme.interfaces import IDefaultPloneLayer
+from zope.interface import Attribute
 from zope.interface import Interface
 
 
@@ -69,7 +70,49 @@ class ISCSSRegistry(Interface):
         """
 
 
-class ISCSSFileResource(Interface):
+class ISCSSResource(Interface):
+    """An SCSS resource has a snippet of SCSS code and can tell whether the
+    resources should be rendered an a specific context / request / setup.
+    """
+
+    name = Attribute('The name of the resource.')
+    slot = Attribute('The slot where the resource belongs.'
+                     ' This must be one of the list of slots.')
+
+    def available(context, request, profileinfo=None):
+        """Check whether the resource is available for this context.
+
+        Checks applied:
+
+        - ``context`` must provide the ``for_``-interface of the resorce
+        - ``request`` must provide the ``layer``-interface of the resorce
+        - the profile must be installed.
+
+        :param context: A acquisition wrapped context object.
+        :type context: object
+        :param request: The request object.
+        :type request: object
+        :param profileinfo: A profileinfo object for checking whether
+          the profile is installed.
+        :type profile: :py:class:`ftw.theming.profileinfo.ProfileInfo`
+        :returns: ``True`` when the resource is available and should be
+          included.
+        :rtype: bool
+        """
+
+    def get_source(context, request):
+        """Returns the raw SCSS of this resource as string.
+
+        :param context: A acquisition wrapped context object.
+        :type context: object
+        :param request: The request object.
+        :type request: object
+        :returns: The raw SCSS
+        :rtype: string
+        """
+
+
+class ISCSSFileResource(ISCSSResource):
     """A scss resource represents a scss file for registering in the scss registry.
     It holds the relevant information for building the scss pipeline.
 
@@ -108,32 +151,4 @@ class ISCSSFileResource(Interface):
         :param after: Move this resource after the other resource with that
           name within the same slot.
         :type after: string (name of other resource)
-        """
-
-    def available(context, request, profileinfo=None):
-        """Check whether the resource is available for this context.
-
-        Checks applied:
-
-        - ``context`` must provide the ``for_``-interface of the resorce
-        - ``request`` must provide the ``layer``-interface of the resorce
-        - the profile must be installed.
-
-        :param context: A acquisition wrapped context object.
-        :type context: object
-        :param request: The request object.
-        :type request: object
-        :param profileinfo: A profileinfo object for checking whether
-          the profile is installed.
-        :type profile: :py:class:`ftw.theming.profileinfo.ProfileInfo`
-        :returns: ``True`` when the resource is available and should be
-          included.
-        :rtype: bool
-        """
-
-    def get_source():
-        """Returns the raw SCSS of this resource as string.
-
-        :returns: The raw SCSS
-        :rtype: string
         """
