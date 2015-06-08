@@ -78,6 +78,10 @@ class ISCSSResource(Interface):
     name = Attribute('The name of the resource.')
     slot = Attribute('The slot where the resource belongs.'
                      ' This must be one of the list of slots.')
+    before = Attribute('Move this resource before the other resource with that'
+                       ' name within the same slot.')
+    after = Attribute('Move this resource after the other resource with that'
+                      ' name within the same slot.')
 
     def available(context, request, profileinfo=None):
         """Check whether the resource is available for this context.
@@ -151,4 +155,13 @@ class ISCSSFileResource(ISCSSResource):
         :param after: Move this resource after the other resource with that
           name within the same slot.
         :type after: string (name of other resource)
+        """
+
+
+class ISCSSResourceFactory(Interface):
+    """An SCSS resource factory creates and returnes an SCSSResource when called.
+    """
+
+    def __call__(context, request):
+        """Accepts any context and request and returns an SCSSResource object.
         """

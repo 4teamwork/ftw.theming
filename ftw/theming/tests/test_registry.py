@@ -1,12 +1,15 @@
 from ftw.theming.exceptions import CyclicResourceOrder
 from ftw.theming.interfaces import ISCSSRegistry
+from ftw.theming.interfaces import ISCSSResourceFactory
 from ftw.theming.registry import SCSSRegistry
 from ftw.theming.resource import SCSSFileResource
+from ftw.theming.resource import SCSSResource
 from ftw.theming.tests.stubs import CONTEXT
 from ftw.theming.tests.stubs import ProfileInfoStub
 from ftw.theming.tests.stubs import REQUEST
 from operator import attrgetter
 from unittest2 import TestCase
+from zope.interface import provider
 from zope.interface.verify import verifyClass
 
 
@@ -132,3 +135,33 @@ class TestSCSSRegistry(TestCase):
             "Cyclic resource order: [['ftw.theming.tests:resources/bar.scss', "
             "'ftw.theming.tests:resources/foo.scss']]",
             str(cm.exception))
+
+    def test_calls_registered_resource_factories(self):
+        foo = SCSSFileResource('ftw.theming.tests', 'resources/foo.scss')
+        dynamic = SCSSResource('dynamic-scss', slot='addon',
+                               source=u'$foreground = black;')
+        bar = SCSSFileResource('ftw.theming.tests', 'resources/baz.scss')
+
+        @provider(ISCSSResourceFactory)
+        def dynamic_resource_factory(context, request):
+            return dynamic
+
+        registry = SCSSRegistry()
+        registry.add_resource(foo)
+        registry.add_resource(dynamic_resource_factory)
+        registry.add_resource(bar)
+
+        self.assertEquals([foo, dynamic, bar],
+                          registry.get_resources(CONTEXT, REQUEST))
+
+    def test_resource_factories_returning_None_are_skipped(self):
+        registry = SCSSRegistry()
+
+        @registry.add_resource
+        @provider(ISCSSResourceFactory)
+        def null_resource_factory(context, request):
+            return None
+
+        self.assertEquals([], registry.get_resources(CONTEXT, REQUEST))
+        self.assertEquals([], registry.get_resources(CONTEXT, REQUEST,
+                                                     include_unavailable=True))

@@ -161,6 +161,39 @@ Ordering priority:
 Be aware that the ZCML load order is usally random.
 
 
+Resource factories for dynamic resources
+----------------------------------------
+
+A resource factory is a callable (accepting context and request) which returns
+an ``ISCSSResource`` object.
+Since the callable instantiates the resource, it's content can be created dynamically.
+
+
+.. code:: xml
+
+    <configure
+        xmlns:theme="http://namespaces.zope.org/ftw.theming"
+        xmlns:zcml="http://namespaces.zope.org/zcml"
+        i18n_domain="plonetheme.fancy">
+
+        <include package="ftw.theming" />
+
+        <theme:scss_factory factory=".dynamic_resource_factory" />
+
+    </configure>
+
+
+.. code:: python
+
+    from ftw.theming.interfaces import ISCSSResourceFactory
+    from ftw.theming.resource import ISCSSResource
+    from zope.interface import provider
+
+    @provider(ISCSSResourceFactory)
+    def dynamic_resource_factory(context, request):
+        return ISCSSResource('dynamic.scss', slot='addon', source='$color: blue;')
+
+
 
 Links
 =====

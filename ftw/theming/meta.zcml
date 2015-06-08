@@ -10,6 +10,12 @@
             handler=".meta.add_scss"
             />
 
+        <meta:directive
+            name="scss_factory"
+            schema=".meta.IAddSCSSFactoryDirective"
+            handler=".meta.add_scss_factory"
+            />
+
         <meta:complexDirective
             name="resources"
             schema=".meta.IResourcesDirective"

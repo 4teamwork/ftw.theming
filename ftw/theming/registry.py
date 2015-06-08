@@ -1,6 +1,7 @@
 from collections import OrderedDict
 from ftw.theming.exceptions import CyclicResourceOrder
 from ftw.theming.interfaces import ISCSSRegistry
+from ftw.theming.interfaces import ISCSSResourceFactory
 from ftw.theming.interfaces import SLOTS
 from tarjan import tarjan
 from zope.interface import implements
@@ -17,17 +18,16 @@ class SCSSRegistry(object):
 
     def get_resources(self, context, request, profileinfo=None,
                       include_unavailable=False):
+        slot_lookup = self._slot_resources_lookup(context, request)
         resources = reduce(list.__add__,
                            map(self.order_resources,
-                               map(self.get_resources_for_slot, SLOTS)))
+                               map(slot_lookup.get, SLOTS)))
+
         if not include_unavailable:
             resources = filter(
                 lambda res: res.available(context, request, profileinfo),
                 resources)
         return resources
-
-    def get_resources_for_slot(self, slotname):
-        return filter(lambda res: res.slot == slotname, self.resources)
 
     def order_resources(self, resources):
         if not resources:
@@ -49,3 +49,12 @@ class SCSSRegistry(object):
 
         order = reduce(list.__add__, groups)
         return sorted(resources, key=lambda res: order.index(res.name))
+
+    def _slot_resources_lookup(self, context, request):
+        result = dict((slot, []) for slot in SLOTS)
+        for resource in self.resources:
+            if ISCSSResourceFactory.providedBy(resource):
+                resource = resource(context, request)
+            if resource is not None:
+                result[resource.slot].append(resource)
+        return result

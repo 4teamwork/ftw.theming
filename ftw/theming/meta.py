@@ -1,4 +1,5 @@
 from ftw.theming.interfaces import ISCSSRegistry
+from ftw.theming.interfaces import ISCSSResourceFactory
 from ftw.theming.registry import SCSSRegistry
 from ftw.theming.resource import SCSSFileResource
 from path import Path
@@ -57,10 +58,7 @@ def add_scss(context, **kwargs):
     """Register an .scss file.
     """
 
-    registry = queryUtility(ISCSSRegistry)
-    if registry is None:
-        registry = SCSSRegistry()
-        provideUtility(registry)
+    registry = get_or_create_registry()
 
     relpath = Path(kwargs['file']).relpath(
         Path(context.package.__file__).parent)
@@ -84,3 +82,29 @@ class Resources(object):
     def scss(self, context, **kwargs):
         kwargs.update(self.kwargs)
         add_scss(context, **kwargs)
+
+
+class IAddSCSSFactoryDirective(Interface):
+
+    factory = fields.GlobalObject(
+        title=u'Adapter factory',
+        required=True)
+
+
+def add_scss_factory(context, factory):
+    """Register an SCSS resource factory.
+    """
+
+    if not ISCSSResourceFactory.providedBy(factory):
+        raise ValueError('add_scss: factory must provide ISCSSResourceFactory')
+
+    registry = get_or_create_registry()
+    registry.add_resource(factory)
+
+
+def get_or_create_registry():
+    registry = queryUtility(ISCSSRegistry)
+    if registry is None:
+        registry = SCSSRegistry()
+        provideUtility(registry)
+    return registry

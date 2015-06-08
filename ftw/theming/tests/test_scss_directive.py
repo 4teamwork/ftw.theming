@@ -1,4 +1,6 @@
 from ftw.theming.interfaces import ISCSSRegistry
+from ftw.theming.interfaces import ISCSSResourceFactory
+from ftw.theming.resource import SCSSResource
 from ftw.theming.testing import META_ZCML
 from ftw.theming.tests.stubs import CONTEXT
 from ftw.theming.tests.stubs import ProfileInfoStub
@@ -10,7 +12,9 @@ from unittest2 import TestCase
 from zope.component import getUtility
 from zope.configuration.xmlconfig import ZopeXMLConfigurationError
 from zope.interface import Interface
+from zope.interface import provider
 from zope.publisher.interfaces.browser import IDefaultBrowserLayer
+import ftw.theming.tests
 
 
 class TestSCSSDirective(TestCase):
@@ -101,6 +105,30 @@ class TestSCSSDirective(TestCase):
              'before': 'bar:bar.scss',
              'after': 'baz:baz.scss'},
             self.get_resource_vars())
+
+    def test_scss_factory(self):
+        @provider(ISCSSResourceFactory)
+        def resource_factory(context, request):
+            return SCSSResource('foo', source='$color = red;')
+
+        ftw.theming.tests.resource_factory = resource_factory
+        self.load_zcml('<theme:scss_factory factory=".resource_factory" />')
+
+        self.assertDictContainsSubset(
+            {'name': 'foo',
+             'slot': 'addon',
+             'before': None,
+             'after': None},
+            self.get_resource_vars())
+
+    def test_scss_factory_must_provide_interface(self):
+        def bad_resource_factory(context, request):
+            return None
+        ftw.theming.tests.resource_factory = bad_resource_factory
+        with self.assertRaises(ZopeXMLConfigurationError) as cm:
+            self.load_zcml('<theme:scss_factory factory=".resource_factory" />')
+        self.assertEquals('add_scss: factory must provide ISCSSResourceFactory',
+                          str(cm.exception.evalue))
 
     def load_zcml(self, *lines):
         self.layer.load_zcml_string('\n'.join((

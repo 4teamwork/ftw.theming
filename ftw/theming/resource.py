@@ -13,13 +13,16 @@ class SCSSResource(object):
     """
     implements(ISCSSResource)
 
-    def __init__(self, name, slot='addon', source=u''):
+    def __init__(self, name, slot='addon', before=None, after=None,
+                 source=u''):
         if slot not in SLOTS:
             raise ValueError('Invalid slot "{0}". Valid slots: {1}'.format(
                     slot, SLOTS))
 
         self.name = name
         self.slot = slot
+        self.before = before
+        self.after = after
         self.source = source
 
     def available(self, context, request, profileinfo=None):
@@ -39,7 +42,10 @@ class SCSSFileResource(SCSSResource):
                  profile=None, for_=INavigationRoot, layer=Interface,
                  before=None, after=None):
         name = self._make_resource_name(package, relative_path)
-        super(SCSSFileResource, self).__init__(name, slot=slot)
+        before = before and self._make_resource_name(package, before)
+        after = after and self._make_resource_name(package, after)
+        super(SCSSFileResource, self).__init__(name, slot=slot,
+                                               before=before, after=after)
 
         self.package = package
         self.relative_path = relative_path
@@ -47,8 +53,6 @@ class SCSSFileResource(SCSSResource):
         self.profile = profile
         self.for_ = for_
         self.layer = layer
-        self.before = before and self._make_resource_name(package, before)
-        self.after = after and self._make_resource_name(package, after)
 
     def available(self, context, request, profileinfo=None):
         if not self.for_.providedBy(context):
