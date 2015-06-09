@@ -106,6 +106,26 @@ class TestSCSSDirective(TestCase):
              'after': 'baz:baz.scss'},
             self.get_resource_vars())
 
+    def test_complex_directive_with_changed_slot(self):
+        self.load_zcml(
+            '<theme:resources slot="theme">'
+            '  <theme:scss'
+            '        file="resources/foo.scss"'
+            '        slot="variables" />'
+            '</theme:resources>')
+
+        self.assertDictContainsSubset(
+            {'name': 'ftw.theming.tests:resources/foo.scss',
+             'package': 'ftw.theming.tests',
+             'relative_path': 'resources/foo.scss',
+             'slot': 'variables',
+             'profile': None,
+             'for_': INavigationRoot,
+             'layer': Interface,
+             'before': None,
+             'after': None},
+            self.get_resource_vars())
+
     def test_scss_factory(self):
         @provider(ISCSSResourceFactory)
         def resource_factory(context, request):

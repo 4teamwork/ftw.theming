@@ -33,6 +33,11 @@ class IResourcesDirective(Interface):
 
 class IAddSCSSSubDirective(Interface):
 
+    slot = TextLine(
+        title=u'The name of the slot where the resource should be'
+        ' rendered in.',
+        required=False)
+
     file = fields.Path(
         title=u'Relative path to the .scss file.',
         required=True)
@@ -80,8 +85,9 @@ class Resources(object):
         self.kwargs = kwargs
 
     def scss(self, context, **kwargs):
-        kwargs.update(self.kwargs)
-        add_scss(context, **kwargs)
+        arguments = self.kwargs.copy()
+        arguments.update(kwargs)
+        add_scss(context, **arguments)
 
 
 class IAddSCSSFactoryDirective(Interface):
