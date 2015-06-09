@@ -3,13 +3,14 @@ from ftw.theming.resource import SCSSResource
 from ftw.theming.tests.stubs import CONTEXT
 from ftw.theming.tests.stubs import REQUEST
 from unittest2 import TestCase
-from zope.interface.verify import verifyClass
+from zope.interface.verify import verifyObject
 
 
 class TestSCSSResource(TestCase):
 
     def test_implements_interface(self):
-        verifyClass(ISCSSResource, SCSSResource)
+        resource = SCSSResource('foo.scss')
+        verifyObject(ISCSSResource, resource)
 
     def test_create_resource(self):
         resource = SCSSResource('foo.scss')

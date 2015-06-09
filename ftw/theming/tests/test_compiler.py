@@ -1,14 +1,14 @@
-from ftw.theming.compiler import SCSSCompiler
 from ftw.theming.interfaces import ISCSSCompiler
 from ftw.theming.tests import FunctionalTestCase
 from zope.component import getMultiAdapter
-from zope.interface.verify import verifyClass
+from zope.interface.verify import verifyObject
 
 
 class TestCompiler(FunctionalTestCase):
 
     def test_default_compiler_implements_interface(self):
-        verifyClass(ISCSSCompiler, SCSSCompiler)
+        compiler = getMultiAdapter((self.portal, self.request), ISCSSCompiler)
+        verifyObject(ISCSSCompiler, compiler)
 
     def test_compiles_to_css(self):
         compiler = getMultiAdapter((self.portal, self.request), ISCSSCompiler)

@@ -10,7 +10,7 @@ from ftw.theming.tests.stubs import REQUEST
 from operator import attrgetter
 from unittest2 import TestCase
 from zope.interface import provider
-from zope.interface.verify import verifyClass
+from zope.interface.verify import verifyObject
 
 
 def slots(resources):
@@ -24,7 +24,8 @@ def paths(resources):
 class TestSCSSRegistry(TestCase):
 
     def test_implements_interface(self):
-        verifyClass(ISCSSRegistry, SCSSRegistry)
+        registry = SCSSRegistry()
+        verifyObject(ISCSSRegistry, registry)
 
     def test_add_resources(self):
         foo = SCSSFileResource('ftw.theming.tests', 'resources/foo.scss')
