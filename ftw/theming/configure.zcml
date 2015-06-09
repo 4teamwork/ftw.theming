@@ -10,6 +10,7 @@
     <include package="ftw.upgrade" file="meta.zcml" />
 
     <include file="meta.zcml" />
+    <include file="resources.zcml" />
     <include package=".browser" />
     <include package=".viewlets" />
 
@@ -28,10 +29,5 @@
         profile="ftw.theming:default"
         directory="upgrades"
         />
-
-    <theme:resources slot="ftw.theming" profile="ftw.theming:default">
-        <theme:scss file="resources/scss/reset.scss"  />
-        <theme:scss file="resources/scss/theming_controlpanel.scss" />
-    </theme:resources>
 
 </configure>

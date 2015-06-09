@@ -45,13 +45,13 @@
                     <td class="col-index" tal:content="item/index" />
                     <td class="col-slot" tal:content="item/slot" />
                     <td class="col-name" tal:content="item/name"
-                        tal:attributes="title item/path"/>
-                    <td class="col-package" tal:content="item/package" />
-                    <td class="col-profile" tal:content="item/profile" />
-                    <td class="col-for" tal:content="item/for_name"
-                        tal:attributes="title item/for_path"/>
-                    <td class="col-layer" tal:content="item/layer_name"
-                        tal:attributes="title item/layer_path" />
+                        tal:attributes="title item/path|nothing"/>
+                    <td class="col-package" tal:content="item/package|nothing" />
+                    <td class="col-profile" tal:content="item/profile|nothing" />
+                    <td class="col-for" tal:content="item/for_name|nothing"
+                        tal:attributes="title item/for_path|nothing"/>
+                    <td class="col-layer" tal:content="item/layer_name|nothing"
+                        tal:attributes="title item/layer_path|nothing" />
                 </tr>
             </tbody>
 

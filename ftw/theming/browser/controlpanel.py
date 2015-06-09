@@ -1,3 +1,4 @@
+from ftw.theming.interfaces import ISCSSFileResource
 from ftw.theming.interfaces import ISCSSRegistry
 from Products.Five import BrowserView
 from zope.component import getUtility
@@ -11,20 +12,26 @@ class ThemingResources(BrowserView):
             cssclasses = 'theming-resource '
             cssclasses += available and 'available' or 'not-available'
 
-            yield {
+            infos = {
                 'available': available,
                 'cssclasses': cssclasses,
                 'index': index,
                 'name': resource.name,
-                'path': resource.path,
-                'package': resource.package,
                 'slot': resource.slot,
-                'profile': resource.profile,
-                'for_name': resource.for_.__name__,
-                'for_path': resource.for_.__identifier__,
-                'layer_name': resource.layer.__name__,
-                'layer_path': resource.layer.__identifier__,
                 }
+
+            if ISCSSFileResource.providedBy(resource):
+                infos.update({
+                        'path': resource.path,
+                        'package': resource.package,
+                        'profile': resource.profile,
+                        'for_name': resource.for_.__name__,
+                        'for_path': resource.for_.__identifier__,
+                        'layer_name': resource.layer.__name__,
+                        'layer_path': resource.layer.__identifier__,
+                        })
+
+            yield infos
 
     def resources(self):
         registry = getUtility(ISCSSRegistry)

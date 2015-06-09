@@ -1,0 +1,13 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:theme="http://namespaces.zope.org/ftw.theming"
+    i18n_domain="ftw.theming">
+
+    <theme:scss_factory factory=".variables.portal_url_variable_resource_factory" />
+
+    <theme:resources slot="ftw.theming" profile="ftw.theming:default">
+        <theme:scss file="resources/scss/reset.scss"  />
+        <theme:scss file="resources/scss/theming_controlpanel.scss" />
+    </theme:resources>
+
+</configure>
