@@ -1,8 +1,15 @@
+
+body.template-theming-resources,
+body.template-theming-variables {
+  ul.formTabs {
+    margin-top: 1.4em;
+    margin-bottom: 1em;
+  }
+}
+
 body.template-theming-resources {
 
   table.theming-resources {
-    margin-top: 2em;
-
     tbody tr.not-available td {
       &.col-available, &.col-profile, &.col-for, &.col-layer {
         color: red;

@@ -1,0 +1,81 @@
+
+@if function-exists(register-theming-variables) {
+  _: register-theming-variables(string, portal-url);
+}
+
+/* COLORS */
+$primary-color: #205C90;
+$secondary-color: #75ad0a;
+
+$gray-base: #000;
+$gray-darker: lighten($gray-base, 13.5%);
+$gray-dark: lighten($gray-base, 20%);
+$gray: lighten($gray-base, 33.5%);
+$gray-light: lighten($gray-base, 46.7%);
+$gray-lighter: lighten($gray-base, 93.5%);
+
+$body-bg: #fff;
+$text-color: $gray-dark;
+$link-color: $primary-color;
+$link-hover-color: $secondary-color;
+$link-decoration: none;
+$link-hover-decoration: underline;
+
+@if function-exists(register-theming-variables) {
+  ?: register-theming-variables(color,
+                                primary-color,
+                                secondary-color,
+                                gray-base,
+                                gray-darker,
+                                gray-dark,
+                                gray,
+                                gray-light,
+                                gray-lighter,
+                                body-bg,
+                                text-color,
+                                link-color,
+                                link-hover-color);
+
+  ?: register-theming-variables(string,
+                                link-decoration,
+                                link-hover-decoration);
+}
+
+
+/* TYPOGRAPHY */
+
+$font-family-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family-serif: Georgia, "Times New Roman", Times, serif;
+$font-family-monospace: Menlo, Monaco, Consolas, "Courier New", monospace;
+$font-family-base: $font-family-sans-serif;
+$font-size-base: 14px;
+$font-size-large: ceil(($font-size-base * 1.25));
+$font-size-small: ceil(($font-size-base * 0.85));
+$line-height-base: 1.428571429;
+
+$font-size-h1: floor(($font-size-base * 2.6));
+$font-size-h2: floor(($font-size-base * 2.15));
+$font-size-h3: ceil(($font-size-base * 1.7));
+$font-size-h4: ceil(($font-size-base * 1.25));
+$font-size-h5: $font-size-base;
+$font-size-h6: ceil(($font-size-base * 0.85));
+
+
+@if function-exists(register-theming-variables) {
+  ?: register-theming-variables(font,
+                                font-family-sans-serif,
+                                font-family-serif,
+                                font-family-monospace,
+                                font-family-base);
+  ?: register-theming-variables(size,
+                                font-size-base,
+                                font-size-large,
+                                font-size-small,
+                                line-height-base,
+                                font-size-h1,
+                                font-size-h2,
+                                font-size-h3,
+                                font-size-h4,
+                                font-size-h5,
+                                font-size-h6);
+}

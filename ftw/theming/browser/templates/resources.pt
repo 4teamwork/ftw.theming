@@ -9,16 +9,28 @@
 
     <div metal:fill-slot="prefs_configlet_main">
 
-        <h1 class="documentFirstHeading"
-            i18n:translate="title_theming_resources">Theming Resources</h1>
+        <h1 class="documentFirstHeading">Theming Resources</h1>
 
-        <a href=""
-           class="link-parent"
+        <a class="link-parent"
            tal:attributes="href string:$portal_url/@@overview-controlpanel"
            i18n:translate="label_up_to_plone_setup"
            i18n:domain="plone">
             Up to Site Setup
         </a>
+
+        <ul class="formTabs">
+            <li class="formTab firstFormTab">
+                <a tal:attributes="href string:$portal_url/@@theming-resources" i18n:translate=""
+                   class="selected">
+                    Theming Resources
+                </a>
+            </li>
+            <li class="formTab lastFormTab">
+                <a tal:attributes="href string:$portal_url/@@theming-variables" i18n:translate="">
+                    Theming Variables
+                </a>
+            </li>
+        </ul>
 
         <table class="theming-resources listing">
 

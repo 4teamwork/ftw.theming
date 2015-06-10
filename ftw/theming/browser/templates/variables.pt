@@ -1,0 +1,70 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="here/prefs_main_template/macros/master"
+      i18n:domain="ftw.theming">
+
+    <div metal:fill-slot="prefs_configlet_main">
+
+        <h1 class="documentFirstHeading"
+            i18n:translate="title_theming_resources">Theming Variables</h1>
+
+        <a class="link-parent"
+           tal:attributes="href string:$portal_url/@@overview-controlpanel"
+           i18n:translate="label_up_to_plone_setup"
+           i18n:domain="plone">
+            Up to Site Setup
+        </a>
+
+        <ul class="formTabs">
+            <li class="formTab firstFormTab">
+                <a tal:attributes="href string:$portal_url/@@theming-resources" i18n:translate="">
+                    Theming Resources
+                </a>
+            </li>
+            <li class="formTab lastFormTab">
+                <a tal:attributes="href string:$portal_url/@@theming-variables" i18n:translate=""
+                   class="selected">
+                    Theming Variables
+                </a>
+            </li>
+        </ul>
+
+        <table class="theming-variables listing">
+
+            <thead>
+                <tr>
+                    <th i18n:translate="">Name</th>
+                    <th i18n:translate="">Value</th>
+                    <th i18n:translate="">Example</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr tal:repeat="item view/variables">
+                    <td tal:content="item/name" />
+                    <td class="value"
+                        tal:content="item/value" />
+
+                    <td tal:condition="python: item['type'] == 'color'"
+                        class="example color"
+                        tal:attributes="style string:background-color:${item/value}" />
+
+                    <td tal:condition="python: item['type'] == 'font'"
+                        class="example font"
+                        tal:attributes="style string:font-family:${item/value}">
+                        The quick brown fox jumps over the lazy dog.
+                    </td>
+
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</html>

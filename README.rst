@@ -195,6 +195,15 @@ Since the callable instantiates the resource, it's content can be created dynami
 
 
 
+Control Panel
+=============
+
+When ``ftw.theming`` is installed, a control panel is added, listing the
+SCSS resources and the default SCSS variables.
+The controlpanel views are available on any navigation root.
+
+
+
 Links
 =====
 

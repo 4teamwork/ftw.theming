@@ -5,6 +5,13 @@
     i18n_domain="ftw.theming">
 
     <browser:page
+        name="theming.css"
+        for="plone.app.layout.navigation.interfaces.INavigationRoot"
+        class=".theming_css.ThemingCSSView"
+        permission="zope.Public"
+        />
+
+    <browser:page
         name="theming-resources"
         for="plone.app.layout.navigation.interfaces.INavigationRoot"
         template="templates/resources.pt"
@@ -13,10 +20,11 @@
         />
 
     <browser:page
-        name="theming.css"
+        name="theming-variables"
         for="plone.app.layout.navigation.interfaces.INavigationRoot"
-        class=".theming_css.ThemingCSSView"
-        permission="zope.Public"
+        template="templates/variables.pt"
+        class=".theming_variables.ThemingVariablesView"
+        permission="cmf.ManagePortal"
         />
 
 </configure>
