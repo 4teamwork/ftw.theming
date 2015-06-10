@@ -34,13 +34,14 @@ class TestControlpanel(FunctionalTestCase):
             del resource['']
             del resource['#']
 
-        self.assertIn({'For': 'INavigationRoot',
-                       'Layer': 'Interface',
-                       'Name': 'ftw.theming:resources/scss/reset.scss',
-                       'Package': 'ftw.theming',
-                       'Profile': 'ftw.theming:default',
-                       'Slot': 'ftw.theming'},
-                      resources)
+        self.assertIn(
+            {'For': 'INavigationRoot',
+             'Layer': 'Interface',
+             'Name': 'ftw.theming:resources/scss/default/theming_controlpanel.scss',
+             'Package': 'ftw.theming',
+             'Profile': 'ftw.theming:default',
+             'Slot': 'addon'},
+            resources)
 
     @browsing
     def test_theming_variables_lists_variables(self, browser):
