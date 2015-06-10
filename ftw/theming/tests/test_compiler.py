@@ -21,3 +21,9 @@ class TestCompiler(FunctionalTestCase):
         compiler = getMultiAdapter((self.portal, self.request), ISCSSCompiler)
         self.assertTrue(compiler.compile(debug=True),
                         'Compiled CSS should be empty.')
+
+    def test_compile_scss_string(self):
+        compiler = getMultiAdapter((self.portal, self.request), ISCSSCompiler)
+        result = compiler.compile_scss_string('$red: red;'
+                                              'body { background-color: $red; }')
+        self.assertEquals('body{background-color:red}', result.strip())

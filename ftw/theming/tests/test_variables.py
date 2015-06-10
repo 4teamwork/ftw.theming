@@ -1,6 +1,5 @@
 from ftw.theming.interfaces import ISCSSRegistry
 from ftw.theming.tests import FunctionalTestCase
-from ftw.theming.variables import portal_url_variable_resource_factory
 from zope.component import getUtility
 
 
