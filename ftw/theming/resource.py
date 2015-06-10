@@ -69,7 +69,7 @@ class SCSSFileResource(SCSSResource):
         return True
 
     def get_source(self, context, request):
-        return self.path.text()
+        return self.path.text('utf-8')
 
     @staticmethod
     def _resolve_path(package, relative_path):
