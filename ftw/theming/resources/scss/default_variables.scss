@@ -81,3 +81,56 @@ $font-size-h6: ceil(($font-size-base * 0.85));
                                 font-size-h5,
                                 font-size-h6);
 }
+
+/* Viewports */
+
+// Taken from http://en.wikipedia.org/wiki/Display_resolution
+$desktop-WQHD-width:   2560px;
+$desktop-FHD-width:    1920px;
+$desktop-HDPLUS-width: 1600px;
+$desktop-HD-width:     1360px;
+$desktop-WXGA-width:   1280px;
+$desktop-XGA-width:    1024px;
+
+// Taken from http://www.ciop.com/common-resolutions-for-mobile-phones-and-tablets
+$mobile-large: 1280px;
+$mobile-medium: 1024px;
+$mobile-small: 800px;
+$mobile-smaller: 600px;
+$mobile-tiny: 480px;
+
+
+$screen-XL: "(min-width: #{$desktop-WQHD-width})";
+$screen-L: "(max-width: #{$desktop-HDPLUS-width})";
+$screen-M: "(max-width: #{$desktop-HD-width})";
+$screen-S: "(max-width: #{$desktop-XGA-width})";
+$screen-XS: "(max-width: #{$mobile-small})";
+
+@mixin desktop-XL {
+  @media #{$screen-XL} {
+    @content;
+  }
+}
+
+@mixin desktop-L {
+  @media #{$screen-L} {
+    @content;
+  }
+}
+
+@mixin desktop-M {
+  @media #{$screen-M} {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media #{$screen-S} {
+    @content;
+  }
+}
+@mixin phone {
+  @media #{$screen-XS} {
+    @content;
+  }
+}

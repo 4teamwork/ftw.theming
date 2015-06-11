@@ -203,6 +203,35 @@ SCSS resources and the default SCSS variables.
 The controlpanel views are available on any navigation root.
 
 
+SCSS Mixins
+===========
+
+Using media queries Mixins
+--------------------------
+
+``ftw.theming`` provides mixins for most common media queries:
+
+- phone (800px)
+- tablet (1024px)
+- desktop-M (1360px) - HD
+- desktop-L (1920px) - Full HD
+- desktop-XL (2560px) - WQHD
+
+Example usage:
+
+.. code:: SCSS
+
+    #container {
+        width: 1600px;
+
+        @include tablet {
+            width:1000px;
+        }
+        @include phone {
+            width:500px;
+        }
+    }
+
 
 Links
 =====
