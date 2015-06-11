@@ -19,15 +19,35 @@
     <adapter factory=".compiler.SCSSCompiler" />
 
     <genericsetup:registerProfile
-        title="ftw.theming"
+        title="ftw.theming (default)"
         name="default"
         directory="profiles/default"
+        description="Setup ftw.theming control panel and SCSS mechanism."
         provides="Products.GenericSetup.interfaces.EXTENSION"
         />
 
     <upgrade-step:directory
         profile="ftw.theming:default"
-        directory="upgrades"
+        directory="upgrades/default"
+        />
+
+    <genericsetup:registerProfile
+        title="ftw.theming (base)"
+        name="base"
+        directory="profiles/base"
+        description="Replace Plone standard CSS with ftw.theming SCSS."
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+        />
+
+    <upgrade-step:directory
+        profile="ftw.theming:base"
+        directory="upgrades/base"
+        />
+
+    <subscriber
+        for="Products.CMFCore.interfaces.ISiteRoot
+             zope.traversing.interfaces.IBeforeTraverseEvent"
+        handler=".header.set_ftw_theming_header"
         />
 
 </configure>

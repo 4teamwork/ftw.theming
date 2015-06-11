@@ -10,4 +10,8 @@
         <theme:scss file="resources/scss/default/theming_controlpanel.scss" slot="addon" />
     </theme:resources>
 
+    <theme:resources profile="ftw.theming:base" slot="ftw.theming">
+        <theme:scss file="resources/scss/base/normalize.scss" slot="top" />
+    </theme:resources>
+
 </configure>
