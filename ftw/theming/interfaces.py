@@ -6,6 +6,7 @@ from zope.interface import Interface
 
 SLOTS = ('top',
          'variables',
+         'mixins',
          'ftw.theming',
          'addon',
          'theme',

@@ -45,6 +45,7 @@ Theese are the available slots, sorted by inclusion order:
 
 - ``top``
 - ``variables``
+- ``mixins``
 - ``ftw.theming``
 - ``addon``
 - ``theme``
