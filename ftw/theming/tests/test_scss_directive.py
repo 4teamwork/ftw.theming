@@ -44,7 +44,7 @@ class TestSCSSDirective(TestCase):
             self.load_zcml('<theme:scss file="resources/foo.scss"'
                            ' slot="any" />')
         self.assertEquals('Invalid slot "any". Valid slots:'
-                          ' (\'top\', \'variables\', \'ftw.theming\','
+                          ' (\'top\', \'variables\', \'mixins\', \'ftw.theming\','
                           ' \'addon\', \'theme\', \'policy\', \'bottom\')',
                           str(cm.exception.evalue))
 

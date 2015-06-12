@@ -23,6 +23,7 @@ $danger-color: #d9534f;
 $page-bg-color: $gray-lighter;
 $content-bg-color: #fff;
 $text-color: $gray-dark;
+$light-text-color: $gray-light;
 $link-color: $primary-color;
 $link-hover-color: $secondary-color;
 $link-decoration: none;
@@ -46,12 +47,22 @@ $link-hover-decoration: underline;
                                 page-bg-color,
                                 content-bg-color,
                                 text-color,
+                                light-text-color,
                                 link-color,
                                 link-hover-color);
 
   ?: register-theming-variables(string,
                                 link-decoration,
                                 link-hover-decoration);
+}
+
+
+/* COMPONENTS */
+$border-radius: 3px;
+
+@if function-exists(register-theming-variables) {
+  ?: register-theming-variables(size,
+                                border-radius);
 }
 
 
