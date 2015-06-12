@@ -14,6 +14,12 @@ $gray: lighten($gray-base, 33.5%);
 $gray-light: lighten($gray-base, 46.7%);
 $gray-lighter: lighten($gray-base, 93.5%);
 
+$standalone-color: #fafafa;
+$context-color: $primary-color;
+$success-color: #5cb85c;
+$warning-color: #f0ad4e;
+$danger-color: #d9534f;
+
 $page-bg-color: $gray-lighter;
 $content-bg-color: #fff;
 $text-color: $gray-dark;
@@ -32,6 +38,11 @@ $link-hover-decoration: underline;
                                 gray,
                                 gray-light,
                                 gray-lighter,
+                                standalone-color,
+                                context-color,
+                                success-color,
+                                warning-color,
+                                danger-color,
                                 page-bg-color,
                                 content-bg-color,
                                 text-color,
