@@ -23,6 +23,7 @@ $link-color: $primary-color !default;
 $link-hover-color: $secondary-color !default;
 $link-decoration: none !default;
 $link-hover-decoration: underline !default;
+$outline-color: change-color($primary-color, $lightness: 60%);
 
 @include declare-variables(
   primary-color,
@@ -45,7 +46,8 @@ $link-hover-decoration: underline !default;
   link-color,
   link-hover-color,
   link-decoration,
-  link-hover-decoration);
+  link-hover-decoration,
+  outline-color);
 
 
 /* COMPONENTS */
