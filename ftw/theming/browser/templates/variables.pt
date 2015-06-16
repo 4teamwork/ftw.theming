@@ -33,7 +33,7 @@
             </li>
         </ul>
 
-        <table class="theming-variables listing">
+        <table class="theming-variables listing nosort">
 
             <thead>
                 <tr>

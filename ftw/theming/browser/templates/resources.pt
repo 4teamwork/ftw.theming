@@ -32,7 +32,7 @@
             </li>
         </ul>
 
-        <table class="theming-resources listing">
+        <table class="theming-resources listing nosort">
 
             <thead>
                 <tr>
