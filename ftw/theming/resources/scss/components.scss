@@ -5,3 +5,23 @@
   background-color: $color;
   @include borderradius($radius);
 }
+
+
+@mixin linklist($color: $gray-light, $horizontal-padding: 0.5em,
+                $height: 0.8em, $vertical-padding: 0.3em) {
+  > * {
+    float: left;
+  }
+
+  > :not(:first-child) {
+    &:before {
+      content: '';
+      float: left;
+      border-left: 1px solid $color;
+      height: $height;
+      margin-top: $vertical-padding;
+      width: $horizontal-padding;
+      margin-left: $horizontal-padding;
+    }
+  }
+}
