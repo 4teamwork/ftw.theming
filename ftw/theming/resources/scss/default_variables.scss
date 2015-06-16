@@ -1,132 +1,124 @@
-
-@if function-exists(register-theming-variables) {
-  _: register-theming-variables(string, portal-url);
-}
-
 /* COLORS */
-$primary-color: #205C90;
-$secondary-color: #75ad0a;
+$primary-color: #205C90 !default;
+$secondary-color: #75ad0a !default;
 
-$gray-base: #000;
-$gray-darker: lighten($gray-base, 13.5%);
-$gray-dark: lighten($gray-base, 20%);
-$gray: lighten($gray-base, 33.5%);
-$gray-light: lighten($gray-base, 46.7%);
-$gray-lighter: lighten($gray-base, 93.5%);
+$gray-base: #000 !default;
+$gray-darker: lighten($gray-base, 13.5%) !default;
+$gray-dark: lighten($gray-base, 20%) !default;
+$gray: lighten($gray-base, 33.5%) !default;
+$gray-light: lighten($gray-base, 46.7%) !default;
+$gray-lighter: lighten($gray-base, 93.5%) !default;
 
-$standalone-color: #fafafa;
-$context-color: #337AB7;
-$success-color: #5cb85c;
-$warning-color: #f0ad4e;
-$danger-color: #d9534f;
+$standalone-color: #fafafa !default;
+$context-color: #337AB7 !default;
+$success-color: #5cb85c !default;
+$warning-color: #f0ad4e !default;
+$danger-color: #d9534f !default;
 
-$page-bg-color: $gray-lighter;
-$content-bg-color: #fff;
-$text-color: $gray-dark;
-$light-text-color: $gray-light;
-$link-color: $primary-color;
-$link-hover-color: $secondary-color;
-$link-decoration: none;
-$link-hover-decoration: underline;
+$page-bg-color: $gray-lighter !default;
+$content-bg-color: #fff !default;
+$text-color: $gray-dark !default;
+$light-text-color: $gray-light !default;
+$link-color: $primary-color !default;
+$link-hover-color: $secondary-color !default;
+$link-decoration: none !default;
+$link-hover-decoration: underline !default;
 
-@if function-exists(register-theming-variables) {
-  ?: register-theming-variables(color,
-                                primary-color,
-                                secondary-color,
-                                gray-base,
-                                gray-darker,
-                                gray-dark,
-                                gray,
-                                gray-light,
-                                gray-lighter,
-                                standalone-color,
-                                context-color,
-                                success-color,
-                                warning-color,
-                                danger-color,
-                                page-bg-color,
-                                content-bg-color,
-                                text-color,
-                                light-text-color,
-                                link-color,
-                                link-hover-color);
-
-  ?: register-theming-variables(string,
-                                link-decoration,
-                                link-hover-decoration);
-}
+@include declare-variables(
+  primary-color,
+  secondary-color,
+  gray-base,
+  gray-darker,
+  gray-dark,
+  gray,
+  gray-light,
+  gray-lighter,
+  standalone-color,
+  context-color,
+  success-color,
+  warning-color,
+  danger-color,
+  page-bg-color,
+  content-bg-color,
+  text-color,
+  light-text-color,
+  link-color,
+  link-hover-color,
+  link-decoration,
+  link-hover-decoration);
 
 
 /* COMPONENTS */
-$border-radius: 3px;
+$border-radius: 3px !default;
 
-@if function-exists(register-theming-variables) {
-  ?: register-theming-variables(size,
-                                border-radius);
-}
+@include declare-variables(
+  border-radius);
 
 
 /* TYPOGRAPHY */
 
-$font-family-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
-$font-family-serif: Georgia, "Times New Roman", Times, serif;
-$font-family-monospace: Menlo, Monaco, Consolas, "Courier New", monospace;
-$font-family-base: $font-family-sans-serif;
-$font-size-base: 14px;
-$font-size-large: ceil(($font-size-base * 1.25));
-$font-size-small: ceil(($font-size-base * 0.85));
-$line-height-base: 1.428571429;
+$font-family-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$font-family-serif: Georgia, "Times New Roman", Times, serif !default;
+$font-family-monospace: Menlo, Monaco, Consolas, "Courier New", monospace !default;
+$font-family-base: $font-family-sans-serif !default;
+$font-size-base: 14px !default;
+$font-size-large: ceil(($font-size-base * 1.25)) !default;
+$font-size-small: ceil(($font-size-base * 0.85)) !default;
+$line-height-base: 1.428571429 !default;
 
-$font-size-h1: floor(($font-size-base * 2.6));
-$font-size-h2: floor(($font-size-base * 2.15));
-$font-size-h3: ceil(($font-size-base * 1.7));
-$font-size-h4: ceil(($font-size-base * 1.25));
-$font-size-h5: $font-size-base;
-$font-size-h6: ceil(($font-size-base * 0.85));
+$font-size-h1: floor(($font-size-base * 2.6)) !default;
+$font-size-h2: floor(($font-size-base * 2.15)) !default;
+$font-size-h3: ceil(($font-size-base * 1.7)) !default;
+$font-size-h4: ceil(($font-size-base * 1.25)) !default;
+$font-size-h5: $font-size-base !default;
+$font-size-h6: ceil(($font-size-base * 0.85)) !default;
 
+@include declare-variables(
+  font-family-sans-serif,
+  font-family-serif,
+  font-family-monospace,
+  font-family-base,
+  font-size-base,
+  font-size-large,
+  font-size-small,
+  line-height-base,
+  font-size-h1,
+  font-size-h2,
+  font-size-h3,
+  font-size-h4,
+  font-size-h5,
+  font-size-h6);
 
-@if function-exists(register-theming-variables) {
-  ?: register-theming-variables(font,
-                                font-family-sans-serif,
-                                font-family-serif,
-                                font-family-monospace,
-                                font-family-base);
-  ?: register-theming-variables(size,
-                                font-size-base,
-                                font-size-large,
-                                font-size-small,
-                                line-height-base,
-                                font-size-h1,
-                                font-size-h2,
-                                font-size-h3,
-                                font-size-h4,
-                                font-size-h5,
-                                font-size-h6);
-}
 
 /* Viewports */
 
 // Taken from http://en.wikipedia.org/wiki/Display_resolution
-$desktop-WQHD-width:   2560px;
-$desktop-FHD-width:    1920px;
-$desktop-HDPLUS-width: 1600px;
-$desktop-HD-width:     1360px;
-$desktop-WXGA-width:   1280px;
-$desktop-XGA-width:    1024px;
+$desktop-WQHD-width:   2560px !default;
+$desktop-FHD-width:    1920px !default;
+$desktop-HDPLUS-width: 1600px !default;
+$desktop-HD-width:     1360px !default;
+$desktop-WXGA-width:   1280px !default;
+$desktop-XGA-width:    1024px !default;
 
 // Taken from http://www.ciop.com/common-resolutions-for-mobile-phones-and-tablets
-$mobile-large: 1280px;
-$mobile-medium: 1024px;
-$mobile-small: 800px;
-$mobile-smaller: 600px;
-$mobile-tiny: 480px;
+$mobile-large: 1280px !default;
+$mobile-medium: 1024px !default;
+$mobile-small: 800px !default;
+$mobile-smaller: 600px !default;
+$mobile-tiny: 480px !default;
 
+$screen-XL: "(min-width: #{$desktop-WQHD-width})" !default;
+$screen-L: "(max-width: #{$desktop-HDPLUS-width})" !default;
+$screen-M: "(max-width: #{$desktop-HD-width})" !default;
+$screen-S: "(max-width: #{$desktop-XGA-width})" !default;
+$screen-XS: "(max-width: #{$mobile-small})" !default;
 
-$screen-XL: "(min-width: #{$desktop-WQHD-width})";
-$screen-L: "(max-width: #{$desktop-HDPLUS-width})";
-$screen-M: "(max-width: #{$desktop-HD-width})";
-$screen-S: "(max-width: #{$desktop-XGA-width})";
-$screen-XS: "(max-width: #{$mobile-small})";
+@include declare-variables(
+  screen-XL,
+  screen-L,
+  screen-M,
+  screen-S,
+  screen-XS);
 
 @mixin desktop-XL {
   @media #{$screen-XL} {

@@ -8,8 +8,9 @@ body.template-theming-variables {
 }
 
 body.template-theming-resources {
-
   table.theming-resources {
+    margin-top: 1.4em;
+
     tbody tr.not-available td {
       &.col-available, &.col-profile, &.col-for, &.col-layer {
         color: red;
@@ -20,5 +21,25 @@ body.template-theming-resources {
       color: #33AA33;
     }
   }
+}
 
+body.template-theming-variables {
+  table.theming-variables {
+    margin-top: 1.4em;
+
+    tr.part-title td {
+      font-size: $font-size-h4;
+      font-weight: bold;
+      padding-top: 1.4em;
+      text-align: center;
+    }
+
+    td.name {
+      white-space: nowrap;
+    }
+
+    td.color {
+      border-left: 1px solid #ddd;
+    }
+  }
 }

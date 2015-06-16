@@ -1,0 +1,5 @@
+@mixin declare-variables($varnames...) {
+  @if function-exists(register-theming-variables) {
+    ?: register-theming-variables($varnames...);
+  }
+}

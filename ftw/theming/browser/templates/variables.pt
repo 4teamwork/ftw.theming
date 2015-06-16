@@ -37,6 +37,7 @@
 
             <thead>
                 <tr>
+                    <th i18n:translate="">File</th>
                     <th i18n:translate="">Name</th>
                     <th i18n:translate="">Value</th>
                     <th i18n:translate="">Example</th>
@@ -44,22 +45,22 @@
             </thead>
 
             <tbody>
-                <tr tal:repeat="item view/variables">
-                    <td tal:content="item/name" />
-                    <td class="value"
-                        tal:content="item/value" />
+                <tal:PACKAGE tal:repeat="package view/packages">
+                    <tr class="part-title">
+                        <td colspan="4" tal:content="package/name" />
+                    </tr>
 
-                    <td tal:condition="python: item['type'] == 'color'"
-                        class="example color"
-                        tal:attributes="style string:background-color:${item/value}" />
+                    <tr tal:repeat="item package/variables">
+                        <td class="filename" tal:content="item/filename" />
+                        <td class="name" tal:content="item/name" />
+                        <td class="value" tal:content="item/value"
+                            tal:attributes="colspan python:item['type'] in ('Color',) and 1 or 2"/>
 
-                    <td tal:condition="python: item['type'] == 'font'"
-                        class="example font"
-                        tal:attributes="style string:font-family:${item/value}">
-                        The quick brown fox jumps over the lazy dog.
-                    </td>
-
-                </tr>
+                        <td tal:condition="python: item['type'] == 'Color'"
+                            class="example color"
+                            tal:attributes="style string:background-color:${item/value}" />
+                    </tr>
+                </tal:PACKAGE>
 
             </tbody>
 

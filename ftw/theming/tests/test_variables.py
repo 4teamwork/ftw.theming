@@ -12,7 +12,8 @@ class TestVariables(FunctionalTestCase):
         self.assertIn('ftw.theming:portal_url', resources.keys())
 
         resource = resources['ftw.theming:portal_url']
-        self.assertEquals('$portal-url: "http://nohost/plone";',
+        self.assertEquals('$portal-url: "http://nohost/plone";\n'
+                          '@include declare-variables(portal-url);',
                           resource.get_source(self.portal, self.request).strip())
 
         self.assertEquals('variables', resource.slot)

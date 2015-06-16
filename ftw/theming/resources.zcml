@@ -4,6 +4,7 @@
     i18n_domain="ftw.theming">
 
     <theme:scss_factory factory=".variables.portal_url_variable_resource_factory" />
+    <theme:scss file="resources/scss/core.scss" slot="top" />
     <theme:scss file="resources/scss/default_variables.scss" slot="variables" />
     <theme:scss file="resources/scss/standard_mixins.scss" slot="mixins" />
 

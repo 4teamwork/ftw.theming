@@ -48,11 +48,14 @@ class TestControlpanel(FunctionalTestCase):
         browser.login(SITE_OWNER_NAME).open(view='theming-variables')
         variables = browser.css('table.theming-variables').first.dicts()
 
-        self.assertIn({'Name': '$gray-base',
+        self.assertIn({'File': 'default_variables.scss',
+                       'Name': '$gray-base',
                        'Value': '#000',
                        'Example': ''},
                       variables)
 
-        self.assertIn({'Name': '$portal-url',
-                       'Value': '"http://nohost/plone"'},
+        self.assertIn({'File': 'portal_url',
+                       'Name': '$portal-url',
+                       'Value': '"http://nohost/plone"',
+                       'Example': '"http://nohost/plone"'},
                       variables)
