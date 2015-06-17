@@ -2,6 +2,7 @@ from ftw.theming.extensions import ThemingExtensions
 from ftw.theming.interfaces import ISCSSCompiler
 from ftw.theming.interfaces import ISCSSFileResource
 from ftw.theming.interfaces import ISCSSRegistry
+from pathlib import Path
 from scss.compiler import Compiler
 from scss.namespace import Namespace
 from scss.source import SourceFile
@@ -9,6 +10,7 @@ from zope.component import adapts
 from zope.component import getUtility
 from zope.interface import implements
 from zope.interface import Interface
+import os.path
 
 
 class SCSSCompiler(object):
@@ -36,10 +38,12 @@ class SCSSCompiler(object):
                     u'$current-filename: "{0}";'.format(filename),
                     resource.get_source(self.context, self.request)))
             if ISCSSFileResource.providedBy(resource):
-                path = resource.path
+                source_file = SourceFile.from_string(source, Path(str(resource.path)))
+                source_file.origin = Path(str(resource.path))
+                return source_file
             else:
                 path = 'dynamic:{0}'.format(resource.name)
-            return SourceFile.from_string(source, path)
+                return SourceFile.from_string(source, path)
 
         registry = getUtility(ISCSSRegistry)
         resources = registry.get_resources(self.context, self.request)
@@ -47,9 +51,20 @@ class SCSSCompiler(object):
 
     def _compile(self, files, debug=False):
         compiler = Compiler(
+            search_path=self._get_search_path_for_files(files),
             output_style=debug and 'expanded' or 'compressed',
             generate_source_map=True,
             namespace=self.namespace)
-        compiler.extensions.append(ThemingExtensions)
+        compiler.extensions.append(ThemingExtensions())
         css = compiler.compile_sources(*files)
         return css.encode('utf-8')
+
+    def _get_search_path_for_files(self, files):
+        directories = []
+        for source_file in files:
+            if not source_file.path or not source_file.path.startswith('/'):
+                continue
+            path = os.path.dirname(source_file.path)
+            if path not in directories:
+                directories.append(path)
+        return map(Path, directories)
