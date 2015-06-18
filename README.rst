@@ -236,7 +236,7 @@ Changing the iconset should be done in an SCSS file in the ``variables`` slot.
 
 .. code:: scss
 
-    $standard-iconset: icomoon;
+    $standard-iconset: customicons;
 
 
 Custom iconsets
