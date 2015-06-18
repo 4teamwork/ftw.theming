@@ -71,4 +71,5 @@ class TestControlpanel(FunctionalTestCase):
     def test_theming_icons_lists_portal_type_icons(self, browser):
         browser.login(SITE_OWNER_NAME).open(view='theming-icons')
         icons = browser.css('table.theming-portal-type-icons').first.dicts()
-        self.assertIn({'Type': 'Folder'}, icons)
+        self.assertIn({'Type': 'Folder',
+                       'Name': 'folder'}, icons)

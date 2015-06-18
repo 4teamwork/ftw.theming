@@ -45,18 +45,21 @@
             <thead>
                 <tr>
                     <th i18n:translate="">Type</th>
+                    <th i18n:translate="">Name</th>
                 </tr>
             </thead>
             <tbody>
 
                 <tal:TYPE tal:repeat="name view/get_portal_types">
-                    <tr tal:define="class python:'contenttype-' + normalizeString(name)">
+                    <tr tal:define="normalized_name python: normalizeString(name);
+                                    class string:contenttype-${normalized_name}">
                         <td>
                             <a tal:content="name"
                                i18n:translate=""
                                tal:attributes="class class"
                                href="#" />
                         </td>
+                        <td tal:content="normalized_name" />
                     </tr>
                 </tal:TYPE>
 
