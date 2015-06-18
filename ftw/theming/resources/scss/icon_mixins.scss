@@ -1,0 +1,20 @@
+$icons-portal-type-icons: ();
+
+@mixin portal-type-icon($type, $value, $iconset) {
+  $icons-portal-type-icons: append($icons-portal-type-icons,
+                                   ($type, $value, $iconset));
+}
+
+@function get-portal-type-icons-for-iconset($requested-iconset) {
+  $result: ();
+  @each $type, $value, $iconset in $icons-portal-type-icons {
+    @if $iconset == $requested-iconset {
+      $result: append($result, ($type, $value));
+    }
+  }
+  @return $result;
+}
+
+@mixin portal-type-font-awesome-icon($type, $value) {
+  @include portal-type-icon($type, $value, font-awesome);
+}

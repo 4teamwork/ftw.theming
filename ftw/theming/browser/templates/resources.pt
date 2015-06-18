@@ -25,9 +25,14 @@
                     Theming Resources
                 </a>
             </li>
-            <li class="formTab lastFormTab">
+            <li class="formTab">
                 <a tal:attributes="href string:$portal_url/@@theming-variables" i18n:translate="">
                     Theming Variables
+                </a>
+            </li>
+            <li class="formTab lastFormTab">
+                <a tal:attributes="href string:$portal_url/@@theming-icons" i18n:translate="">
+                    Icons
                 </a>
             </li>
         </ul>

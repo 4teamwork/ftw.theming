@@ -27,6 +27,13 @@ class TestControlpanel(FunctionalTestCase):
                           browser.url)
 
     @browsing
+    def test_navigate_from_resources_to_icons(self, browser):
+        browser.login(SITE_OWNER_NAME).open(view='theming-resources')
+        browser.find('Icons').click()
+        self.assertEquals('http://nohost/plone/@@theming-icons',
+                          browser.url)
+
+    @browsing
     def test_theming_resources_lists_resources(self, browser):
         browser.login(SITE_OWNER_NAME).open(view='theming-resources')
         resources = browser.css('table.theming-resources').first.dicts()
@@ -59,3 +66,9 @@ class TestControlpanel(FunctionalTestCase):
                        'Value': '"http://nohost/plone"',
                        'Example': '"http://nohost/plone"'},
                       variables)
+
+    @browsing
+    def test_theming_icons_lists_portal_type_icons(self, browser):
+        browser.login(SITE_OWNER_NAME).open(view='theming-icons')
+        icons = browser.css('table.theming-portal-type-icons').first.dicts()
+        self.assertIn({'Type': 'Folder'}, icons)

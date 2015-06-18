@@ -8,6 +8,8 @@
     <theme:scss file="resources/scss/default_variables.scss" slot="variables" />
     <theme:scss file="resources/scss/standard_mixins.scss" slot="mixins" />
     <theme:scss file="resources/scss/components.scss" slot="mixins" />
+    <theme:scss file="resources/scss/icon_mixins.scss" slot="mixins" />
+    <theme:scss file="resources/scss/iconset_font-awesome.scss" slot="bottom" />
 
     <theme:resources profile="ftw.theming:default">
         <theme:scss file="resources/scss/default/theming_controlpanel.scss" slot="addon" />
@@ -15,6 +17,7 @@
 
     <theme:resources profile="ftw.theming:base" slot="ftw.theming">
         <theme:scss file="resources/scss/base/normalize.scss" slot="top" />
+        <theme:scss file="resources/scss/base/standard_icons.scss" />
     </theme:resources>
 
 </configure>
