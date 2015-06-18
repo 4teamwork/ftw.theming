@@ -204,6 +204,89 @@ SCSS resources and the default SCSS variables.
 The controlpanel views are available on any navigation root.
 
 
+Icons
+=====
+
+``ftw.theming`` provides a portal type icon registry.
+The default iconset is `font-awesome`_.
+
+
+Declare icon for portal types
+-----------------------------
+
+Portal type icons are declared in the scss file of the addon package.
+It is possible to support multiple icon sets by declaring icons for each iconset:
+
+.. code:: scss
+
+    @include portal-type-font-awesome-icon(repository-folder, leaf);
+    @include portal-type-icon(repository-folder, "\e616", customicons);
+
+Using those mixins does not generate any CSS yet, nor does it introduce dependency
+to those iconset.
+It simply stores this information in a list to be processed later.
+
+
+Switching iconset
+-----------------
+
+A theme or policy package may change the iconset.
+The standard iconset is ``font-awesome``.
+Changing the iconset should be done in an SCSS file in the ``variables`` slot.
+
+.. code:: scss
+
+    $standard-iconset: icomoon;
+
+
+Custom iconsets
+---------------
+
+The default iconset is ``font-awesome``, which is automatically loaded and the
+necessary CSS is generated when the ``$standard-iconset`` variable is ``font-awesome``.
+
+For having custom iconsets an SCSS file must be registered in the ``bottom`` slot.
+This is usually done by a theme or policy package.
+
+The SCSS file should apply the necessary CSS only when the ``$standard-iconset`` is set
+to this iconset:
+
+.. code:: scss
+
+    @if $standard-iconset == customicons {
+
+      @font-face {
+        font-family: 'customicons';
+        src:url('#{$portal-url}++theme++foo/fonts/customicons.eot?-fa99j8');
+        src:url('#{$portal-url}++theme++foo/fonts/customicons.eot?#iefix-fa99j8') format('embedded-opentype'),
+        url('#{$portal-url}++theme++foo/fonts/customicons.woff?-fa99j8') format('woff'),
+        url('#{$portal-url}++theme++foo/fonts/customicons.ttf?-fa99j8') format('truetype'),
+        url('#{$portal-url}++theme++foo/fonts/customicons.svg?-fa99j8#opengever') format('svg');
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      .icons-on [class^="contenttype-"],
+      .icons-on [class*=" contenttype-"] {
+        &:before {
+          font-family: 'customicons';
+          content: "x";
+          text-align:center;
+          position: absolute;
+        }
+      }
+
+      @each $type, $value in get-portal-type-icons-for-iconset(font-awesome) {
+        body.icons-on .contenttype-#{$type} {
+          &:before {
+            content: $value;
+          }
+        }
+      }
+    }
+
+
+
 SCSS Mixins
 ===========
 
@@ -220,7 +303,7 @@ Using media queries Mixins
 
 Example usage:
 
-.. code:: SCSS
+.. code:: scss
 
     #container {
         width: 1600px;
@@ -248,3 +331,5 @@ Copyright
 This package is copyright by `4teamwork <http://www.4teamwork.ch/>`_.
 
 ``ftw.theming`` is licensed under GNU General Public License, version 2.
+
+.. _font-awesome: http://fortawesome.github.io/Font-Awesome/

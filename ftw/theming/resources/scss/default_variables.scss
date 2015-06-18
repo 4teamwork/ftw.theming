@@ -150,3 +150,10 @@ $screen-XS: "(max-width: #{$mobile-small})" !default;
     @content;
   }
 }
+
+
+/* ICONS */
+
+$standard-iconset: font-awesome;
+@include declare-variables(
+  standard-iconset);

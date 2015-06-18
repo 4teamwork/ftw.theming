@@ -1,0 +1,26 @@
+@if $standard-iconset == font-awesome {
+  $fa-font-path: "#{$portal-url}/++resource++ftw.theming/font-awesome/fonts";
+  @import "../font-awesome/scss/font-awesome";
+
+  .icons-on [class^="contenttype-"],
+  .icons-on [class*=" contenttype-"] {
+    @extend .#{$fa-css-prefix}-times-circle;
+    &:before {
+      color: $danger-color;
+      font-family: FontAwesome;
+      float: left;
+      text-align: center;
+      min-width: 1.4em;
+      margin-right: 0.2em;
+    }
+  }
+
+  @each $type, $value in get-portal-type-icons-for-iconset(font-awesome) {
+    body.icons-on .contenttype-#{$type} {
+      @extend .#{$fa-css-prefix}-#{$value};
+      &:before {
+        color: inherit;
+      }
+    }
+  }
+}

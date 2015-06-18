@@ -27,4 +27,12 @@
         permission="cmf.ManagePortal"
         />
 
+    <browser:page
+        name="theming-icons"
+        for="plone.app.layout.navigation.interfaces.INavigationRoot"
+        template="templates/icons.pt"
+        class=".icons.ThemingIcons"
+        permission="cmf.ManagePortal"
+        />
+
 </configure>
