@@ -34,7 +34,7 @@ def get_css_cache_key(func, self):
 
     portal = getToolByName(self.context, 'portal_url').getPortalObject()
     navroot = getNavigationRootObject(self.context, portal)
-    key = ['/'.join(navroot.getPhysicalPath()),
+    key = [navroot.absolute_url(),
            compute_css_bundle_hash(self.context)]
     return '.'.join(key)
 
