@@ -6,6 +6,7 @@
   .icons-on [class*=" contenttype-"] {
     @extend .#{$fa-css-prefix}-times-circle;
     &:before {
+      display: inline-block;
       color: $danger-color;
       font-family: FontAwesome;
       text-align: center;
