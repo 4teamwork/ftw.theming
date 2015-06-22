@@ -257,11 +257,11 @@ to this iconset:
 
       @font-face {
         font-family: 'customicons';
-        src:url('#{$portal-url}/++theme++foo/fonts/customicons.eot?-fa99j8');
-        src:url('#{$portal-url}/++theme++foo/fonts/customicons.eot?#iefix-fa99j8') format('embedded-opentype'),
-        url('#{$portal-url}/++theme++foo/fonts/customicons.woff?-fa99j8') format('woff'),
-        url('#{$portal-url}/++theme++foo/fonts/customicons.ttf?-fa99j8') format('truetype'),
-        url('#{$portal-url}/++theme++foo/fonts/customicons.svg?-fa99j8#opengever') format('svg');
+        src:url('#{$portal-url}/++theme++foo/fonts/customicons.eot');
+        src:url('#{$portal-url}/++theme++foo/fonts/customicons.eot') format('embedded-opentype'),
+        url('#{$portal-url}/++theme++foo/fonts/customicons.woff') format('woff'),
+        url('#{$portal-url}/++theme++foo/fonts/customicons.ttf') format('truetype'),
+        url('#{$portal-url}/++theme++foo/fonts/customicons.svg') format('svg');
         font-weight: normal;
         font-style: normal;
       }
