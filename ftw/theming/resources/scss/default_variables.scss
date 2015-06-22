@@ -2,15 +2,15 @@
 $primary-color: #205C90 !default;
 $secondary-color: #75ad0a !default;
 
-$gray-base: #000 !default;
+$gray-base: #403e3d !default;
 $gray-darker: lighten($gray-base, 13.5%) !default;
 $gray-dark: lighten($gray-base, 20%) !default;
 $gray: lighten($gray-base, 33.5%) !default;
 $gray-light: lighten($gray-base, 46.7%) !default;
-$gray-lighter: lighten($gray-base, 93.5%) !default;
+$gray-lighter: lighten($gray-base, 70%) !default;
 
 $standalone-color: #fafafa !default;
-$context-color: #337AB7 !default;
+$context-color: #337ab7 !default;
 $success-color: #5cb85c !default;
 $warning-color: #f0ad4e !default;
 $danger-color: #d9534f !default;

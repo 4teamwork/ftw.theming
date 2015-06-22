@@ -57,7 +57,7 @@ class TestControlpanel(FunctionalTestCase):
 
         self.assertIn({'File': 'default_variables.scss',
                        'Name': '$gray-base',
-                       'Value': '#000',
+                       'Value': '#403e3d',
                        'Example': ''},
                       variables)
 
