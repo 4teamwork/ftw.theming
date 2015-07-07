@@ -32,9 +32,11 @@ class SCSSCompiler(object):
     def _get_scss_files(self):
         def make_source_file(resource):
             package = resource.name.split(':')[0]
-            filename = resource.name.split(':')[-1].split('/')[-1]
+            relpath = resource.name.split(':')[-1]
+            filename = relpath.split('/')[-1]
             source = u'\n'.join((
                     u'$current-package: "{0}";'.format(package),
+                    u'$current-relpath: "{0}";'.format(relpath),
                     u'$current-filename: "{0}";'.format(filename),
                     resource.get_source(self.context, self.request)))
             if ISCSSFileResource.providedBy(resource):
