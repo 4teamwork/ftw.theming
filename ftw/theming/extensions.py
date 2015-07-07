@@ -1,4 +1,4 @@
-from ftw.theming.browser.theming_variables import find_object_in_stack
+from ftw.theming.utils import find_object_in_stack
 from lxml import etree
 from lxml.cssselect import CSSSelector
 from path import Path

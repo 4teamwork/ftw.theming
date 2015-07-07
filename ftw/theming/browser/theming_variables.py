@@ -1,18 +1,11 @@
 from collections import OrderedDict
 from ftw.theming.interfaces import ISCSSCompiler
+from ftw.theming.utils import find_object_in_stack
 from operator import methodcaller
 from Products.Five import BrowserView
 from scss.calculator import Calculator
 from scss.types import Null
 from zope.component import getMultiAdapter
-import inspect
-
-
-def find_object_in_stack(name, klass):
-    frame = inspect.currentframe()
-    while not isinstance(frame.f_locals.get(name, None), klass):
-        frame = frame.f_back
-    return frame.f_locals[name]
 
 
 class ThemingVariablesView(BrowserView):
