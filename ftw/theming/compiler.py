@@ -40,7 +40,8 @@ class SCSSCompiler(object):
                     u'$current-filename: "{0}";'.format(filename),
                     resource.get_source(self.context, self.request)))
             if ISCSSFileResource.providedBy(resource):
-                source_file = SourceFile.from_string(source, Path(str(resource.path)))
+                source_file = SourceFile.from_string(
+                    source, Path(str(resource.path)))
                 source_file.origin = Path(str(resource.path))
                 return source_file
             else:

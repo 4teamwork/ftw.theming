@@ -25,8 +25,10 @@ class ThemingVariablesView(BrowserView):
         def register_theming_variables(*varnames):
             calculator = find_object_in_stack('self', Calculator)
             variables = calculator.namespace.variables
-            package = variables.get('$current-package').render().strip('"').strip("'")
-            filename = variables.get('$current-filename').render().strip('"').strip("'")
+            package = (variables.get('$current-package').render()
+                       .strip('"').strip("'"))
+            filename = (variables.get('$current-filename').render()
+                        .strip('"').strip("'"))
             varnames = map(methodcaller('render'), varnames)
 
             if package not in packages:
