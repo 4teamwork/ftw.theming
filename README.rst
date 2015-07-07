@@ -287,6 +287,45 @@ to this iconset:
 
 
 
+Functions
+=========
+
+embed-resource
+--------------
+
+The ``embed-resource`` function embeds a resource (e.g. svg) as
+base64 encoded url.
+
+Example:
+
+.. code:: scss
+
+    .something {
+        background: embed-resource("images/foo.svg");
+    }
+
+The function is able to fill colors in SVGs.
+This can be done with either XPath or CSS selectors.
+
+Since lxml is used for filling the SVGs and SVGs are namespaced
+XML documents, the expressions must be namespaced as well.
+This leads to problems when converting certain CSS selectors
+since CSS does not support namespaces.
+
+Example:
+
+.. code:: scss
+
+    .foo {
+        background: embed-resource("soccer.svg", $fill-css:['#pentagon': red]);
+    }
+
+    .bar {
+        background: embed-resource("soccer.svg", $fill-xpath:['//*[@id="black_stuff"]/*[local-name()="g"][1]': red]);
+    }
+
+
+
 SCSS Mixins
 ===========
 
