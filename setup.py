@@ -40,7 +40,9 @@ setup(name='ftw.theming',
 
       install_requires=[
         'Plone',
+        'cssselect',
         'ftw.upgrade',
+        'lxml',
         'path.py',
         'pyScss >= 1.3',
         'setuptools',
