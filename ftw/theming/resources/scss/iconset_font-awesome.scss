@@ -2,17 +2,23 @@
   $fa-font-path: "#{$portal-url}/++resource++ftw.theming/font-awesome/fonts";
   @import "../font-awesome/scss/font-awesome";
 
-  .icons-on [class^="contenttype-"],
-  .icons-on [class*=" contenttype-"] {
-    @extend .#{$fa-css-prefix}-times-circle;
+  /* We dont want the font-family to be changed on the text elements
+     but only on the before pseudo-elements. */
+  .#{$fa-css-prefix}-icon {
     &:before {
       display: inline-block;
-      color: $danger-color;
       font-family: FontAwesome;
       text-align: center;
       min-width: 1.4em;
       margin-right: 0.2em;
     }
+  }
+
+  .icons-on [class^="contenttype-"],
+  .icons-on [class*=" contenttype-"] {
+    @extend .#{$fa-css-prefix}-times-circle;
+    @extend .fa-icon;
+    color: $danger-color;
   }
 
   @each $type, $value in get-portal-type-icons-for-iconset(font-awesome) {
