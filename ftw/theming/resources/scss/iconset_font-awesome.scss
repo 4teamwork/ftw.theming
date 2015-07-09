@@ -22,7 +22,7 @@
   }
 
   @each $type, $value in get-portal-type-icons-for-iconset(font-awesome) {
-    body.icons-on .contenttype-#{$type} {
+    .icons-on .contenttype-#{$type} {
       @extend .#{$fa-css-prefix}-#{$value};
       &:before {
         color: inherit;
