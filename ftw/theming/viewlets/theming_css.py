@@ -1,4 +1,5 @@
 from plone.app.layout.navigation.root import getNavigationRootObject
+from ftw.theming.browser.theming_css import get_css_cache_key
 from plone.app.layout.viewlets.common import ViewletBase
 from Products.CMFCore.utils import getToolByName
 
@@ -11,8 +12,12 @@ class ThemingCSS(ViewletBase):
         return self.template.format(href=self.css_url())
 
     def css_url(self):
-        return '{0}/theming.css'.format(
-            self.get_navigation_root().absolute_url())
+        navroot_url = self.get_navigation_root().absolute_url()
+        css_url = '{0}/theming.css'.format(navroot_url)
+        cachekey = get_css_cache_key(self.context)
+        if cachekey:
+            css_url += '?cachekey={0}'.format(cachekey)
+        return css_url
 
     def get_navigation_root(self):
         portal = getToolByName(self.context, 'portal_url').getPortalObject()
