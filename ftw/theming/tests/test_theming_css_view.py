@@ -129,6 +129,33 @@ class TestThemingCSSView(FunctionalTestCase):
             self.assertNotEqual(theming_css_url, self.get_css_url(css_base_url),
                                 'Cachekey should be refreshed when navroot changes.')
 
+    @browsing
+    def test_requests_are_redirected_when_not_no_navroot(self, browser):
+        """When configured, TinyMCE makes requests to theming.css relative to
+        the current context.
+        In order to reuse existing caches, we simply redirect all requests of
+        theming.css on non-navroot contexts to their navroot versions, adding
+        a cachkey param when necessary.
+        """
+        self.grant('Manager')
+        self.portal_css.setDebugMode(False)
+        folder = create(Builder('folder'))
+        page = create(Builder('page').within(folder))
+
+        browser.open(page, view='theming.css')
+        self.assertRegexpMatches(
+            browser.url,
+            r'^{}'.format(
+                re.escape('http://nohost/plone/theming.css?cachekey=')))
+
+        alsoProvides(folder, INavigationRoot)
+        transaction.commit()
+        browser.open(page, view='theming.css')
+        self.assertRegexpMatches(
+            browser.url,
+            r'^{}'.format(
+                re.escape('http://nohost/plone/folder/theming.css?cachekey=')))
+
     def register_compiler_mock(self):
         sitemanager = self.portal.getSiteManager()
         COMPILER_MOCK_DATA = {'counter': 0}

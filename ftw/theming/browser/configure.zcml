@@ -6,6 +6,13 @@
 
     <browser:page
         name="theming.css"
+        for="*"
+        class=".theming_css.RedirectToNavrootThemingCSSView"
+        permission="zope.Public"
+        />
+
+    <browser:page
+        name="theming.css"
         for="plone.app.layout.navigation.interfaces.INavigationRoot"
         class=".theming_css.ThemingCSSView"
         permission="zope.Public"

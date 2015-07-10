@@ -50,6 +50,20 @@ def ramcachekey(func, self):
     return cachekey
 
 
+def get_theming_css_url(context):
+    """Returns the theming.css URL for a context, relative to
+    its navigation root.
+    Cachekey params may be added.
+    """
+    portal = getToolByName(context, 'portal_url').getPortalObject()
+    navroot = getNavigationRootObject(context, portal)
+    css_url = '{0}/theming.css'.format(navroot.absolute_url())
+    cachekey = get_css_cache_key(context)
+    if cachekey:
+        css_url += '?cachekey={0}'.format(cachekey)
+    return css_url
+
+
 class ThemingCSSView(BrowserView):
 
     def __call__(self):
@@ -72,3 +86,18 @@ class ThemingCSSView(BrowserView):
     def invalidate_cache(self):
         cache = getUtility(ICacheChooser)('{0}.get_css'.format(__name__))
         cache.ramcache.invalidateAll()
+
+
+class RedirectToNavrootThemingCSSView(BrowserView):
+    """The theming.css should only be shipped on navigation roots,
+    but there may be requests (e.g. from tinymce) on other contexts.
+
+    By redirecting to the navigation root we can make sure that the
+    client-side caching works efficiently.
+    """
+
+    def __call__(self):
+        portal = getToolByName(self.context, 'portal_url').getPortalObject()
+        navroot = getNavigationRootObject(self.context, portal)
+        target = get_theming_css_url(self.context)
+        return self.request.response.redirect(target)
