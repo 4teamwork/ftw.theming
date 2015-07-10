@@ -7,6 +7,7 @@ from Products.CMFCore.utils import getToolByName
 from Products.Five import BrowserView
 from zope.component import getMultiAdapter
 from zope.component import getUtility
+from zope.component.hooks import getSite
 
 
 def compute_css_bundle_hash(context):
@@ -25,18 +26,28 @@ def compute_css_bundle_hash(context):
     return str(hash(frozenset(keys)))
 
 
-def get_css_cache_key(func, self):
-    if self._debug_mode_enabled():
-        raise ram.DontCache
+def debug_mode_enabled():
+    cssregistry = getToolByName(getSite(), 'portal_css')
+    return bool(cssregistry.getDebugMode())
 
-    if self._no_cache_header_present():
-        self.invalidate_cache()
 
-    portal = getToolByName(self.context, 'portal_url').getPortalObject()
-    navroot = getNavigationRootObject(self.context, portal)
+def get_css_cache_key(context):
+    if debug_mode_enabled():
+        return None
+
+    portal = getToolByName(context, 'portal_url').getPortalObject()
+    navroot = getNavigationRootObject(context, portal)
     key = [navroot.absolute_url(),
-           compute_css_bundle_hash(self.context)]
-    return '.'.join(key)
+           compute_css_bundle_hash(navroot),
+           str(navroot.modified().millis())]
+    return '.'.join(key).encode('base64').strip()
+
+
+def ramcachekey(func, self):
+    cachekey = get_css_cache_key(self.context)
+    if cachekey is None:
+        raise ram.DontCache
+    return cachekey
 
 
 class ThemingCSSView(BrowserView):
@@ -46,20 +57,18 @@ class ThemingCSSView(BrowserView):
         response.setHeader('Content-Type', 'text/css; charset=utf-8')
         response.setHeader('X-Theme-Disabled', 'True')
         response.enableHTTPCompression(REQUEST=self.request)
+        if self.request.get('cachekey'):
+            # Do not set cache headers when no cachekey provided.
+            # The cached representation is to be considered fresh for 1 year
+            # http://stackoverflow.com/a/3001556/880628
+            response.setHeader('Cache-Control', 'private, max-age=31536000')
         return self.get_css()
 
-    @ram.cache(get_css_cache_key)
+    @ram.cache(ramcachekey)
     def get_css(self):
         compiler = getMultiAdapter((self.context, self.request), ISCSSCompiler)
-        return compiler.compile(debug=self._debug_mode_enabled())
+        return compiler.compile(debug=debug_mode_enabled())
 
     def invalidate_cache(self):
         cache = getUtility(ICacheChooser)('{0}.get_css'.format(__name__))
         cache.ramcache.invalidateAll()
-
-    def _debug_mode_enabled(self):
-        cssregistry = getToolByName(self.context, 'portal_css')
-        return bool(cssregistry.getDebugMode())
-
-    def _no_cache_header_present(self):
-        return self.request.getHeader('Cache-Control') == 'no-cache'
