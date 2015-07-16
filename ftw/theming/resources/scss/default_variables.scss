@@ -20,6 +20,7 @@ $content-bg-color: #fff !default;
 $text-color: $gray-dark !default;
 $light-text-color: $gray-light !default;
 $link-color: $primary-color !default;
+$link-font-weight: normal !default;
 $link-hover-color: $secondary-color !default;
 $link-decoration: none !default;
 $link-hover-decoration: underline !default;
@@ -44,6 +45,7 @@ $outline-color: change-color($primary-color, $lightness: 60%);
   text-color,
   light-text-color,
   link-color,
+  link-font-weight,
   link-hover-color,
   link-decoration,
   link-hover-decoration,
