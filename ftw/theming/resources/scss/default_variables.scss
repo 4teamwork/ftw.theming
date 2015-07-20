@@ -150,6 +150,11 @@ $screen-XS: "(max-width: #{$mobile-small})" !default;
     @content;
   }
 }
+@mixin print {
+  @media print {
+    @content;
+  }
+}
 
 
 /* ICONS */
