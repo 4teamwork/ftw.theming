@@ -18,7 +18,9 @@
   .icons-on [class*=" contenttype-"] {
     @extend .#{$fa-css-prefix}-times-circle;
     @extend .fa-icon;
-    color: $danger-color;
+    &:before {
+      color: fuchsia;
+    }
   }
 
   @each $type, $value in get-portal-type-icons-for-iconset(font-awesome) {
