@@ -5,7 +5,7 @@
 
     <browser:viewlet
         name="ftw.theming.css"
-        manager="plone.app.layout.viewlets.interfaces.IPortalTop"
+        manager="plone.app.layout.viewlets.interfaces.IHtmlHeadLinks"
         class=".theming_css.ThemingCSS"
         permission="zope2.View"
         layer="ftw.theming.interfaces.IThemingLayer"
