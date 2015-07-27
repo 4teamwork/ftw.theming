@@ -13,6 +13,15 @@
       margin-right: 0.2em;
     }
   }
+  .#{$fa-css-prefix}-icon-right {
+    &:after {
+      display: inline-block;
+      font-family: FontAwesome;
+      text-align: center;
+      min-width: 1.4em;
+      margin-right: 0.2em;
+    }
+  }
 
   .icons-on [class^="contenttype-"],
   .icons-on [class*=" contenttype-"] {
