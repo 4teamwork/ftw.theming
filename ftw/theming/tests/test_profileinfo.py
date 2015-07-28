@@ -18,16 +18,17 @@ class TestProfileInfo(FunctionalTestCase):
         self.quickinstaller = getToolByName(self.portal, 'portal_quickinstaller')
 
     def test_is_profile_installed(self):
-        info = ProfileInfo(self.portal)
-
         with create(self.package_builder).zcml_loaded(self.layer['configurationContext']):
+            info = ProfileInfo(self.portal)
             self.assertFalse(info.is_profile_installed('profile-the.package:default'))
             self.assertFalse(info.is_profile_installed('the.package:default'))
 
+            info = ProfileInfo(self.portal)
             self.portal_setup.runAllImportStepsFromProfile('profile-the.package:default')
             self.assertTrue(info.is_profile_installed('profile-the.package:default'))
             self.assertTrue(info.is_profile_installed('the.package:default'))
 
+            info = ProfileInfo(self.portal)
             self.quickinstaller.uninstallProducts(['the.package'])
             self.assertFalse(info.is_profile_installed('profile-the.package:default'))
             self.assertFalse(info.is_profile_installed('the.package:default'))
