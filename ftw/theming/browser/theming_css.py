@@ -31,8 +31,8 @@ def debug_mode_enabled():
     return bool(cssregistry.getDebugMode())
 
 
-def get_css_cache_key(context):
-    if debug_mode_enabled():
+def get_css_cache_key(context, debug_mode_caching=True):
+    if not debug_mode_caching and debug_mode_enabled():
         return None
 
     portal = getToolByName(context, 'portal_url').getPortalObject()
@@ -40,11 +40,21 @@ def get_css_cache_key(context):
     key = [navroot.absolute_url(),
            compute_css_bundle_hash(navroot),
            str(navroot.modified().millis())]
+
+    if debug_mode_enabled():
+        key.append(get_compiler_cachekey(context))
+
     return '.'.join(key).encode('base64').strip()
 
 
+def get_compiler_cachekey(context):
+    request = context.REQUEST
+    compiler = getMultiAdapter((context, request), ISCSSCompiler)
+    return compiler.get_cachekey()
+
+
 def ramcachekey(func, self):
-    cachekey = get_css_cache_key(self.context)
+    cachekey = get_css_cache_key(self.context, debug_mode_caching=False)
     if cachekey is None:
         raise ram.DontCache
     return cachekey
