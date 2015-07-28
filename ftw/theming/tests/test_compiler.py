@@ -27,3 +27,9 @@ class TestCompiler(FunctionalTestCase):
         result = compiler.compile_scss_string('$red: red;'
                                               'body { background-color: $red; }')
         self.assertEquals('body{background-color:red}', result.strip())
+
+    def test_get_cachekey_returns_a_value(self):
+        # The cachekey is based on the modified date of the resource,
+        # which changes and therefore we just test that it is positive.
+        compiler = getMultiAdapter((self.portal, self.request), ISCSSCompiler)
+        self.assertTrue(compiler.get_cachekey())
