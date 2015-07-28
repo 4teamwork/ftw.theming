@@ -6,6 +6,7 @@ from path import Path
 from plone.app.layout.navigation.interfaces import INavigationRoot
 from zope.interface import implements
 from zope.interface import Interface
+import hashlib
 
 
 class SCSSResource(object):
@@ -30,6 +31,9 @@ class SCSSResource(object):
 
     def get_source(self, context, request):
         return self.source
+
+    def get_cachekey(self, context, request):
+        return hashlib.md5(self.get_source(context, request)).hexdigest()
 
 
 class SCSSFileResource(SCSSResource):
@@ -70,6 +74,9 @@ class SCSSFileResource(SCSSResource):
 
     def get_source(self, context, request):
         return self.path.text('utf-8')
+
+    def get_cachekey(self, context, request):
+        return str(self.path.mtime)
 
     @staticmethod
     def _resolve_path(package, relative_path):

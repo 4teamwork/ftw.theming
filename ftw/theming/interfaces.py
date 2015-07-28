@@ -116,6 +116,18 @@ class ISCSSResource(Interface):
         :rtype: string
         """
 
+    def get_cachekey(context, request):
+        """Returns a string which changes when the content source
+        changes.
+
+        :param context: A acquisition wrapped context object.
+        :type context: object
+        :param request: The request object.
+        :type request: object
+        :returns: cache string
+        :rtype: string
+        """
+
 
 class ISCSSFileResource(ISCSSResource):
     """A scss resource represents a scss file for registering in the scss registry.
