@@ -10,11 +10,9 @@ from plone.app.layout.navigation.interfaces import INavigationRoot
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces.siteroot import IPloneSiteRoot
 from zope.component import adapts
-from zope.event import notify
 from zope.interface import alsoProvides
 from zope.interface import implements
 from zope.interface import Interface
-from zope.lifecycleevent import ObjectModifiedEvent
 import re
 import transaction
 

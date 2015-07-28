@@ -97,7 +97,5 @@ class RedirectToNavrootThemingCSSView(BrowserView):
     """
 
     def __call__(self):
-        portal = getToolByName(self.context, 'portal_url').getPortalObject()
-        navroot = getNavigationRootObject(self.context, portal)
         target = get_theming_css_url(self.context)
         return self.request.response.redirect(target)
