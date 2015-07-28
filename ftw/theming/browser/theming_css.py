@@ -8,6 +8,7 @@ from Products.Five import BrowserView
 from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.component.hooks import getSite
+import hashlib
 
 
 def compute_css_bundle_hash(context):
@@ -44,7 +45,7 @@ def get_css_cache_key(context, debug_mode_caching=True):
     if debug_mode_enabled():
         key.append(get_compiler_cachekey(context))
 
-    return '.'.join(key).encode('base64').strip()
+    return hashlib.md5('.'.join(key)).hexdigest()
 
 
 def get_compiler_cachekey(context):
