@@ -3,6 +3,7 @@ from ftw.theming.exceptions import CyclicResourceOrder
 from ftw.theming.interfaces import ISCSSRegistry
 from ftw.theming.interfaces import ISCSSResourceFactory
 from ftw.theming.interfaces import SLOTS
+from ftw.theming.profileinfo import ProfileInfo
 from tarjan import tarjan
 from zope.interface import implements
 
@@ -24,6 +25,7 @@ class SCSSRegistry(object):
                                map(slot_lookup.get, SLOTS)))
 
         if not include_unavailable:
+            profileinfo = profileinfo or ProfileInfo(context)
             resources = filter(
                 lambda res: res.available(context, request, profileinfo),
                 resources)

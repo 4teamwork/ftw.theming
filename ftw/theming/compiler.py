@@ -10,6 +10,7 @@ from zope.component import adapts
 from zope.component import getUtility
 from zope.interface import implements
 from zope.interface import Interface
+import hashlib
 import os.path
 
 
@@ -28,6 +29,14 @@ class SCSSCompiler(object):
     def compile_scss_string(self, source, debug=False):
         source_file = SourceFile.from_string(source)
         return self._compile((source_file,), debug=debug)
+
+    def get_cachekey(self):
+        registry = getUtility(ISCSSRegistry)
+        resources = registry.get_resources(self.context, self.request)
+        result = hashlib.md5()
+        map(result.update, (resource.get_cachekey(self.context, self.request)
+                            for resource in resources))
+        return result.hexdigest()
 
     def _get_scss_files(self):
         def make_source_file(resource):

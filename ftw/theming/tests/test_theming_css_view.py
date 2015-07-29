@@ -10,6 +10,7 @@ from plone.app.layout.navigation.interfaces import INavigationRoot
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces.siteroot import IPloneSiteRoot
 from zope.component import adapts
+from zope.component import getMultiAdapter
 from zope.interface import alsoProvides
 from zope.interface import implements
 from zope.interface import Interface
@@ -67,13 +68,22 @@ class TestThemingCSSView(FunctionalTestCase):
         self.assertEquals(2, self.view(), 'invalidate_cache() did not invalidate cache')
         self.assertEquals(2, self.view(), 'Cache does not work...')
 
-    def test_debug_mode_does_not_cache(self):
+    def test_changing_files_should_update_cache_when_debugmode_active(self):
         self.register_compiler_mock()
         self.assertEquals(1, self.view())
         self.assertEquals(1, self.view(), 'Cache does not work...')
         self.portal_css.setDebugMode(True)
         self.assertEquals(2, self.view(), 'Caching should be disabled in debug mode.')
-        self.assertEquals(3, self.view(), 'Caching should be disabled in debug mode.')
+        self.compiler().imitate_change()
+        self.assertEquals(3, self.view(), 'Changing files should change cache')
+
+    def test_changing_files_should_NOT_update_cache_when_debugmode_INactive(self):
+        self.register_compiler_mock()
+        self.assertEquals(1, self.view())
+        self.compiler().imitate_change()
+        self.assertEquals(1, self.view(),
+                          'Changing files should NOT change cache when'
+                          ' debugmode disabled.')
 
     def test_recooking_portal_css_flushes_cache(self):
         self.register_compiler_mock()
@@ -93,18 +103,6 @@ class TestThemingCSSView(FunctionalTestCase):
         self.assertEquals('private, max-age=31536000',
                           browser.headers['Cache-Control'],
                           'Cache headers should be set.')
-
-    @browsing
-    def test_caching_inactive_when_debugmode_enabled(self, browser):
-        self.portal_css.setDebugMode(True)
-        browser.open()
-        theming_css_url = self.get_css_url('http://nohost/plone/theming.css')
-        self.assertEquals('http://nohost/plone/theming.css', theming_css_url,
-                          'Cachekey param should not be set in debug mode.')
-
-        browser.open(theming_css_url)
-        self.assertNotIn('Cache-Control', browser.headers,
-                         'Cache-Control headers should not be set in debug mode.')
 
     @browsing
     def test_cachekey_refreshes_when_navroot_changes(self, browser):
@@ -156,7 +154,8 @@ class TestThemingCSSView(FunctionalTestCase):
 
     def register_compiler_mock(self):
         sitemanager = self.portal.getSiteManager()
-        COMPILER_MOCK_DATA = {'counter': 0}
+        COMPILER_MOCK_DATA = {'counter': 0,
+                              'version': 1}
 
         @sitemanager.registerAdapter
         class CompilerMock(object):
@@ -169,6 +168,15 @@ class TestThemingCSSView(FunctionalTestCase):
             def compile(self, debug=False):
                 COMPILER_MOCK_DATA['counter'] += 1
                 return COMPILER_MOCK_DATA['counter']
+
+            def get_cachekey(self):
+                return str(COMPILER_MOCK_DATA['version'])
+
+            def imitate_change(self):
+                COMPILER_MOCK_DATA['version'] += 1
+
+    def compiler(self):
+        return getMultiAdapter((self.portal, self.request), ISCSSCompiler)
 
     def list_css_urls(self):
         return [node.attrib.get('href') for node in browser.css('link')]

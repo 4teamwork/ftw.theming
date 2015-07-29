@@ -71,3 +71,9 @@ class TestSCSSFileResource(TestCase):
             resource.get_source(CONTEXT, REQUEST))
         self.assertEquals(unicode, type(resource.get_source(CONTEXT, REQUEST)),
                           'Source should be unicode.')
+
+    def test_get_cachekey_returns_a_value(self):
+        # The cachekey is based on the modified date of the resource,
+        # which changes and therefore we just test that it is positive.
+        resource = SCSSFileResource('ftw.theming.tests', 'resources/foo.scss')
+        self.assertTrue(resource.get_cachekey(None, None))

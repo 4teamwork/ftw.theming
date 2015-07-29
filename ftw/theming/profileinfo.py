@@ -1,3 +1,4 @@
+from plone.memoize import instance
 from Products.CMFCore.utils import getToolByName
 import re
 
@@ -7,6 +8,7 @@ class ProfileInfo(object):
     def __init__(self, context):
         self.context = context
 
+    @instance.memoize
     def is_profile_installed(self, profileid):
         profileid = re.sub(r'^profile\-', '', profileid)
         quickinstaller = getToolByName(self.context, 'portal_quickinstaller')
