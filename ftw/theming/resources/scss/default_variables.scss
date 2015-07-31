@@ -113,10 +113,11 @@ $mobile-smaller: 600px !default;
 $mobile-tiny: 480px !default;
 
 $screen-XL: "(min-width: #{$desktop-WQHD-width})" !default;
-$screen-L: "(max-width: #{$desktop-HDPLUS-width})" !default;
-$screen-M: "(max-width: #{$desktop-HD-width})" !default;
-$screen-S: "(max-width: #{$desktop-XGA-width})" !default;
-$screen-XS: "(max-width: #{$mobile-small})" !default;
+$screen-L: "(min-width: #{$desktop-HDPLUS-width})" !default;
+$screen-M: "(min-width: #{$desktop-HD-width})" !default;
+$screen-S: "(min-width: #{$desktop-XGA-width})" !default;
+$screen-XS: "(min-width: #{$mobile-small})" !default;
+$screen-XXS: "(min-width: #{$mobile-tiny})" !default;
 
 @include declare-variables(
   screen-XL,
@@ -155,6 +156,23 @@ $screen-XS: "(max-width: #{$mobile-small})" !default;
 }
 @mixin print {
   @media print {
+    @content;
+  }
+}
+
+@mixin screen-large {
+  @media #{$screen-S} {
+    @content;
+  }
+}
+
+@mixin screen-medium {
+  @media #{$screen-XS} {
+    @content;
+  }
+}
+@mixin screen-small {
+  @media #{$screen-XXS} {
     @content;
   }
 }
