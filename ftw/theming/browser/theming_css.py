@@ -1,3 +1,4 @@
+from ftw.theming.interfaces import ICSSCaching
 from ftw.theming.interfaces import ISCSSCompiler
 from operator import methodcaller
 from plone.app.layout.navigation.root import getNavigationRootObject
@@ -8,6 +9,7 @@ from Products.Five import BrowserView
 from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.component.hooks import getSite
+from zope.interface import alsoProvides
 import hashlib
 
 
@@ -81,12 +83,14 @@ class ThemingCSSView(BrowserView):
         response = self.request.response
         response.setHeader('Content-Type', 'text/css; charset=utf-8')
         response.setHeader('X-Theme-Disabled', 'True')
-        response.enableHTTPCompression(REQUEST=self.request)
         if self.request.get('cachekey'):
             # Do not set cache headers when no cachekey provided.
             # The cached representation is to be considered fresh for 1 year
             # http://stackoverflow.com/a/3001556/880628
+            # The cache header is only active when plone.app.caching is not
+            # configured.
             response.setHeader('Cache-Control', 'private, max-age=31536000')
+            alsoProvides(self, ICSSCaching)
         return self.get_css()
 
     @ram.cache(ramcachekey)
