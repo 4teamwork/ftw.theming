@@ -1,8 +1,12 @@
 <configure
     xmlns="http://namespaces.zope.org/zope"
+    xmlns:cache="http://namespaces.zope.org/cache"
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:i18n="http://namespaces.zope.org/i18n"
     i18n_domain="ftw.theming">
+
+    <include package="z3c.caching" />
+    <include package="z3c.caching" file="meta.zcml" />
 
     <browser:page
         name="theming.css"
@@ -16,6 +20,11 @@
         for="plone.app.layout.navigation.interfaces.INavigationRoot"
         class=".theming_css.ThemingCSSView"
         permission="zope.Public"
+        />
+
+    <cache:ruleset
+        for="ftw.theming.interfaces.ICSSCaching"
+        ruleset="plone.stableResource"
         />
 
     <browser:page
