@@ -79,6 +79,14 @@
       display: inline;
     }
   }
+  @if $style == table {
+    padding-left: 0;
+    margin: 0;
+    display: table;
+    li {
+      display: table-cell;
+    }
+  }
 }
 
 @mixin dl($style: default) {
