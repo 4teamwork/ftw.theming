@@ -29,13 +29,14 @@ def compute_css_bundle_hash(context):
     return str(hash(frozenset(keys)))
 
 
-def debug_mode_enabled():
+def is_debug_mode_enabled():
     cssregistry = getToolByName(getSite(), 'portal_css')
     return bool(cssregistry.getDebugMode())
 
 
 def get_css_cache_key(context, debug_mode_caching=True):
-    if not debug_mode_caching and debug_mode_enabled():
+    debug_mode_enabled = is_debug_mode_enabled()
+    if not debug_mode_caching and debug_mode_enabled:
         return None
 
     portal = getToolByName(context, 'portal_url').getPortalObject()
@@ -44,7 +45,7 @@ def get_css_cache_key(context, debug_mode_caching=True):
            compute_css_bundle_hash(navroot),
            str(navroot.modified().millis())]
 
-    if debug_mode_enabled():
+    if debug_mode_enabled:
         key.append(get_compiler_cachekey(context))
 
     return hashlib.md5('.'.join(key)).hexdigest()
@@ -96,7 +97,7 @@ class ThemingCSSView(BrowserView):
     @ram.cache(ramcachekey)
     def get_css(self):
         compiler = getMultiAdapter((self.context, self.request), ISCSSCompiler)
-        return compiler.compile(debug=debug_mode_enabled())
+        return compiler.compile(debug=is_debug_mode_enabled())
 
     def invalidate_cache(self):
         cache = getUtility(ICacheChooser)('{0}.get_css'.format(__name__))
