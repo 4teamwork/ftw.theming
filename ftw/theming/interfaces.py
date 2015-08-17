@@ -84,6 +84,24 @@ class ISCSSResource(Interface):
     after = Attribute('Move this resource after the other resource with that'
                       ' name within the same slot.')
 
+    def __init__(name, slot='addon', before=None, after=None, source=u''):
+        """Initialize an scss resource.
+
+        :param name: The name of the resource.
+        :type name: string
+        :param slot: The slot where the resource belongs. This must be one of
+          the list of slots.
+        :type slot: string
+        :param before: Move this resource before the other resource with that
+          name within the same slot.
+        :type before: string (name of other resource)
+        :param after: Move this resource after the other resource with that
+          name within the same slot.
+        :type after: string (name of other resource)
+        :param source: The SCSS source.
+        :type source: string
+        """
+
     def available(context, request, profileinfo=None):
         """Check whether the resource is available for this context.
 
@@ -141,7 +159,7 @@ class ISCSSFileResource(ISCSSResource):
     def __init__(package, relative_path, slot='addon',
                  profile=None, for_=INavigationRoot, layer=Interface,
                  before=None, after=None):
-        """Initialize a scss resource.
+        """Initialize an scss resource.
 
         :param package: The name of the python package where the resource is
           registered.
