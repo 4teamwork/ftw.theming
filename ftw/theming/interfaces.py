@@ -147,6 +147,35 @@ class ISCSSResource(Interface):
         """
 
 
+class IDynamicSCSSResource(ISCSSResource):
+    """A dynamic SCSS resource provides SCSS source which may change.
+    In order to have the correct caching, a cachekey is necessary.
+
+    Dynamic resources should either subclass the DynamicSCSSResource class or
+    initialize it with at least a name, a source and a cache key.
+    """
+
+    def __init__(name, slot='addon', before=None, after=None, source=u''):
+        """Initialize an scss resource.
+
+        :param name: The name of the resource.
+        :type name: string
+        :param slot: The slot where the resource belongs. This must be one of
+          the list of slots.
+        :type slot: string
+        :param before: Move this resource before the other resource with that
+          name within the same slot.
+        :type before: string (name of other resource)
+        :param after: Move this resource after the other resource with that
+          name within the same slot.
+        :type after: string (name of other resource)
+        :param source: The SCSS source.
+        :type source: string
+        :param cachekey: The cache key which must change when the source changes.
+        :type source: string
+        """
+
+
 class ISCSSFileResource(ISCSSResource):
     """A scss resource represents a scss file for registering in the scss registry.
     It holds the relevant information for building the scss pipeline.

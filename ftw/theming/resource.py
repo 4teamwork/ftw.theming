@@ -1,3 +1,4 @@
+from ftw.theming.interfaces import IDynamicSCSSResource
 from ftw.theming.interfaces import ISCSSFileResource
 from ftw.theming.interfaces import ISCSSResource
 from ftw.theming.interfaces import SLOTS
@@ -34,6 +35,30 @@ class SCSSResource(object):
 
     def get_cachekey(self, context, request):
         return hashlib.md5(self.get_source(context, request)).hexdigest()
+
+
+class DynamicSCSSResource(SCSSResource):
+    """A dynamic SCSS resource provides SCSS source which may change.
+    In order to have the correct caching, a cachekey is necessary.
+
+    Dynamic resources should either subclass the DynamicSCSSResource class or
+    initialize it with at least a name, a source and a cache key.
+    """
+    implements(IDynamicSCSSResource)
+
+    def __init__(self, name, slot='addon', before=None, after=None,
+                 source=u'', cachekey=None):
+        super(DynamicSCSSResource, self).__init__(name=name,
+                                                  slot=slot,
+                                                  before=before,
+                                                  after=after,
+                                                  source=source)
+        self.cachekey = cachekey
+
+    def get_cachekey(self, context, request):
+        if not self.cachekey:
+            raise NotImplementedError('No cachekey set.')
+        return self.cachekey
 
 
 class SCSSFileResource(SCSSResource):

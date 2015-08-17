@@ -1,4 +1,6 @@
+from ftw.theming.interfaces import IDynamicSCSSResource
 from ftw.theming.interfaces import ISCSSResource
+from ftw.theming.resource import DynamicSCSSResource
 from ftw.theming.resource import SCSSResource
 from ftw.theming.tests.stubs import CONTEXT
 from ftw.theming.tests.stubs import REQUEST
@@ -42,3 +44,20 @@ class TestSCSSResource(TestCase):
         resource = SCSSResource('foo.scss', source=u'$foreground = red;')
         self.assertEquals('e7d3c829ae8433699c7c061fd87b5fd6',
                           resource.get_cachekey(None, None))
+
+
+class TestDynamicSCSSResource(TestCase):
+
+    def test_implements_interface(self):
+        resource = DynamicSCSSResource('foo')
+        verifyObject(ISCSSResource, resource)
+        verifyObject(IDynamicSCSSResource, resource)
+
+    def test_get_cachekey_must_be_implemented(self):
+        resource = DynamicSCSSResource('foo')
+        with self.assertRaises(NotImplementedError):
+            resource.get_cachekey(None, None)
+
+    def test_get_cachekey_can_be_passed_on_initialization(self):
+        resource = DynamicSCSSResource('foo', cachekey='bar')
+        self.assertEquals('bar', resource.get_cachekey(None, None))
