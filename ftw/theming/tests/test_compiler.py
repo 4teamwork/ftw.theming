@@ -1,6 +1,10 @@
 from ftw.theming.interfaces import ISCSSCompiler
+from ftw.theming.interfaces import ISCSSRegistry
+from ftw.theming.resource import DynamicSCSSResource
 from ftw.theming.tests import FunctionalTestCase
+from Products.CMFCore.utils import getToolByName
 from zope.component import getMultiAdapter
+from zope.component import getUtility
 from zope.interface.verify import verifyObject
 
 
@@ -33,3 +37,22 @@ class TestCompiler(FunctionalTestCase):
         # which changes and therefore we just test that it is positive.
         compiler = getMultiAdapter((self.portal, self.request), ISCSSCompiler)
         self.assertTrue(compiler.get_cachekey())
+
+    def test_get_cachkey_only_with_dynamic_resources(self):
+        """In production we only respect cachekeys of dynamic resources in order
+        to speed up cachekey calculation and because everything else should be
+        static. We also do not want to change cache keys in production too often.
+
+        Therefore the compiler's get_cachekey method has a dynamic_resources_only
+        param.
+        """
+        resource = DynamicSCSSResource('foo', cachekey='foo')
+        getUtility(ISCSSRegistry).add_resource(resource)
+
+        compiler = getMultiAdapter((self.portal, self.request), ISCSSCompiler)
+        initial_cachekey = compiler.get_cachekey(dynamic_resources_only=True)
+        self.assertEqual(initial_cachekey,
+                         compiler.get_cachekey(dynamic_resources_only=True))
+        resource.cachekey = 'bar'
+        self.assertNotEqual(initial_cachekey,
+                            compiler.get_cachekey(dynamic_resources_only=True))

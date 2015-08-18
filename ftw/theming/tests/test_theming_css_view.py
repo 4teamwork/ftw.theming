@@ -5,12 +5,15 @@ from ftw.testbrowser import browser
 from ftw.testbrowser import browsing
 from ftw.testing import freeze
 from ftw.theming.interfaces import ISCSSCompiler
+from ftw.theming.interfaces import ISCSSRegistry
+from ftw.theming.resource import DynamicSCSSResource
 from ftw.theming.tests import FunctionalTestCase
 from plone.app.layout.navigation.interfaces import INavigationRoot
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces.siteroot import IPloneSiteRoot
 from zope.component import adapts
 from zope.component import getMultiAdapter
+from zope.component import getUtility
 from zope.interface import alsoProvides
 from zope.interface import implements
 from zope.interface import Interface
@@ -77,14 +80,6 @@ class TestThemingCSSView(FunctionalTestCase):
         self.compiler().imitate_change()
         self.assertEquals(3, self.view(), 'Changing files should change cache')
 
-    def test_changing_files_should_NOT_update_cache_when_debugmode_INactive(self):
-        self.register_compiler_mock()
-        self.assertEquals(1, self.view())
-        self.compiler().imitate_change()
-        self.assertEquals(1, self.view(),
-                          'Changing files should NOT change cache when'
-                          ' debugmode disabled.')
-
     def test_recooking_portal_css_flushes_cache(self):
         self.register_compiler_mock()
         self.assertEquals(1, self.view())
@@ -124,6 +119,28 @@ class TestThemingCSSView(FunctionalTestCase):
             browser.reload()
             self.assertNotEqual(theming_css_url, self.get_css_url(css_base_url),
                                 'Cachekey should be refreshed when navroot changes.')
+
+    @browsing
+    def test_cachekey_changes_when_dynamic_resource_cachekey_changes(self, browser):
+        resource = DynamicSCSSResource('foo', cachekey='foo')
+        getUtility(ISCSSRegistry).add_resource(resource)
+
+        self.portal_css.setDebugMode(False)
+        browser.open()
+        theming_css_url = self.get_css_url('http://nohost/plone/theming.css')
+        self.assertIn('?cachekey=', theming_css_url, 'Missing cachekey param.')
+
+        browser.reload()
+        self.assertEqual(theming_css_url,
+                         self.get_css_url('http://nohost/plone/theming.css'),
+                         'URL (cachekey?) did unexpectedly change.')
+
+        resource.cachekey = 'bar'
+
+        browser.reload()
+        self.assertNotEqual(theming_css_url,
+                            self.get_css_url('http://nohost/plone/theming.css'),
+                            'Cachekey should have changed.')
 
     @browsing
     def test_requests_are_redirected_when_not_no_navroot(self, browser):
@@ -169,7 +186,7 @@ class TestThemingCSSView(FunctionalTestCase):
                 COMPILER_MOCK_DATA['counter'] += 1
                 return COMPILER_MOCK_DATA['counter']
 
-            def get_cachekey(self):
+            def get_cachekey(self, dynamic_resources_only=False):
                 return str(COMPILER_MOCK_DATA['version'])
 
             def imitate_change(self):

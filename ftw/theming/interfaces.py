@@ -70,6 +70,18 @@ class ISCSSRegistry(Interface):
         :rtype: list of :py:class:`ftw.theming.interfaces.ISCSSFileResource`
         """
 
+    def get_raw_dynamic_resources(context, request):
+        """Returns all dynamic resources without ordering or filtering them.
+        This is an efficient lookup for doing such as fast cache calculation.
+
+        :param context: A acquisition wrapped context object.
+        :type context: object
+        :param request: The request object.
+        :param request: object
+        :returns: A list of scss resource objects.
+        :rtype: list of :py:class:`ftw.theming.interfaces.IDynamicSCSSResource`
+        """
+
 
 class ISCSSResource(Interface):
     """An SCSS resource has a snippet of SCSS code and can tell whether the

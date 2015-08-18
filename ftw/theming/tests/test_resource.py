@@ -32,19 +32,6 @@ class TestSCSSResource(TestCase):
         self.assertEquals(u'$foreground = black;',
                           resource.get_source(CONTEXT, REQUEST))
 
-    def test_cachekey_is_compiled_from_source(self):
-        resource = SCSSResource('foo.scss', source=u'$foreground = black;')
-        self.assertEquals('37a986b6ad84bf77261bf3796a01b458',
-                          resource.get_cachekey(None, None))
-
-        resource = SCSSResource('foo.scss', source=u'$foreground = black;')
-        self.assertEquals('37a986b6ad84bf77261bf3796a01b458',
-                          resource.get_cachekey(None, None))
-
-        resource = SCSSResource('foo.scss', source=u'$foreground = red;')
-        self.assertEquals('e7d3c829ae8433699c7c061fd87b5fd6',
-                          resource.get_cachekey(None, None))
-
 
 class TestDynamicSCSSResource(TestCase):
 

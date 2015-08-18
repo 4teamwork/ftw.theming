@@ -34,7 +34,8 @@ class SCSSResource(object):
         return self.source
 
     def get_cachekey(self, context, request):
-        return hashlib.md5(self.get_source(context, request)).hexdigest()
+        raise NotImplementedError(
+            'SCSSResource {} has no cachekey'.format(self.name))
 
 
 class DynamicSCSSResource(SCSSResource):

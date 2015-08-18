@@ -30,9 +30,19 @@ class SCSSCompiler(object):
         source_file = SourceFile.from_string(source)
         return self._compile((source_file,), debug=debug)
 
-    def get_cachekey(self):
+    def get_cachekey(self, dynamic_resources_only=False, **kwargs):
         registry = getUtility(ISCSSRegistry)
-        resources = registry.get_resources(self.context, self.request)
+
+        if dynamic_resources_only:
+            # Usually used in production mode: omit file resources and skip
+            # ordering in order to speed up cache generation.
+            resources = registry.get_raw_dynamic_resources(self.context, self.request)
+
+        else:
+            # Usually used in development mode: include file's modified date
+            # in order to be up to date when developing.
+            resources = registry.get_resources(self.context, self.request)
+
         result = hashlib.md5()
         map(result.update, (resource.get_cachekey(self.context, self.request)
                             for resource in resources))

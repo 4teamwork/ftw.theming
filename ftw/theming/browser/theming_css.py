@@ -41,20 +41,13 @@ def get_css_cache_key(context, debug_mode_caching=True):
 
     portal = getToolByName(context, 'portal_url').getPortalObject()
     navroot = getNavigationRootObject(context, portal)
+    compiler = getMultiAdapter((context, context.REQUEST), ISCSSCompiler)
     key = [navroot.absolute_url(),
            compute_css_bundle_hash(navroot),
-           str(navroot.modified().millis())]
-
-    if debug_mode_enabled:
-        key.append(get_compiler_cachekey(context))
+           str(navroot.modified().millis()),
+           compiler.get_cachekey(dynamic_resources_only=not debug_mode_enabled)]
 
     return hashlib.md5('.'.join(key)).hexdigest()
-
-
-def get_compiler_cachekey(context):
-    request = context.REQUEST
-    compiler = getMultiAdapter((context, request), ISCSSCompiler)
-    return compiler.get_cachekey()
 
 
 def ramcachekey(func, self):

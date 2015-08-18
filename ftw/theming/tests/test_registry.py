@@ -2,6 +2,7 @@ from ftw.theming.exceptions import CyclicResourceOrder
 from ftw.theming.interfaces import ISCSSRegistry
 from ftw.theming.interfaces import ISCSSResourceFactory
 from ftw.theming.registry import SCSSRegistry
+from ftw.theming.resource import DynamicSCSSResource
 from ftw.theming.resource import SCSSFileResource
 from ftw.theming.resource import SCSSResource
 from ftw.theming.tests.stubs import CONTEXT
@@ -166,3 +167,18 @@ class TestSCSSRegistry(TestCase):
         self.assertEquals([], registry.get_resources(CONTEXT, REQUEST))
         self.assertEquals([], registry.get_resources(CONTEXT, REQUEST,
                                                      include_unavailable=True))
+
+    def test_get_raw_dynamic_resources(self):
+        """The get_raw_dynamic_resources method returns all dynamic resources without
+        ordering or filtering. This is much more efficient and can be used for fast
+        cache calculation.
+        """
+        foo = SCSSFileResource('ftw.theming.tests', 'resources/foo.scss')
+        bar = DynamicSCSSResource('bar')
+
+        registry = SCSSRegistry()
+        registry.add_resource(foo)
+        registry.add_resource(bar)
+
+        self.assertEquals([bar],
+                          registry.get_raw_dynamic_resources(None, None))
