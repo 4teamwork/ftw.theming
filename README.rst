@@ -166,7 +166,7 @@ Resource factories for dynamic resources
 ----------------------------------------
 
 A resource factory is a callable (accepting context and request) which returns
-an ``ISCSSResource`` object.
+a ``DynamicSCSSResource`` object.
 Since the callable instantiates the resource, it's content can be created dynamically.
 
 
@@ -187,12 +187,44 @@ Since the callable instantiates the resource, it's content can be created dynami
 .. code:: python
 
     from ftw.theming.interfaces import ISCSSResourceFactory
-    from ftw.theming.resource import ISCSSResource
+    from ftw.theming.resource import DynamicSCSSResource
     from zope.interface import provider
 
     @provider(ISCSSResourceFactory)
     def dynamic_resource_factory(context, request):
-        return ISCSSResource('dynamic.scss', slot='addon', source='$color: blue;')
+        return DynamicSCSSResource('dynamic.scss', slot='addon', source='$color: blue;',
+                                   cachekey='1')
+
+
+When generating the SCSS is expensive in time, you should subclass the
+``DynamicSCSSResource`` class and implement custom ``get_source`` and ``get_cachekey``
+methods.
+The ``get_cachekey`` should be very lightweight and cheap: it is called on every pageview.
+It should return any string and only change the return value when the ``get_source`` result
+will change.
+
+.. code:: python
+
+    from Products.CMFCore.utils import getToolByName
+    from ftw.theming.interfaces import ISCSSResourceFactory
+    from ftw.theming.resource import DynamicSCSSResource
+    from zope.annotation import IAnnotations
+    from zope.interface import provider
+
+
+    class CustomSCSSResource(DynamicSCSSResource):
+
+          def get_source(self, context, request):
+              return 'body { background-color: $primary-color; }'
+
+          def get_cachekey(self, context, request):
+              portal = getToolByName(context, 'portal_url').getPortalObject()
+              config = IAnnotations(portal).get('my-custom-config', {})
+              return config.get('last-change-timestamp', '1')
+
+    @provider(ISCSSResourceFactory)
+    def dynamic_resource_factory(context, request):
+        return CustomSCSSResource('my.package:custom.scss', slot='addon')
 
 
 
