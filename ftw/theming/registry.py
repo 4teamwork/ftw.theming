@@ -1,5 +1,6 @@
 from collections import OrderedDict
 from ftw.theming.exceptions import CyclicResourceOrder
+from ftw.theming.interfaces import IDynamicSCSSResource
 from ftw.theming.interfaces import ISCSSRegistry
 from ftw.theming.interfaces import ISCSSResourceFactory
 from ftw.theming.interfaces import SLOTS
@@ -30,6 +31,11 @@ class SCSSRegistry(object):
                 lambda res: res.available(context, request, profileinfo),
                 resources)
         return resources
+
+    def get_raw_dynamic_resources(self, context, request):
+        slot_lookup = self._slot_resources_lookup(context, request)
+        resources = reduce(list.__add__, slot_lookup.values())
+        return filter(IDynamicSCSSResource.providedBy, resources)
 
     def order_resources(self, resources):
         if not resources:

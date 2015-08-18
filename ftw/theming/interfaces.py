@@ -70,6 +70,18 @@ class ISCSSRegistry(Interface):
         :rtype: list of :py:class:`ftw.theming.interfaces.ISCSSFileResource`
         """
 
+    def get_raw_dynamic_resources(context, request):
+        """Returns all dynamic resources without ordering or filtering them.
+        This is an efficient lookup for doing such as fast cache calculation.
+
+        :param context: A acquisition wrapped context object.
+        :type context: object
+        :param request: The request object.
+        :param request: object
+        :returns: A list of scss resource objects.
+        :rtype: list of :py:class:`ftw.theming.interfaces.IDynamicSCSSResource`
+        """
+
 
 class ISCSSResource(Interface):
     """An SCSS resource has a snippet of SCSS code and can tell whether the
@@ -83,6 +95,24 @@ class ISCSSResource(Interface):
                        ' name within the same slot.')
     after = Attribute('Move this resource after the other resource with that'
                       ' name within the same slot.')
+
+    def __init__(name, slot='addon', before=None, after=None, source=u''):
+        """Initialize an scss resource.
+
+        :param name: The name of the resource.
+        :type name: string
+        :param slot: The slot where the resource belongs. This must be one of
+          the list of slots.
+        :type slot: string
+        :param before: Move this resource before the other resource with that
+          name within the same slot.
+        :type before: string (name of other resource)
+        :param after: Move this resource after the other resource with that
+          name within the same slot.
+        :type after: string (name of other resource)
+        :param source: The SCSS source.
+        :type source: string
+        """
 
     def available(context, request, profileinfo=None):
         """Check whether the resource is available for this context.
@@ -129,6 +159,35 @@ class ISCSSResource(Interface):
         """
 
 
+class IDynamicSCSSResource(ISCSSResource):
+    """A dynamic SCSS resource provides SCSS source which may change.
+    In order to have the correct caching, a cachekey is necessary.
+
+    Dynamic resources should either subclass the DynamicSCSSResource class or
+    initialize it with at least a name, a source and a cache key.
+    """
+
+    def __init__(name, slot='addon', before=None, after=None, source=u''):
+        """Initialize an scss resource.
+
+        :param name: The name of the resource.
+        :type name: string
+        :param slot: The slot where the resource belongs. This must be one of
+          the list of slots.
+        :type slot: string
+        :param before: Move this resource before the other resource with that
+          name within the same slot.
+        :type before: string (name of other resource)
+        :param after: Move this resource after the other resource with that
+          name within the same slot.
+        :type after: string (name of other resource)
+        :param source: The SCSS source.
+        :type source: string
+        :param cachekey: The cache key which must change when the source changes.
+        :type source: string
+        """
+
+
 class ISCSSFileResource(ISCSSResource):
     """A scss resource represents a scss file for registering in the scss registry.
     It holds the relevant information for building the scss pipeline.
@@ -141,7 +200,7 @@ class ISCSSFileResource(ISCSSResource):
     def __init__(package, relative_path, slot='addon',
                  profile=None, for_=INavigationRoot, layer=Interface,
                  before=None, after=None):
-        """Initialize a scss resource.
+        """Initialize an scss resource.
 
         :param package: The name of the python package where the resource is
           registered.
