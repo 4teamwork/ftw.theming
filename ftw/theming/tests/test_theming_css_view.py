@@ -169,6 +169,22 @@ class TestThemingCSSView(FunctionalTestCase):
             r'^{}'.format(
                 re.escape('http://nohost/plone/folder/theming.css?cachekey=')))
 
+    def test_view_provides_get_url(self):
+        """For internal use in templates, the view should provide the theming
+        css URL.
+        """
+        portal_css_url = self.portal.restrictedTraverse('theming.css').get_url()
+        self.assertRegexpMatches(
+            portal_css_url,
+            r'^{}'.format(
+                re.escape('http://nohost/plone/theming.css?cachekey=')))
+
+        self.grant('Manager')
+        folder = create(Builder('folder'))
+        folder_css_url = folder.restrictedTraverse('theming.css').get_url()
+        self.assertEquals(portal_css_url, folder_css_url,
+                          'The CSS should always be relative to the root.')
+
     def register_compiler_mock(self):
         sitemanager = self.portal.getSiteManager()
         COMPILER_MOCK_DATA = {'counter': 0,
