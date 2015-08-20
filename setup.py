@@ -8,24 +8,24 @@ tests_require = [
     'ftw.testbrowser',
     'ftw.testing',
     'plone.app.testing',
-    ]
+]
 
 
 setup(name='ftw.theming',
       version=version,
       description="",
       long_description=open("README.rst").read() + "\n" + open(
-        os.path.join("docs", "HISTORY.txt")).read(),
+          os.path.join("docs", "HISTORY.txt")).read(),
 
       classifiers=[
-        "Environment :: Web Environment",
-        'Framework :: Plone',
-        'Framework :: Plone :: 4.3',
-        "Intended Audience :: Developers",
-        'License :: OSI Approved :: GNU General Public License (GPL)',
-        'Programming Language :: Python',
-        'Topic :: Software Development :: Libraries :: Python Modules',
-        ],
+          "Environment :: Web Environment",
+          'Framework :: Plone',
+          'Framework :: Plone :: 4.3',
+          "Intended Audience :: Developers",
+          'License :: OSI Approved :: GNU General Public License (GPL)',
+          'Programming Language :: Python',
+          'Topic :: Software Development :: Libraries :: Python Modules',
+      ],
 
       keywords='ftw theming',
       author='4teamwork AG',
@@ -39,15 +39,15 @@ setup(name='ftw.theming',
       zip_safe=False,
 
       install_requires=[
-        'Plone',
-        'cssselect',
-        'ftw.upgrade',
-        'lxml',
-        'path.py',
-        'pyScss >= 1.3',
-        'setuptools',
-        'tarjan',
-        ],
+          'Plone',
+          'cssselect',
+          'ftw.upgrade',
+          'lxml',
+          'path.py',
+          'pyScss >= 1.3',
+          'setuptools',
+          'tarjan',
+      ],
       tests_require=tests_require,
       extras_require=dict(tests=tests_require),
 
@@ -56,4 +56,4 @@ setup(name='ftw.theming',
       [z3c.autoinclude.plugin]
       target = plone
       """,
-      )
+)
