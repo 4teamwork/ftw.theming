@@ -96,6 +96,9 @@ class ThemingCSSView(BrowserView):
         cache = getUtility(ICacheChooser)('{0}.get_css'.format(__name__))
         cache.ramcache.invalidateAll()
 
+    def get_url(self):
+        return get_theming_css_url(self.context)
+
 
 class RedirectToNavrootThemingCSSView(BrowserView):
     """The theming.css should only be shipped on navigation roots,
@@ -106,5 +109,7 @@ class RedirectToNavrootThemingCSSView(BrowserView):
     """
 
     def __call__(self):
-        target = get_theming_css_url(self.context)
-        return self.request.response.redirect(target)
+        return self.request.response.redirect(self.get_url())
+
+    def get_url(self):
+        return get_theming_css_url(self.context)
