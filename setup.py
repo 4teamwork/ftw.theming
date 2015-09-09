@@ -45,6 +45,7 @@ setup(name='ftw.theming',
           'lxml',
           'path.py',
           'pyScss >= 1.3',
+          'six >= 1.4.0',  # six.unichr
           'setuptools',
           'tarjan',
       ],
