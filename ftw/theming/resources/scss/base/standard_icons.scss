@@ -8,3 +8,73 @@
 @include portal-type-font-awesome-icon(news-item, newspaper-o);
 @include portal-type-font-awesome-icon(plone-site, globe);
 @include portal-type-font-awesome-icon(topic, list-alt);
+
+
+@include mark-portal-type-having-mimetypes(file);
+
+/* Default */
+@include mime-type-font-awesome-icon(mime, file-o);
+@include mime-type-font-awesome-icon(application, file-o);
+@include mime-type-font-awesome-icon(unknown, file-o);
+
+/* ms office */
+@include mime-type-font-awesome-icon(doc, file-word-o);
+@include mime-type-font-awesome-icon(docx, file-word-o);
+@include mime-type-font-awesome-icon(xls, file-excel-o);
+@include mime-type-font-awesome-icon(xlsx, file-excel-o);
+@include mime-type-font-awesome-icon(ppt, file-powerpoint-o);
+@include mime-type-font-awesome-icon(pptx, file-powerpoint-o);
+
+/* open office */
+@include mime-type-font-awesome-icon(sxc, file-excel-o);
+@include mime-type-font-awesome-icon(sxd, file-image-o);
+@include mime-type-font-awesome-icon(sxi, file-powerpoint-o);
+@include mime-type-font-awesome-icon(sxm, file-excel-o);
+@include mime-type-font-awesome-icon(sxg, file-word-o);
+@include mime-type-font-awesome-icon(sxw, file-word-o);
+
+/* images */
+@include mime-type-font-awesome-icon(image, file-image-o);
+@include mime-type-font-awesome-icon(ps, file-image-o);
+@include mime-type-font-awesome-icon(png, file-image-o);
+
+/* archives */
+@include mime-type-font-awesome-icon(rar, file-archive-o);
+@include mime-type-font-awesome-icon(rpm, file-archive-o);
+@include mime-type-font-awesome-icon(tar, file-archive-o);
+@include mime-type-font-awesome-icon(zip, file-archive-o);
+@include mime-type-font-awesome-icon(deb, file-archive-o);
+@include mime-type-font-awesome-icon(iso, file-archive-o);
+@include mime-type-font-awesome-icon(pk, file-archive-o);
+
+/* media */
+@include mime-type-font-awesome-icon(audio, file-audio-o);
+@include mime-type-font-awesome-icon(midi, file-audio-o);
+@include mime-type-font-awesome-icon(wav, file-audio-o);
+@include mime-type-font-awesome-icon(video, file-video-o);
+@include mime-type-font-awesome-icon(avi, file-video-o);
+
+/* generic / various */
+@include mime-type-font-awesome-icon(dvi, file-o);
+@include mime-type-font-awesome-icon(pdf, file-pdf-o);
+@include mime-type-font-awesome-icon(txt, file-text-o);
+@include mime-type-font-awesome-icon(text, file-text-o);
+@include mime-type-font-awesome-icon(man, file-text-o);
+@include mime-type-font-awesome-icon(message, envelope-o);
+@include mime-type-font-awesome-icon(font, font);
+@include mime-type-font-awesome-icon(gf, font);
+@include mime-type-font-awesome-icon(vcard, user);
+
+/* code */
+@include mime-type-font-awesome-icon(sh, file-code-o);
+@include mime-type-font-awesome-icon(java, file-code-o);
+@include mime-type-font-awesome-icon(c, file-code-o);
+@include mime-type-font-awesome-icon(h, file-code-o);
+@include mime-type-font-awesome-icon(py, file-code-o);
+@include mime-type-font-awesome-icon(cpp, file-code-o);
+@include mime-type-font-awesome-icon(exe, file-code-o);
+@include mime-type-font-awesome-icon(f, file-code-o);
+@include mime-type-font-awesome-icon(o, file-code-o);
+@include mime-type-font-awesome-icon(html, file-code-o);
+@include mime-type-font-awesome-icon(pl, file-code-o);
+@include mime-type-font-awesome-icon(tex, file-code-o);
