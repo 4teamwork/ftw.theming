@@ -64,6 +64,51 @@
                 </tal:TYPE>
 
             </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2">
+                        <span class="types-with-mimetype-icons-hint"
+                              i18n:translate="">
+                            Types which have mimetype icons:
+                            the default type icon is visible when adding a new object of
+                            this type,
+                            existing objects are usually listed with an icon representing
+                            the mimetype of the object.
+                        </span>
+                    </td>
+            </tfoot>
+        </table>
+
+        <h2 i18n:translate="">Mime Types Icons</h2>
+
+        <table class="theming-mime-type-icons listing nosort">
+            <colgroup>
+                <col width="10%" />
+                <col width="10%" />
+                <col width="80%" />
+            </colgroup>
+            <thead>
+                <tr>
+                    <th i18n:translate="">Original</th>
+                    <th i18n:translate="">Icon</th>
+                    <th i18n:translate="">Name</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tal:MIMETYPE tal:repeat="item view/get_mime_types">
+                    <tr>
+                        <td>
+                            <img tal:attributes="src string:${here/portal_url}/${item/filename}" />
+                        </td>
+                        <td>
+                            <span tal:attributes="class item/classes" />
+                        </td>
+                        <td tal:content="item/normalized_name" />
+                    </tr>
+                </tal:MIMETYPE>
+
+            </tbody>
         </table>
 
     </div>

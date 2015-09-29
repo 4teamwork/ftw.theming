@@ -43,3 +43,22 @@ body.template-theming-variables {
     }
   }
 }
+
+body.template-theming-icons {
+  .types-with-mimetype-icons-hint {
+    @extend .fa-icon;
+    @extend .fa-star;
+    &:before {
+      color: #A00;
+      font-size: 70%;
+      vertical-align: top;
+    }
+  }
+
+  .theming-mime-type-icons td {
+    text-align: center;
+    &:last-child {
+      text-align: left;
+    }
+  }
+}
