@@ -50,4 +50,12 @@
         handler=".header.set_ftw_theming_header"
         />
 
+
+    <!-- override icons adapters, extend with a html wrapper tag -->
+    <adapter for="*
+                  ftw.theming.interfaces.IThemingLayer
+                  Products.ZCatalog.CatalogBrains.AbstractCatalogBrain"
+             factory=".icons.CatalogBrainContentIcon"
+             provides="plone.app.layout.icons.interfaces.IContentIcon" />
+
 </configure>
