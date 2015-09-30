@@ -202,5 +202,7 @@ $screen-XXS: "(min-width: #{$mobile-tiny})" !default;
 /* ICONS */
 
 $standard-iconset: font-awesome;
+$use-font-awesome-mimetype-icons: true;
 @include declare-variables(
-  standard-iconset);
+  standard-iconset,
+  use-font-awesome-mimetype-icons);

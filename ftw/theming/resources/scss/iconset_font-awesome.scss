@@ -26,18 +26,52 @@
   .icons-on [class^="contenttype-"],
   .icons-on [class*=" contenttype-"] {
     @extend .#{$fa-css-prefix}-times-circle;
-    @extend .fa-icon;
+    @extend .#{$fa-css-prefix}-icon;
     &:before {
       color: fuchsia;
     }
   }
 
   @each $type, $value in get-portal-type-icons-for-iconset(font-awesome) {
-    body.icons-on .contenttype-#{$type} {
+    body.icons-on .contenttype-$type {
       @extend .#{$fa-css-prefix}-#{$value};
       &:before {
         color: inherit;
       }
     }
+  }
+
+  @if $use-font-awesome-mimetype-icons == true {
+
+    @each $type in get-portal-types-with-mimetype-icons() {
+      .icons-on a.contenttype-$type:before {
+        display: none;
+      }
+
+      .icons-on #plone-contentmenu-factories a.contenttype-$type:before,
+      .icons-on.template-theming-icons a.contenttype-$type:before {
+        display: inline-block;
+      }
+      .icons-on.template-theming-icons a.contenttype-$type {
+        @extend .fa-icon-right;
+        &:after {
+          content: '\f005';
+          color: #A00;
+          font-size: 70%;
+          vertical-align: top;
+        }
+      }
+    }
+
+    @each $classpostfix, $value in get-mime-type-icons-for-iconset(font-awesome) {
+      body.icons-on span.mimetype-icon.icon-mimetype-img-$classpostfix {
+        >img {
+          display: none;
+        }
+        @extend .fa-icon;
+        @extend .#{$fa-css-prefix}-#{$value};
+      }
+    }
+
   }
 }

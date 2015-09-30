@@ -1,3 +1,6 @@
+
+/* Portal type icons registry */
+
 $icons-portal-type-icons: ();
 
 @mixin portal-type-icon($type, $value, $iconset) {
@@ -17,4 +20,40 @@ $icons-portal-type-icons: ();
 
 @mixin portal-type-font-awesome-icon($type, $value) {
   @include portal-type-icon($type, $value, font-awesome);
+}
+
+
+/* Portal types with mime type icons registry */
+$icons-mimetype-portal-types: ();
+
+@mixin mark-portal-type-having-mimetypes($type) {
+  $icons-mimetype-portal-types: append($icons-mimetype-portal-types, $type);
+}
+
+@function get-portal-types-with-mimetype-icons() {
+  @return $icons-mimetype-portal-types;
+}
+
+
+/* Mime type icons registry */
+
+$icons-mime-type-icons: ();
+
+@mixin mime-type-icon($classpostfix, $value, $iconset) {
+  $icons-mime-type-icons: append($icons-mime-type-icons,
+                                 ($classpostfix, $value, $iconset));
+}
+
+@function get-mime-type-icons-for-iconset($requested-iconset) {
+  $result: ();
+  @each $classpostfix, $value, $iconset in $icons-mime-type-icons {
+    @if $iconset == $requested-iconset {
+      $result: append($result, ($classpostfix, $value));
+    }
+  }
+  @return $result;
+}
+
+@mixin mime-type-font-awesome-icon($classpostfix, $value) {
+  @include mime-type-icon($classpostfix, $value, font-awesome);
 }
