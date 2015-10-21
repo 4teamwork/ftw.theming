@@ -61,6 +61,12 @@
           vertical-align: top;
         }
       }
+
+      .icons-on.template-search .searchResults > .contenttype-$type {
+        &:before {
+          display: none;
+        }
+      }
     }
 
     @each $classpostfix, $value in get-mime-type-icons-for-iconset(font-awesome) {
