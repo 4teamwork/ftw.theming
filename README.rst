@@ -41,7 +41,7 @@ Resource slots
 --------------
 
 The registry allows to register resources to a list of fix slots.
-Theese are the available slots, sorted by inclusion order:
+These are the available slots, sorted by inclusion order:
 
 - ``top``
 - ``variables``
