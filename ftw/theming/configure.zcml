@@ -58,4 +58,12 @@
              factory=".icons.CatalogBrainContentIcon"
              provides="plone.app.layout.icons.interfaces.IContentIcon" />
 
+    <configure zcml:condition="installed collective.solr">
+        <adapter for="*
+                      ftw.theming.interfaces.IThemingLayer
+                      collective.solr.interfaces.IFlare"
+                 factory=".icons.CatalogBrainContentIcon"
+                 provides="plone.app.layout.icons.interfaces.IContentIcon" />
+    </configure>
+
 </configure>
