@@ -5,7 +5,8 @@ Changelog
 1.0.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add open office mimetype icons.
+  [jone]
 
 
 1.0.2 (2015-10-28)

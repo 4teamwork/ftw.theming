@@ -32,6 +32,19 @@
 @include mime-type-font-awesome-icon(sxm, file-excel-o);
 @include mime-type-font-awesome-icon(sxg, file-word-o);
 @include mime-type-font-awesome-icon(sxw, file-word-o);
+@include mime-type-font-awesome-icon(resource-mtr-icons-odb, database);
+@include mime-type-font-awesome-icon(resource-mtr-icons-odc, pie-chart);
+@include mime-type-font-awesome-icon(resource-mtr-icons-odg, file-image-o);
+@include mime-type-font-awesome-icon(resource-mtr-icons-odp, file-powerpoint-o);
+@include mime-type-font-awesome-icon(resource-mtr-icons-ods, file-excel-o);
+@include mime-type-font-awesome-icon(resource-mtr-icons-odt, file-word-o);
+@include mime-type-font-awesome-icon(resource-mtr-icons-oo-empty, file-o);
+@include mime-type-font-awesome-icon(resource-mtr-icons-otg, file-image-o);
+@include mime-type-font-awesome-icon(resource-mtr-icons-oth, file-code-o);
+@include mime-type-font-awesome-icon(resource-mtr-icons-otp, file-powerpoint-o);
+@include mime-type-font-awesome-icon(resource-mtr-icons-ots, file-excel-o);
+@include mime-type-font-awesome-icon(resource-mtr-icons-ott, file-word-o);
+
 
 /* images */
 @include mime-type-font-awesome-icon(image, file-image-o);
