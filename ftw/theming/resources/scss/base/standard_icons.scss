@@ -1,4 +1,4 @@
-@include portal-type-font-awesome-icon(collection, list-alt);
+@include portal-type-font-awesome-icon(collection, list-ul);
 @include portal-type-font-awesome-icon(document, file-text-o);
 @include portal-type-font-awesome-icon(event, calendar);
 @include portal-type-font-awesome-icon(file, file);
@@ -7,7 +7,7 @@
 @include portal-type-font-awesome-icon(link, link);
 @include portal-type-font-awesome-icon(news-item, newspaper-o);
 @include portal-type-font-awesome-icon(plone-site, globe);
-@include portal-type-font-awesome-icon(topic, list-alt);
+@include portal-type-font-awesome-icon(topic, list-ul);
 
 
 @include mark-portal-type-having-mimetypes(file);

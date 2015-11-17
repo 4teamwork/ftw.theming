@@ -5,6 +5,9 @@ Changelog
 1.0.3 (unreleased)
 ------------------
 
+- Change collection / topic icons in order to avoid collision.
+  [jone]
+
 - Add open office mimetype icons.
   [jone]
 
