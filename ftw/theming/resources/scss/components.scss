@@ -1,5 +1,5 @@
 
-@mixin label($color, $radius: $border-radius) {
+@mixin label($color, $radius: $border-radius-primary) {
   color: contrast($color, #eee, #333, $lightness: 63%);
   padding: 0.2em 0.3em;
   background-color: $color;
@@ -7,7 +7,7 @@
 }
 
 
-@mixin linklist($color: $gray-light, $horizontal-padding: 0.5em,
+@mixin linklist($color: $color-gray-light, $horizontal-padding: 0.5em,
                 $height: 0.8em, $vertical-padding: 0.3em) {
   > * {
     float: left;

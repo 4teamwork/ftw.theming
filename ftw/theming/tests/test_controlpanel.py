@@ -55,9 +55,9 @@ class TestControlpanel(FunctionalTestCase):
         browser.login(SITE_OWNER_NAME).open(view='theming-variables')
         variables = browser.css('table.theming-variables').first.dicts()
 
-        self.assertIn({'File': 'default_variables.scss',
-                       'Name': '$gray-base',
-                       'Value': '#403e3d',
+        self.assertIn({'File': 'variables.scss',
+                       'Name': '$color-primary',
+                       'Value': '#3498db',
                        'Example': ''},
                       variables)
 
