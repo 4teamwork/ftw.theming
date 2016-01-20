@@ -4,12 +4,15 @@
     i18n_domain="ftw.theming">
 
     <theme:scss_factory factory=".variables.portal_url_variable_resource_factory" />
+
     <theme:scss file="resources/scss/core.scss" slot="top" />
 
     <theme:scss file="resources/scss/standard_mixins.scss" slot="mixins" />
     <theme:scss file="resources/scss/components.scss" slot="mixins" />
     <theme:scss file="resources/scss/icon_mixins.scss" slot="mixins" />
     <theme:scss file="resources/scss/iconset_font-awesome.scss" slot="bottom" />
+
+    <theme:scss file="resources/scss/globals/variables.scss" slot="variables" />
 
     <theme:scss file="resources/scss/globals/helpers.scss" slot="mixins" />
     <theme:scss file="resources/scss/globals/grid.scss" slot="mixins" />
@@ -19,7 +22,6 @@
     <theme:scss file="resources/scss/elements/tab.scss" slot="mixins" />
     <theme:scss file="resources/scss/elements/form.scss" slot="mixins" />
 
-    <theme:scss file="resources/scss/globals/variables.scss" slot="top" />
 
     <theme:resources profile="ftw.theming:default">
         <theme:scss file="resources/scss/default/theming_controlpanel.scss" slot="addon" />
