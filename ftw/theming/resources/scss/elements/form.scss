@@ -1,0 +1,42 @@
+$color-input: $color-white !default;
+$line-height-input: $line-height-base !default;
+$border-color-input: $color-gray-dark !default;
+$font-size-input: 1em !default;
+$color-input-active: $color-primary !default;
+
+@mixin input() {
+  position: relative;
+  font-weight: normal;
+  font-style: normal;
+  font-size: $font-size-input;
+  @include auto-text-color($color-input);
+  margin: 0;
+  max-width: 100%;
+  outline: none;
+  line-height: $line-height-input;
+
+  /*
+    IE or FF do not display the height of the inputfield correctly so
+    we have to set the height manually and applying the content-box model.
+  */
+  height: $line-height-input;
+  box-sizing: content-box;
+
+  padding: $padding-vertical $padding-horizontal;
+
+  background: $color-input;
+  border: 1px solid $border-color-input;
+  border-radius: $border-radius-primary;
+
+  &:focus {
+    border-color: $color-input-active;
+  }
+}
+
+@mixin textarea {
+  @include input();
+  resize: vertical;
+  min-height: $padding-vertical * 20;
+  width: 100%;
+  box-sizing: border-box;
+}

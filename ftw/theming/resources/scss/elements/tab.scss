@@ -9,6 +9,7 @@ $color-tab-hover: $color-tab-select !default;
   padding: $padding-vertical $padding-horizontal;
   border-bottom: 2px solid $color-tab;
   background-color: $color-white;
+  color: $color-text;
 
   &:hover {
     border-bottom-color: $color-tab-hover;
