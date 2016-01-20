@@ -53,6 +53,8 @@ $font-size-button: 1em !default;
 
   background: $color-button-default;
 
+  @include no-link();
+
 }
 
 @mixin button-success($color-button-success: $color-button-success, $disabled: false) {
