@@ -1,0 +1,72 @@
+$color-button-default: $color-secondary !default;
+$color-button-success: $color-success !default;
+$color-button-warning : $color-warning !default;
+$color-button-danger: $color-danger !default;
+
+$font-weight-button: normal !default;
+$line-height-button: $line-height-base !default;
+$font-style-button: normal !default;
+$font-size-button: 1em !default;
+
+@mixin button($color-button-default: $color-button-default, $disabled: false) {
+  display: inline-block;
+
+  min-height: 1em;
+
+  outline: none;
+  border: 0;
+  vertical-align: baseline;
+
+  font-family: $font-family-primary;
+
+  margin: 0 $margin-horizontal $margin-vertical 0;
+  padding: $padding-vertical $padding-horizontal;
+
+  text-transform: none;
+  text-shadow: none;
+  font-weight: $font-weight-button;
+  font-size: $font-size-button;
+  line-height: $line-height-button;
+  font-style: $font-style-button;
+  text-align: center;
+  text-decoration: none;
+
+  border-radius: $border-radius-primary;
+  box-shadow: none;
+
+  user-select: none;
+
+  @if ($disabled) {
+    pointer-events: none;
+    cursor: default;
+    color: $color-text-disabled;
+    $color-button: $color-disabled;
+  } @else {
+    cursor: pointer;
+    @include auto-text-color($color-button-default);
+    &:hover {
+      $color-button-hover: darken($color-button-default, 10%);
+      background-color: $color-button-hover;
+      @include auto-text-color($color-button-hover);
+    }
+  }
+
+  background: $color-button-default;
+
+}
+
+@mixin button-success($color-button-success: $color-button-success, $disabled: false) {
+  @include button($color-button-success);
+}
+
+@mixin button-danger($color-button-danger: $color-button-danger, $disabled: false) {
+  @include button($color-button-danger);
+}
+
+@mixin button-warning($color-button-warning: $color-button-warning, $disabled: false) {
+  @include button($color-button-warning);
+}
+
+@mixin button-disabled() {
+  @include button($disabled: true);
+}
