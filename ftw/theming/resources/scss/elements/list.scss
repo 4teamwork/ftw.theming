@@ -1,0 +1,36 @@
+$color-list: $color-white;
+$color-list-hover: $color-gray-light;
+
+@mixin list() {
+
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+
+  @include clearfix();
+
+  > li {
+    display: block;
+    > a {
+      display: block;
+      padding: $padding-vertical $padding-horizontal;
+    }
+  }
+}
+
+@mixin reset-definition-list() {
+  margin: 0;
+  dd {
+    margin: 0;
+  }
+}
+
+@mixin list-horizontal() {
+
+  @include list();
+
+  > li {
+    float: left;
+  }
+
+}

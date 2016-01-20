@@ -1,0 +1,50 @@
+$color-list-group: $color-white !default;
+$color-list-group-hover: $color-primary !default;
+$border-color-list-group: $color-gray-dark !default;
+
+@mixin list-group() {
+  @include list();
+
+  > li {
+
+    border: 1px solid $border-color-list-group;
+    border-bottom: 0;
+
+    &:first-child {
+      border-top-left-radius: $border-radius-primary;
+      border-bottom-left-radius: $border-radius-primary;
+    }
+
+    &:last-child {
+      border-top-right-radius: $border-radius-primary;
+      border-bottom-right-radius: $border-radius-primary;
+      border-bottom: 1px solid $border-color-list-group;
+    }
+
+    > a {
+      @include no-link();
+      @include auto-text-color($color-list-group);
+      background-color: $color-list-group;
+      display: block;
+      padding: $padding-vertical $padding-horizontal;
+      white-space: nowrap;
+    }
+
+  }
+
+}
+
+@mixin list-group-interactive() {
+
+  @include list-group();
+
+  > li  {
+    > a {
+      &:hover {
+        background-color: $color-list-group-hover;
+        @include auto-text-color($color-list-group-hover);
+      }
+    }
+  }
+
+}

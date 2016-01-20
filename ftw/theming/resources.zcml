@@ -13,6 +13,8 @@
 
     <theme:scss file="resources/scss/globals/helpers.scss" slot="mixins" />
     <theme:scss file="resources/scss/elements/button.scss" slot="mixins" />
+    <theme:scss file="resources/scss/elements/list.scss" slot="mixins" />
+    <theme:scss file="resources/scss/elements/list-group.scss" slot="mixins" />
 
     <theme:scss file="resources/scss/globals/variables.scss" slot="top" />
 
