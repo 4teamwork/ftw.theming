@@ -109,7 +109,6 @@ $line-height-base: 1.5em;
   max-width-page,
   line-height-base);
 
-
 /*
   Deprecated Variables
   Will be removed in next major version.
@@ -197,6 +196,51 @@ $screen-XXS: "(min-width: #{$mobile-tiny})" !default;
   }
 }
 
+$primary-color: #205C90 !default;
+$secondary-color: #75ad0a !default;
+
+$gray-base: #403e3d !default;
+$gray-darker: lighten($gray-base, 13.5%) !default;
+$gray-dark: lighten($gray-base, 20%) !default;
+$gray: lighten($gray-base, 33.5%) !default;
+$gray-light: lighten($gray-base, 46.7%) !default;
+$gray-lighter: lighten($gray-base, 70%) !default;
+
+$standalone-color: #fafafa !default;
+$context-color: #337ab7 !default;
+$success-color: #5cb85c !default;
+$warning-color: #f0ad4e !default;
+$danger-color: #d9534f !default;
+
+$page-bg-color: $gray-lighter !default;
+$content-bg-color: #fff !default;
+$text-color: $gray-dark !default;
+$light-text-color: $gray-light !default;
+$link-color: $primary-color !default;
+$link-font-weight: normal !default;
+$link-hover-color: $secondary-color !default;
+$link-focus-color: $secondary-color !default;
+$link-decoration: none !default;
+$link-hover-decoration: underline !default;
+$outline-color: change-color($primary-color, $lightness: 60%);
+
+$button-standalone-color: $standalone-color !default;
+$button-context-color: $context-color !default;
+$button-destructive-color: $danger-color !default;
+$button-success-color: $success-color !default;
+$button-warning-color: $warning-color !default;
+$button-danger-color: $danger-color !default;
+
+$button-standalone-color: $color-secondary !default;
+$button-context-color: $color-default !default;
+$button-destructive-color: $color-danger !default;
+$button-success-color: $color-success !default;
+$button-warning-color: $color-warning !default;
+$button-danger-color: $color-danger !default;
+$button-disabled-color: #ddd !default;
+$button-text-light-color: white !default;
+$button-text-dark-color: black !default;
+
 @include declare-variables(
   primary-color,
   secondary-color,
@@ -234,5 +278,3 @@ $use-font-awesome-mimetype-icons: true;
 @include declare-variables(
   standard-iconset,
   use-font-awesome-mimetype-icons);
-
-
