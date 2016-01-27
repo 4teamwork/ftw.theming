@@ -25,12 +25,20 @@ $color-list-hover: $color-gray-light;
   }
 }
 
-@mixin list-horizontal() {
+@mixin list-horizontal($direction: ltr) {
 
   @include list();
 
-  > li {
-    float: left;
+  @if $direction == ltr {
+    > li {
+      float: left;
+
+    }
+  } @else {
+    > li {
+      float: right;
+    }
+
   }
 
 }
