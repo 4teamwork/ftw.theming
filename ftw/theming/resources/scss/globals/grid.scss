@@ -13,6 +13,18 @@ $gridsystem-width: $columns * $column-width + ($columns - 1) * $gutter-width + 2
   margin-left: 100% * (($column-width + $gutter-width) * $x - $gridsystem-width + $margin-width) / $gridsystem-width;
 }
 
+@for $x from 1 through $columns {
+  div.width-#{$x} {
+    @include gridwidth($x);
+  }
+}
+
+@for $x from 0 through $columns - 1 {
+  div.position-#{$x} {
+    @include gridposition($x);
+  }
+}
+
 @mixin cell {
   position: relative;
   float: left;
@@ -31,4 +43,12 @@ $gridsystem-width: $columns * $column-width + ($columns - 1) * $gutter-width + 2
   width: 100%;
   display: block;
   position: relative;
+}
+
+.row {
+  @include row();
+}
+
+.cell {
+  @include cell();
 }
