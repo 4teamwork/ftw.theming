@@ -36,6 +36,8 @@ $font-size-button: 1em !default;
 
   user-select: none;
 
+  @include no-link();
+
   @if ($disabled) {
     pointer-events: none;
     cursor: default;
@@ -52,9 +54,6 @@ $font-size-button: 1em !default;
   }
 
   background: $color-button;
-
-  @include no-link();
-
 }
 
 @mixin button-default($color-button-default: $color-button-default, $disabled: false) {
