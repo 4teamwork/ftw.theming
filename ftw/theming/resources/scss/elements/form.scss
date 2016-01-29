@@ -1,14 +1,12 @@
 $color-input: $color-white !default;
 $line-height-input: $line-height-base !default;
 $border-color-input: $color-gray-dark !default;
-$font-size-input: 1em !default;
 $color-input-active: $color-primary !default;
 
 @mixin input() {
   position: relative;
   font-weight: normal;
   font-style: normal;
-  font-size: $font-size-input;
   @include auto-text-color($color-input);
   margin: 0;
   max-width: 100%;
