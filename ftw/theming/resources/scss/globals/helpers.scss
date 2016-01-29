@@ -40,3 +40,10 @@
                   $color-text,
                   $lightness:63%);
 }
+
+@mixin auto-link-color($color: $color-primary) {
+  @include auto-text-color($color);
+  &:hover {
+    @include auto-text-color($color);
+  }
+}
