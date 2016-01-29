@@ -1,7 +1,7 @@
-$column-width: 56px;
-$gutter-width: 18px;
-$margin-width: 18px;
-$columns: 16;
+$column-width: 56px !default;
+$gutter-width: 18px !default;
+$margin-width: 18px !default;
+$columns: 16 !default;
 
 $gridsystem-width: $columns * $column-width + ($columns - 1) * $gutter-width + 2 * $margin-width;
 

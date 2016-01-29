@@ -1,5 +1,5 @@
-$color-list: $color-white;
-$color-list-hover: $color-gray-light;
+$color-list: $color-white !default;
+$color-list-hover: $color-gray-light !default;
 
 @mixin list() {
 
