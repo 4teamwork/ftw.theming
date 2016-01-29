@@ -5,7 +5,10 @@ Changelog
 1.0.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Use more modular and adaptive mixins to provide a base to build themes upon it.
+  Deprecated variables are stil avilable but will be removed in the next major.
+  So use the new variables set for further styling.
+  [Kevin Bieri]
 
 
 1.0.3 (2015-11-17)
