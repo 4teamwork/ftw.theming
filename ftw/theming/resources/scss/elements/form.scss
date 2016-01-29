@@ -12,6 +12,7 @@ $color-input-active: $color-primary !default;
   max-width: 100%;
   outline: none;
   line-height: $line-height-input;
+  min-width: 295px;
 
   /*
     IE or FF do not display the height of the inputfield correctly so
