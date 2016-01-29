@@ -13,7 +13,6 @@ $font-size-button: 1em !default;
 
   min-height: 1em;
 
-  outline: none;
   border: 0;
   vertical-align: baseline;
 
@@ -44,10 +43,16 @@ $font-size-button: 1em !default;
   } @else {
     cursor: pointer;
     @include auto-text-color($color-button);
-    &:hover {
+    &:hover, &:focus {
       $color-button-hover: darken($color-button, 10%);
       background-color: $color-button-hover;
       @include auto-text-color($color-button-hover);
+    }
+    &:active {
+      outline: none;
+      $color-button-active: darken($color-button, 20%);
+      background-color: $color-button-active;
+      @include auto-text-color($color-button-active);
     }
   }
 
