@@ -2,6 +2,7 @@ $color-input: $color-white !default;
 $line-height-input: $line-height-base !default;
 $border-color-input: $color-gray-dark !default;
 $color-input-active: $color-primary !default;
+$minimum-textarea-lines: 4 !default;
 
 @mixin input() {
   position: relative;
@@ -35,7 +36,7 @@ $color-input-active: $color-primary !default;
 @mixin textarea {
   @include input();
   resize: vertical;
-  min-height: $padding-vertical * 20;
+  min-height: $padding-vertical * 2 + $line-height-base * $minimum-textarea-lines;
   width: 100%;
   box-sizing: border-box;
 }
