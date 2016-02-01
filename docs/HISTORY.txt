@@ -5,6 +5,9 @@ Changelog
 1.0.4 (unreleased)
 ------------------
 
+- Introduce floated grid system.
+  [Kevin Bieri]
+
 - Use more modular and adaptive mixins to provide a base to build themes upon it.
   Deprecated variables are stil avilable but will be removed in the next major.
   So use the new variables set for further styling.
