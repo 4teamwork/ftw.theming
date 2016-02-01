@@ -7,16 +7,13 @@ $border-color-list-group: $color-gray-dark !default;
 
   > li {
 
-    border: 1px solid $border-color-list-group;
-    border-bottom: 0;
-
-    &:first-child {
+    &:first-child > a {
       border-top-left-radius: $border-radius-primary;
-      border-bottom-left-radius: $border-radius-primary;
+      border-top-right-radius: $border-radius-primary;
     }
 
-    &:last-child {
-      border-top-right-radius: $border-radius-primary;
+    &:last-child > a {
+      border-bottom-left-radius: $border-radius-primary;
       border-bottom-right-radius: $border-radius-primary;
       border-bottom: 1px solid $border-color-list-group;
     }
@@ -28,6 +25,7 @@ $border-color-list-group: $color-gray-dark !default;
       display: block;
       padding: $padding-vertical $padding-horizontal;
       white-space: nowrap;
+      border-bottom: 1px solid $border-color-list-group;
     }
 
   }
