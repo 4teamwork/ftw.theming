@@ -1,0 +1,251 @@
+/*
+  Colors
+ */
+
+$color-primary: #3498db !default;
+$color-secondary: #46637f !default;
+$color-edit: #75ad0a !default;
+
+$color-default: #2980b9 !default;
+$color-success: #21ba45 !default;
+$color-warning: #eab05e !default;
+$color-danger: #db2828 !default;
+
+$color-white: #fff !default;
+$color-gray-dark: #e6e6e6 !default;
+$color-gray-light: #f5f5f5 !default;
+
+$color-text: #444 !default;
+$color-text-inverted: #efefef !default;
+$color-text-light: #95a5a6 !default;
+
+$color-link: $color-primary !default;
+$color-link-hover: $color-secondary !default;
+
+$color-disabled: $color-gray-light !default;
+$color-text-disabled: $color-gray-dark !default;
+
+/*
+  Typography
+ */
+$font-weight-link: normal !default;
+$text-decoration-link: none !default;
+$text-decoration-link-hover: underline !default;
+
+/*
+  Borders
+ */
+$border-radius-primary: 2px !default;
+
+/*
+  Spacing
+ */
+$margin-horizontal: .5em !default;
+$margin-vertical: 1.414em !default;
+$padding-vertical: .7em !default;
+$padding-horizontal: 1.2em !default;
+
+/*
+  Box shadows
+ */
+$box-shadow-primary: 2px 2px 4px rgba(0, 0, 0, .1) !default;
+$box-shadow-secondary: 0 5px 50px rgba(0, 0, 0, .3) !default;
+
+/*
+  Sizes
+ */
+$font-size-base: 16px !default;
+
+$font-size-h1: 2.074em !default;
+$font-size-h2: 1.728em !default;
+$font-size-h3: 1.44em !default;
+$font-size-h4: 1.2em !default;
+
+$font-size-small: 0.75em !default;
+$font-size-medium: $font-size-h4 !default;
+$font-size-large: $font-size-h2 !default;
+
+/*
+  Dimensions
+ */
+
+$max-width-page: 1200px !default;
+$line-height-base: 1.2em !default;
+
+@include declare-variables(
+  color-primary,
+  color-secondary,
+  color-default,
+  color-success,
+  color-warning,
+  color-danger,
+  color-white,
+  color-gray-dark,
+  color-gray-light,
+  color-text,
+  color-text-inverted,
+  color-text-light,
+  color-link,
+  color-link-hover,
+  color-disabled,
+  color-text-disabled,
+  font-weight-link,
+  text-decoration-link,
+  text-decoration-link-hover,
+  border-radius-primary,
+  margin-horizontal,
+  margin-vertical,
+  padding-vertical,
+  padding-horizontal,
+  box-shadow-primary,
+  box-shadow-secondary,
+  font-size-base,
+  font-size-h1,
+  font-size-h2,
+  font-size-h3,
+  font-size-h4,
+  font-size-small,
+  font-size-medium,
+  font-size-large,
+  max-width-page,
+  line-height-base);
+
+/* Viewports */
+
+// Taken from http://en.wikipedia.org/wiki/Display_resolution
+$desktop-WQHD-width:   2560px !default;
+$desktop-FHD-width:    1920px !default;
+$desktop-HDPLUS-width: 1600px !default;
+$desktop-HD-width:     1360px !default;
+$desktop-WXGA-width:   1280px !default;
+$desktop-XGA-width:    1024px !default;
+
+// Taken from http://www.ciop.com/common-resolutions-for-mobile-phones-and-tablets
+$mobile-large: 1280px !default;
+$mobile-medium: 1024px !default;
+$mobile-small: 800px !default;
+$mobile-smaller: 600px !default;
+$mobile-tiny: 480px !default;
+
+$screen-XL: "(min-width: #{$desktop-WQHD-width})" !default;
+$screen-L: "(min-width: #{$desktop-HDPLUS-width})" !default;
+$screen-M: "(min-width: #{$desktop-HD-width})" !default;
+$screen-S: "(min-width: #{$desktop-XGA-width})" !default;
+$screen-XS: "(min-width: #{$mobile-small})" !default;
+$screen-XXS: "(min-width: #{$mobile-tiny})" !default;
+
+@include declare-variables(
+  screen-XL,
+  screen-L,
+  screen-M,
+  screen-S,
+  screen-XS);
+
+@mixin desktop-XL {
+  @media #{$screen-XL} {
+    @content;
+  }
+}
+
+@mixin desktop-L {
+  @media #{$screen-L} {
+    @content;
+  }
+}
+
+@mixin desktop-M {
+  @media #{$screen-M} {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media #{$screen-S} {
+    @content;
+  }
+}
+@mixin phone {
+  @media #{$screen-XS} {
+    @content;
+  }
+}
+@mixin print {
+  @media print {
+    @content;
+  }
+}
+
+@mixin screen-large {
+  @media #{$screen-S} {
+    @content;
+  }
+}
+
+@mixin screen-medium {
+  @media #{$screen-XS} {
+    @content;
+  }
+}
+@mixin screen-small {
+  @media #{$screen-XXS} {
+    @content;
+  }
+}
+/*
+  Deprecated Variables
+  Will be removed in next major version.
+ */
+
+
+$primary-color: #205C90 !default;
+$secondary-color: #75ad0a !default;
+
+$gray-base: #403e3d !default;
+$gray-darker: lighten($gray-base, 13.5%) !default;
+$gray-dark: lighten($gray-base, 20%) !default;
+$gray: lighten($gray-base, 33.5%) !default;
+$gray-light: lighten($gray-base, 46.7%) !default;
+$gray-lighter: lighten($gray-base, 70%) !default;
+
+$standalone-color: #fafafa !default;
+$context-color: #337ab7 !default;
+$success-color: #5cb85c !default;
+$warning-color: #f0ad4e !default;
+$danger-color: #d9534f !default;
+
+$page-bg-color: $gray-lighter !default;
+$content-bg-color: #fff !default;
+$text-color: $gray-dark !default;
+$light-text-color: $gray-light !default;
+$link-color: $primary-color !default;
+$link-font-weight: normal !default;
+$link-hover-color: $secondary-color !default;
+$link-focus-color: $secondary-color !default;
+$link-decoration: none !default;
+$link-hover-decoration: underline !default;
+$outline-color: change-color($primary-color, $lightness: 60%) !default;
+
+$button-standalone-color: $standalone-color !default;
+$button-context-color: $context-color !default;
+$button-destructive-color: $danger-color !default;
+$button-success-color: $success-color !default;
+$button-warning-color: $warning-color !default;
+$button-danger-color: $danger-color !default;
+
+$button-standalone-color: $color-secondary !default;
+$button-context-color: $color-default !default;
+$button-destructive-color: $color-danger !default;
+$button-success-color: $color-success !default;
+$button-warning-color: $color-warning !default;
+$button-danger-color: $color-danger !default;
+$button-disabled-color: #ddd !default;
+$button-text-light-color: white !default;
+$button-text-dark-color: black !default;
+
+/* ICONS */
+
+$standard-iconset: font-awesome !default;
+$use-font-awesome-mimetype-icons: true !default;
+@include declare-variables(
+  standard-iconset,
+  use-font-awesome-mimetype-icons);

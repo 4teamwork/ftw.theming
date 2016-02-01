@@ -1,0 +1,54 @@
+$column-width: 56px !default;
+$gutter-width: 18px !default;
+$margin-width: 18px !default;
+$columns: 16 !default;
+
+$gridsystem-width: $columns * $column-width + ($columns - 1) * $gutter-width + 2 * $margin-width;
+
+@mixin gridwidth($x) {
+  width: 100% * (($column-width + $gutter-width) * $x - $gutter-width) / $gridsystem-width;
+}
+
+@mixin gridposition($x) {
+  margin-left: 100% * (($column-width + $gutter-width) * $x - $gridsystem-width + $margin-width) / $gridsystem-width;
+}
+
+@for $x from 1 through $columns {
+  div.width-#{$x} {
+    @include gridwidth($x);
+  }
+}
+
+@for $x from 0 through $columns - 1 {
+  div.position-#{$x} {
+    @include gridposition($x);
+  }
+}
+
+@mixin cell {
+  position: relative;
+  float: left;
+  left: 100%;
+
+  @include print {
+    float: none;
+    position: static;
+    left: 0;
+    margin: 0 !important;
+  }
+}
+
+@mixin row {
+  float: left;
+  width: 100%;
+  display: block;
+  position: relative;
+}
+
+.row {
+  @include row();
+}
+
+.cell {
+  @include cell();
+}

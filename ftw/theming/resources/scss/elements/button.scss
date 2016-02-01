@@ -1,0 +1,80 @@
+$color-button-default: $color-default !default;
+$color-button-success: $color-success !default;
+$color-button-warning : $color-warning !default;
+$color-button-danger: $color-danger !default;
+
+$font-weight-button: normal !default;
+$line-height-button: $line-height-base !default;
+$font-style-button: normal !default;
+$font-size-button: 1em !default;
+
+@mixin button($color-button: $color-secondary, $disabled: false) {
+  display: inline-block;
+
+  min-height: 1em;
+
+  border: 0;
+  vertical-align: baseline;
+
+  margin: 0 $margin-horizontal $margin-vertical 0;
+  padding: $padding-vertical $padding-horizontal;
+
+  text-transform: none;
+  text-shadow: none;
+  font-weight: $font-weight-button;
+  font-size: $font-size-button;
+  line-height: $line-height-button;
+  font-style: $font-style-button;
+  text-align: center;
+  text-decoration: none;
+
+  border-radius: $border-radius-primary;
+  box-shadow: none;
+
+  user-select: none;
+
+  @include no-link();
+
+  @if ($disabled) {
+    pointer-events: none;
+    cursor: default;
+    color: $color-text-disabled;
+    $color-button: $color-disabled;
+  } @else {
+    cursor: pointer;
+    @include auto-text-color($color-button);
+    &:hover, &:focus {
+      $color-button-hover: darken($color-button, 10%);
+      background-color: $color-button-hover;
+      @include auto-text-color($color-button-hover);
+    }
+    &:active {
+      outline: none;
+      $color-button-active: darken($color-button, 20%);
+      background-color: $color-button-active;
+      @include auto-text-color($color-button-active);
+    }
+  }
+
+  background: $color-button;
+}
+
+@mixin button-default($color-button-default: $color-button-default, $disabled: false) {
+  @include button($color-button-default, $disabled);
+}
+
+@mixin button-success($color-button-success: $color-button-success, $disabled: false) {
+  @include button($color-button-success, $disabled);
+}
+
+@mixin button-danger($color-button-danger: $color-button-danger, $disabled: false) {
+  @include button($color-button-danger, $disabled);
+}
+
+@mixin button-warning($color-button-warning: $color-button-warning, $disabled: false) {
+  @include button($color-button-warning, $disabled);
+}
+
+@mixin button-disabled() {
+  @include button($disabled: true);
+}

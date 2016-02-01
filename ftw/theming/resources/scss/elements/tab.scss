@@ -1,0 +1,39 @@
+$color-tab: $color-gray-dark !default;
+$color-tab-select: $color-primary !default;
+$color-tab-hover: $color-tab-select !default;
+
+@mixin tab($color-tab: $color-tab) {
+
+  @include no-link();
+
+  padding: $padding-vertical $padding-horizontal;
+  border-bottom: 2px solid $color-tab;
+  background-color: $color-white;
+  color: $color-text;
+
+  &:hover {
+    border-bottom-color: $color-tab-hover;
+  }
+
+}
+
+@mixin tab-select($color-tab-select: $color-tab-select) {
+  @include tab($color-tab-select);
+}
+
+@mixin tab-list($color-tab: $color-tab, $color-tab-select: $color-tab-select) {
+
+  @include list-horizontal();
+
+  > li {
+    &.selected {
+      > a {
+        @include tab-select($color-tab-select);
+      }
+    }
+    > a {
+      @include tab($color-tab);
+    }
+  }
+
+}

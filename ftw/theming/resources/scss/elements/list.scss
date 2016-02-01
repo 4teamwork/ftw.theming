@@ -1,0 +1,44 @@
+$color-list: $color-white !default;
+$color-list-hover: $color-gray-light !default;
+
+@mixin list() {
+
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+
+  @include clearfix();
+
+  > li {
+    display: block;
+    > a {
+      display: block;
+      padding: $padding-vertical $padding-horizontal;
+    }
+  }
+}
+
+@mixin reset-definition-list() {
+  margin: 0;
+  dd {
+    margin: 0;
+  }
+}
+
+@mixin list-horizontal($direction: ltr) {
+
+  @include list();
+
+  @if $direction == ltr {
+    > li {
+      float: left;
+
+    }
+  } @else {
+    > li {
+      float: right;
+    }
+
+  }
+
+}

@@ -1,0 +1,55 @@
+@mixin clearfix() {
+  zoom: 1;
+  &:before, &:after {
+    content: "\0020";
+    display: block;
+    height: 0;
+    visibility: hidden;
+  }
+  &:after { clear: both; }
+}
+
+@mixin hidden-structure() {
+  display: block;
+  background: transparent;
+  background-image: none; /* safari bug */
+  border: none;
+  height: 0.1em;
+  overflow: hidden;
+  padding: 0;
+  margin: -0.1em 0 0 -0.1em !important;
+  width: 1px;
+  left: -1000px;
+  top: -1000px;
+  position: absolute;
+}
+
+@mixin no-link() {
+  text-decoration: none;
+  color: $color-text;
+
+  &:hover {
+    text-decoration: none;
+    color: $color-text;
+  }
+}
+
+@mixin link() {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+@mixin auto-text-color($color: $color-primary) {
+  color: contrast($color,
+                  $color-text-inverted,
+                  $color-text,
+                  $lightness:63%);
+}
+
+@mixin auto-link-color($color: $color-primary) {
+  @include auto-text-color($color);
+  &:hover {
+    @include auto-text-color($color);
+  }
+}
