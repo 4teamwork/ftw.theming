@@ -5,6 +5,39 @@ $columns: 16 !default;
 
 $gridsystem-width: $columns * $column-width + ($columns - 1) * $gutter-width + 2 * $margin-width;
 
+@mixin floatgrid($row-width) {
+  $gutter-width-relative: $gutter-width / $max-width-page * 100%;
+  $row-split-width: round($row-width / 2);
+  $row-split-width-factor: $row-width / $row-split-width;
+
+  width: 100%;
+  float: left;
+
+  @media #{$screen-XXS} {
+    width: ((100% / $row-width) * $row-split-width-factor) + (($gutter-width-relative / $row-width) * $row-split-width-factor) - $gutter-width-relative;
+    margin-right: $gutter-width-relative;
+    &:nth-child(#{$row-split-width}n+#{$row-split-width}) {
+      margin-right: 0;
+    }
+  }
+
+  @media #{$screen-S} {
+    width: 100% / $row-width + ($gutter-width-relative / $row-width) - $gutter-width-relative;
+    margin-right: $gutter-width-relative;
+    &:nth-child(#{$row-split-width}n+#{$row-split-width}) {
+      margin-right: $gutter-width-relative;
+    }
+    &:nth-child(#{$row-width}n+#{$row-width}) {
+      margin-right: 0;
+    }
+  }
+
+  @media print {
+    width: 100% !important;
+    margin-right: 0 !important;
+  }
+}
+
 @mixin gridwidth($x) {
   width: 100% * (($column-width + $gutter-width) * $x - $gutter-width) / $gridsystem-width;
 }
