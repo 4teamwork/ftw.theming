@@ -5,6 +5,9 @@ Changelog
 1.0.4 (unreleased)
 ------------------
 
+- Add `width-full` functional class of grid system for legacy support.
+  [Kevin Bieri]
+
 - Introduce floated grid system.
   [Kevin Bieri]
 
