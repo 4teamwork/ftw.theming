@@ -8,7 +8,7 @@ $line-height-button: $line-height-base !default;
 $font-style-button: normal !default;
 $font-size-button: 1em !default;
 
-@mixin button($color-button: $color-secondary, $disabled: false) {
+@mixin button($color-button: $color-primary, $disabled: false) {
   display: inline-block;
 
   min-height: 1em;
@@ -59,7 +59,7 @@ $font-size-button: 1em !default;
   background: $color-button;
 }
 
-@mixin button-default($color-button-default: $color-button-default, $disabled: false) {
+@mixin button-default($color-button-default: $color-secondary, $disabled: false) {
   @include button($color-button-default, $disabled);
 }
 
