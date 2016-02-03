@@ -85,3 +85,7 @@ $gridsystem-width: $columns * $column-width + ($columns - 1) * $gutter-width + 2
 .cell {
   @include cell();
 }
+
+.width-full {
+  @include gridwidth($columns);
+}
