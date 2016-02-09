@@ -16,10 +16,9 @@ $minimum-textarea-lines: 4 !default;
 
   /*
     IE or FF do not display the height of the inputfield correctly so
-    we have to set the height manually and applying the content-box model.
+    we have to set the height manually.
   */
-  height: $line-height-input;
-  box-sizing: content-box;
+  height: $line-height-input + 2 * $padding-horizontal - 1em;
 
   padding: $padding-vertical $padding-horizontal;
 
