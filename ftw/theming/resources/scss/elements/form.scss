@@ -31,6 +31,24 @@ $minimum-textarea-lines: 4 !default;
   }
 }
 
+@mixin input-error($color-input: $color-danger) {
+  @include input();
+  color: darken($color-input, 20%);
+  border-color: $color-input;
+  &:focus {
+    color: $color-text;
+  }
+}
+
+@mixin input-success($color-input: $color-success) {
+  @include input();
+  color: darken($color-input, 20%);
+  border-color: $color-input;
+  &:focus {
+    color: $color-text;
+  }
+}
+
 @mixin textarea {
   @include input();
   resize: vertical;
