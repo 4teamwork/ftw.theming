@@ -24,7 +24,7 @@
 
 
     <theme:resources profile="ftw.theming:default">
-        <theme:scss file="resources/scss/default/theming_controlpanel.scss" slot="addon" />
+        <theme:scss file="resources/scss/default/controlpanel.scss" slot="addon" />
     </theme:resources>
 
     <theme:resources profile="ftw.theming:base" slot="ftw.theming">

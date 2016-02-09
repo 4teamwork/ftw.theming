@@ -44,7 +44,7 @@ class TestControlpanel(FunctionalTestCase):
         self.assertIn(
             {'For': 'INavigationRoot',
              'Layer': 'Interface',
-             'Name': 'ftw.theming:resources/scss/default/theming_controlpanel.scss',
+             'Name': 'ftw.theming:resources/scss/default/controlpanel.scss',
              'Package': 'ftw.theming',
              'Profile': 'ftw.theming:default',
              'Slot': 'addon'},
