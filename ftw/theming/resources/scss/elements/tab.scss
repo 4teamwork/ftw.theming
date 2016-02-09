@@ -10,6 +10,7 @@ $color-tab-hover: $color-tab-select !default;
   border-bottom: 2px solid $color-tab;
   background-color: $color-white;
   color: $color-text;
+  margin-bottom: -2px;
 
   &:hover {
     border-bottom-color: $color-tab-hover;
@@ -24,6 +25,7 @@ $color-tab-hover: $color-tab-select !default;
 @mixin tab-list($color-tab: $color-tab, $color-tab-select: $color-tab-select) {
 
   @include list-horizontal();
+  border-bottom: 2px solid $color-tab;
 
   > li {
     &.selected {
