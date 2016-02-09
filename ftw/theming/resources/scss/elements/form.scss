@@ -1,10 +1,9 @@
-$color-input: $color-white !default;
 $line-height-input: $line-height-base !default;
 $border-color-input: $color-gray-dark !default;
 $color-input-active: $color-primary !default;
 $minimum-textarea-lines: 4 !default;
 
-@mixin input() {
+@mixin input($color-input: $color-content-background) {
   position: relative;
   font-weight: normal;
   font-style: normal;
