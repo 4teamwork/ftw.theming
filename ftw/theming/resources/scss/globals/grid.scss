@@ -5,7 +5,7 @@ $columns: 16 !default;
 
 $gridsystem-width: $columns * $column-width + ($columns - 1) * $gutter-width + 2 * $margin-width;
 
-@mixin floatgrid($row-width) {
+@mixin floatgrid($row-width: 4, $offset: 0) {
   $gutter-width-relative: $gutter-width / $max-width-page * 100%;
   $row-split-width: round($row-width / 2);
   $row-split-width-factor: $row-width / $row-split-width;
@@ -16,7 +16,7 @@ $gridsystem-width: $columns * $column-width + ($columns - 1) * $gutter-width + 2
   @media #{$screen-XXS} {
     width: ((100% / $row-width) * $row-split-width-factor) + (($gutter-width-relative / $row-width) * $row-split-width-factor) - $gutter-width-relative;
     margin-right: $gutter-width-relative;
-    &:nth-child(#{$row-split-width}n+#{$row-split-width}) {
+    &:nth-child(#{$row-split-width + $offset}n+#{$row-split-width + $offset}) {
       margin-right: 0;
     }
   }
@@ -24,10 +24,10 @@ $gridsystem-width: $columns * $column-width + ($columns - 1) * $gutter-width + 2
   @media #{$screen-S} {
     width: 100% / $row-width + ($gutter-width-relative / $row-width) - $gutter-width-relative;
     margin-right: $gutter-width-relative;
-    &:nth-child(#{$row-split-width}n+#{$row-split-width}) {
+    &:nth-child(#{$row-split-width + $offset}n+#{$row-split-width + $offset}) {
       margin-right: $gutter-width-relative;
     }
-    &:nth-child(#{$row-width}n+#{$row-width}) {
+    &:nth-child(#{$row-width + $offset}n+#{$row-width + $offset}) {
       margin-right: 0;
     }
   }

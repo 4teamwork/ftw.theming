@@ -24,6 +24,12 @@
   position: absolute;
 }
 
+@mixin visible-structure() {
+  height: auto;
+  width: auto;
+  position: static;
+}
+
 @mixin no-link() {
   text-decoration: none;
   color: $color-text;
