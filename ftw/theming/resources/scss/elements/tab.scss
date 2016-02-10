@@ -7,14 +7,24 @@ $color-tab-hover: $color-tab-select !default;
   @include no-link();
 
   padding: $padding-vertical $padding-horizontal;
-  border-bottom: 2px solid $color-tab;
   background-color: $color-white;
   color: $color-text;
-  margin-bottom: -2px;
+  position: relative;
 
-  &:hover {
-    border-bottom-color: $color-tab-hover;
+  &:before {
+    content: "";
+    position: absolute;
+    background-color: $color-tab;
+    height: 2px;
+    left: 0;
+    right: 0;
+    bottom: 0;
   }
+
+  &:hover:before {
+    background-color: $color-tab-hover;
+  }
+
 
 }
 
@@ -23,9 +33,20 @@ $color-tab-hover: $color-tab-select !default;
 }
 
 @mixin tab-list($color-tab: $color-tab, $color-tab-select: $color-tab-select) {
-
   @include list-horizontal();
-  border-bottom: 2px solid $color-tab;
+
+  position: relative;
+
+  &:before {
+    content: "";
+    position: absolute;
+    background-color: $color-tab;
+    height: 2px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    visibility: visible;
+  }
 
   > li {
     &.selected {
