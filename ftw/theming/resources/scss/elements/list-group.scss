@@ -43,7 +43,7 @@ $border-color-list-group: $color-gray-dark !default;
     &:last-child > a {
       border-bottom-left-radius: $border-radius-primary;
       border-bottom-right-radius: $border-radius-primary;
-      border-bottom: 1px solid $border-color-list-group;
+      border-bottom: none;
     }
 
     > a {
