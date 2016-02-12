@@ -1,0 +1,24 @@
+@mixin label($color-label: $color-primary) {
+  @include auto-text-color($color-label);
+  border-radius: $border-radius-primary;
+  background-color: $color-label;
+  display: inline-block;
+  padding: $padding-vertical * 0.3 $padding-horizontal * 0.3;
+  margin: 0 $margin-horizontal / 2 $margin-vertical / 2 0;
+}
+
+@mixin label-danger($color-label-danger: $color-danger) {
+  @include label($color-label-danger);
+}
+
+@mixin label-success($color-label-success: $color-success) {
+  @include label($color-label-success);
+}
+
+@mixin label-warning($color-label-warning: $color-warning) {
+  @include label($color-label-warning);
+}
+
+@mixin label-default($color-label-default: $color-default) {
+  @include label($color-label-default);
+}
