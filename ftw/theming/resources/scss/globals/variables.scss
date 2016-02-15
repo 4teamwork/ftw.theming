@@ -2,8 +2,8 @@
   Colors
  */
 
-$color-primary: #3498db !default;
-$color-secondary: #46637f !default;
+$color-primary: #3B234A !default;
+$color-secondary: #BAAFC4 !default;
 $color-edit: #75ad0a !default;
 
 $color-default: #2980b9 !default;
@@ -21,6 +21,8 @@ $color-text-light: #95a5a6 !default;
 
 $color-link: $color-primary !default;
 $color-link-hover: $color-secondary !default;
+$color-link-inverted: $color-primary !default;
+$color-link-hover-inverted: $color-text-inverted !default;
 
 $color-disabled: $color-gray-light !default;
 $color-text-disabled: $color-gray-dark !default;
@@ -89,6 +91,8 @@ $line-height-base: 1.2em !default;
   color-text-light,
   color-link,
   color-link-hover,
+  color-link-inverted,
+  color-link-hover-inverted,
   color-disabled,
   color-text-disabled,
   font-weight-link,

@@ -5,6 +5,10 @@ Changelog
 1.0.4 (unreleased)
 ------------------
 
+- Introduce inverted link colors.
+  Apply blueberry color scheme.
+  [Kevin Bieri]
+
 - Update font-awesome to 4.5.0. [jone]
 
 - Add `width-full` functional class of grid system for legacy support.

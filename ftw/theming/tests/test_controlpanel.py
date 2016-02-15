@@ -57,7 +57,7 @@ class TestControlpanel(FunctionalTestCase):
 
         self.assertIn({'File': 'variables.scss',
                        'Name': '$color-primary',
-                       'Value': '#3498db',
+                       'Value': '#3B234A',
                        'Example': ''},
                       variables)
 
