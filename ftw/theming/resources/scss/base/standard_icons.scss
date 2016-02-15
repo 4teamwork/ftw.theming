@@ -9,7 +9,38 @@
 @include portal-type-font-awesome-icon(plone-site, globe);
 @include portal-type-font-awesome-icon(topic, list-ul);
 
+/* Products.PloneFormGen */
+@include portal-type-font-awesome-icon(formfolder, check-square);
+@include portal-type-font-awesome-icon(formthankspage, file-text-o);
 
+@include portal-type-font-awesome-icon(fieldsetfolder, clone);
+@include portal-type-font-awesome-icon(fieldsetstart, clone);
+@include portal-type-font-awesome-icon(fieldsetend, clone);
+
+@include portal-type-font-awesome-icon(formcustomscriptadapter, code);
+@include portal-type-font-awesome-icon(formmaileradapter, envelope-o);
+@include portal-type-font-awesome-icon(formsavedataadapter, save);
+
+@include portal-type-font-awesome-icon(formbooleanfield, check-square-o);
+@include portal-type-font-awesome-icon(formcaptchafield, check-square-o);
+@include portal-type-font-awesome-icon(formdatefield, check-square-o);
+@include portal-type-font-awesome-icon(formfilefield, check-square-o);
+@include portal-type-font-awesome-icon(formfixedpointfield, check-square-o);
+@include portal-type-font-awesome-icon(formintegerfield, check-square-o);
+@include portal-type-font-awesome-icon(formlabelfield, check-square-o);
+@include portal-type-font-awesome-icon(formlikertfield, check-square-o);
+@include portal-type-font-awesome-icon(formlinesfield, check-square-o);
+@include portal-type-font-awesome-icon(formmultiselectionfield, check-square-o);
+@include portal-type-font-awesome-icon(formpasswordfield, check-square-o);
+@include portal-type-font-awesome-icon(formrichlabelfield, check-square-o);
+@include portal-type-font-awesome-icon(formrichtextfield, check-square-o);
+@include portal-type-font-awesome-icon(formselectionfield, check-square-o);
+@include portal-type-font-awesome-icon(formstringfield, check-square-o);
+@include portal-type-font-awesome-icon(formtextfield, check-square-o);
+
+
+
+/* MIMETYPES */
 @include mark-portal-type-having-mimetypes(file);
 
 /* Default */

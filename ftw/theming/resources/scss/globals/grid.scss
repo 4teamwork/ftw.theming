@@ -72,8 +72,10 @@ $gridsystem-width: $columns * $column-width + ($columns - 1) * $gutter-width + 2
 }
 
 @mixin row {
-  float: left;
+  @include clearfix();
   width: 100%;
+  max-width: $max-width-page;
+  margin: 0 auto;
   display: block;
   position: relative;
 }
