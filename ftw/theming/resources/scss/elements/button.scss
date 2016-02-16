@@ -54,6 +54,12 @@ $font-size-button: 1em !default;
       background-color: $color-button-active;
       @include auto-text-color($color-button-active);
     }
+    &:visited {
+      @include auto-text-color($color-button);
+      &:hover {
+        @include auto-text-color($color-button);
+      }
+    }
   }
 
   background: $color-button;
