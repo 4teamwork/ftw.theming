@@ -28,6 +28,10 @@ $border-color-list-group: $color-gray-dark !default;
     @include auto-text-color($color-list-group-hover);
   }
 
+  &:visited:hover {
+    @include auto-text-color($color-list-group-hover);
+  }
+
 }
 
 @mixin list-group() {
