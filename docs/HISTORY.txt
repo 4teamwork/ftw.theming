@@ -5,6 +5,9 @@ Changelog
 1.0.4 (unreleased)
 ------------------
 
+- Add label element mixins.
+  [elioschmutz]
+
 - Introduce inverted link colors.
   Apply blueberry color scheme.
   [Kevin Bieri]
