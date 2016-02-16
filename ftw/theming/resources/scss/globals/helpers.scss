@@ -38,6 +38,14 @@
     text-decoration: none;
     color: $color-text;
   }
+
+  &:visited {
+    color: $color-text;
+    &:hover {
+      color: $color-text;
+    }
+  }
+
 }
 
 @mixin link() {
@@ -59,6 +67,7 @@
     @include auto-text-color($color);
   }
 }
+
 @function em($pixels, $context: $font-size-base) {
   @return $pixels / $context * 1em;
 }
