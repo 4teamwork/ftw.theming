@@ -68,6 +68,25 @@
   }
 }
 
-@function em($pixels, $context: $font-size-base) {
+@mixin animation($name, $args) {
+  -webkit-animation: #{$name} #{$args};
+  animation: #{$name} #{$args};
+}
+
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+@mixin gradient($args) {
+  background-image: -webkit-gradient(#{$args});
+  background-image: gradient(#{$args});
+}
+
+@function em($pixels: 0, $context: $font-size-base) {
   @return $pixels / $context * 1em;
 }
