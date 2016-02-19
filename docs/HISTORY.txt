@@ -5,6 +5,9 @@ Changelog
 1.0.4 (unreleased)
 ------------------
 
+- Register imaging scales as dynamic SCSS resource.
+  [Kevin Bieri]
+
 - Introduce inverted link colors.
   Apply blueberry color scheme.
   [Kevin Bieri]
