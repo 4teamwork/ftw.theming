@@ -1,0 +1,63 @@
+$progressbar-animation: move !default;
+
+@mixin progressbar($color-progressbar: $color-primary) {
+  border-radius: $border-radius-primary;
+  display: block;
+  height: $line-height-base;
+  position: relative;
+  background-color: $color-gray-dark;
+  box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, .2);
+
+  > * {
+    position: relative;
+    overflow: hidden;
+    display: block;
+    height: 100%;
+    border-radius: $border-radius-primary;
+    background-color: $color-progressbar;
+    transition: width .2s ease-in-out;
+    &:after {
+      $color-progressbar-inverted: lighten($color-progressbar, 7%);
+      @include animation($progressbar-animation, 1s linear infinite);
+      @include gradient(
+        linear, 0 0, 100% 100%,
+        color-stop(.25, $color-progressbar-inverted),
+        color-stop(.25, transparent),
+        color-stop(.5, transparent),
+        color-stop(.5, $color-progressbar-inverted),
+        color-stop(.75, $color-progressbar-inverted),
+        color-stop(.75, transparent), to(transparent)
+      );
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 1;
+      background-size: $line-height-base * 2 $line-height-base * 2;
+      overflow: hidden;
+   }
+  }
+}
+
+@mixin progressbar-danger($color-progressbar: $color-danger) {
+  @include progressbar($color-progressbar);
+}
+
+@mixin progressbar-warning($color-progressbar: $color-warning) {
+  @include progressbar($color-progressbar);
+}
+
+@mixin progressbar-success($color-progressbar: $color-success) {
+  @include progressbar($color-progressbar);
+}
+
+@include keyframes($name: $progressbar-animation) {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: $line-height-base $line-height-base;
+  }
+}

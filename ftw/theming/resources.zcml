@@ -23,6 +23,7 @@
     <theme:scss file="resources/scss/elements/list-group.scss" slot="mixins" />
     <theme:scss file="resources/scss/elements/tab.scss" slot="mixins" />
     <theme:scss file="resources/scss/elements/form.scss" slot="mixins" />
+    <theme:scss file="resources/scss/elements/progressbar.scss" slot="mixins" />
 
 
     <theme:resources profile="ftw.theming:default">
