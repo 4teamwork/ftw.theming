@@ -5,6 +5,9 @@ Changelog
 1.0.4 (unreleased)
 ------------------
 
+- Register imaging scales as dynamic SCSS resource.
+  [Kevin Bieri]
+
 - Add label element mixins.
   [elioschmutz]
 
