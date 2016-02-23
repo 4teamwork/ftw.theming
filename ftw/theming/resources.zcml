@@ -19,9 +19,11 @@
     <theme:scss file="resources/scss/globals/grid.scss" slot="mixins" />
     <theme:scss file="resources/scss/elements/button.scss" slot="mixins" />
     <theme:scss file="resources/scss/elements/list.scss" slot="mixins" />
+    <theme:scss file="resources/scss/elements/label.scss" slot="mixins" />
     <theme:scss file="resources/scss/elements/list-group.scss" slot="mixins" />
     <theme:scss file="resources/scss/elements/tab.scss" slot="mixins" />
     <theme:scss file="resources/scss/elements/form.scss" slot="mixins" />
+    <theme:scss file="resources/scss/elements/progressbar.scss" slot="mixins" />
 
 
     <theme:resources profile="ftw.theming:default">

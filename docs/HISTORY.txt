@@ -5,8 +5,14 @@ Changelog
 1.0.4 (unreleased)
 ------------------
 
+- Introduce progressbar.
+  [Kevin Bieri]
+
 - Register imaging scales as dynamic SCSS resource.
   [Kevin Bieri]
+
+- Add label element mixins.
+  [elioschmutz]
 
 - Introduce inverted link colors.
   Apply blueberry color scheme.
