@@ -42,3 +42,45 @@ $color-list-hover: $color-gray-light !default;
   }
 
 }
+
+@mixin tree-item($indentation: $padding-horizontal) {
+  padding-top: 0;
+  padding-left: $indentation + $padding-horizontal;
+  position: relative;
+  &:after {
+    content: "";
+    width: $padding-horizontal / 2;
+    border-top: 1px dashed $color-text;
+    position: absolute;
+    left: $indentation;
+    top: $line-height-base / 2;
+  }
+  &:before {
+    content: "";
+    border-left: 1px dashed $color-text;
+    position: absolute;
+    left: $indentation;
+    top: 0;
+    height: $line-height-base + $padding-vertical;
+  }
+}
+
+@mixin list-tree($indentation: $padding-horizontal) {
+  @include list();
+
+  > li > a {
+    padding-top: 0;
+    padding-left: 0;
+  }
+
+  ul > li {
+    &:last-child > a:before {
+      height: $padding-vertical;
+    }
+
+    > a {
+      @include tree-item($indentation: $indentation);
+    }
+  }
+}
+
