@@ -66,6 +66,12 @@
   &:hover {
     @include auto-text-color($color);
   }
+  &:visited {
+    @include auto-text-color($color);
+    &:hover {
+      @include auto-text-color($color);
+    }
+  }
 }
 
 @mixin animation($name, $args) {
