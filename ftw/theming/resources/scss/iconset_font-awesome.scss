@@ -10,7 +10,6 @@
       font-family: FontAwesome;
       text-align: center;
       min-width: $line-height-base;
-      margin-right: 0.2em;
     }
   }
   .#{$fa-css-prefix}-icon-right {
@@ -18,8 +17,7 @@
       display: inline-block;
       font-family: FontAwesome;
       text-align: center;
-      min-width: 1.4em;
-      margin-right: 0.2em;
+      min-width: $line-height-base;
     }
   }
 
