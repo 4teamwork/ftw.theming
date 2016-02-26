@@ -49,6 +49,15 @@ $color-tab-hover: $color-tab-select !default;
   }
 
   > li {
+
+    &:first-child > a {
+      padding-left: $padding-horizontal;
+    }
+
+    &:last-child > a {
+      padding-right: $padding-horizontal;
+    }
+
     &.selected {
       > a {
         @include tab-select($color-tab-select);
