@@ -66,6 +66,12 @@
   &:hover {
     @include auto-text-color($color);
   }
+  &:visited {
+    @include auto-text-color($color);
+    &:hover {
+      @include auto-text-color($color);
+    }
+  }
 }
 
 @mixin animation($name, $args) {
@@ -82,7 +88,7 @@
   }
 }
 
-@mixin gradient($args) {
+@mixin gradient($args...) {
   background-image: -webkit-gradient(#{$args});
   background-image: gradient(#{$args});
 }
