@@ -4,15 +4,22 @@ $color-input-active: $color-primary !default;
 $minimum-textarea-lines: 4 !default;
 
 @mixin input($color-input: $color-content-background) {
+  @include screen-small() {
+    min-width: 295px;
+    width: auto;
+  }
+
+  @include auto-text-color($color-input);
+
+  min-width: 0;
+  width: 100%;
   position: relative;
   font-weight: normal;
   font-style: normal;
-  @include auto-text-color($color-input);
   margin: 0;
   max-width: 100%;
   outline: none;
   line-height: $line-height-input;
-  min-width: 295px;
 
   /*
     IE or FF do not display the height of the inputfield correctly so
