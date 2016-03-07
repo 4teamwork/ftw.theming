@@ -19,17 +19,21 @@ $border-color-list-group: $color-gray-dark !default;
   @include auto-text-color($color-list-group-hover);
 }
 
+@mixin list-group-item-interactive-select() {
+  background-color: $color-list-group-hover;
+  @include auto-text-color($color-list-group-hover);
+}
+
 @mixin list-group-item-interactive() {
   @include list-group-item();
   cursor: pointer;
 
   &:hover {
-    background-color: $color-list-group-hover;
-    @include auto-text-color($color-list-group-hover);
+    @include list-group-item-interactive-select();
   }
 
   &:visited:hover {
-    @include auto-text-color($color-list-group-hover);
+    @include list-group-item-interactive-select();
   }
 
 }
