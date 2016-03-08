@@ -58,8 +58,11 @@ $minimum-textarea-lines: 4 !default;
 
 @mixin textarea {
   @include input();
+  @include screen-small() {
+    width: 100%;
+  }
+  width: 100%;
   resize: vertical;
   min-height: $padding-vertical * 2 + $line-height-base * $minimum-textarea-lines;
-  width: 100%;
   box-sizing: border-box;
 }
