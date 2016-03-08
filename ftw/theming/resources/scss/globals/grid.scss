@@ -38,12 +38,22 @@ $gridsystem-width: $columns * $column-width + ($columns - 1) * $gutter-width + 2
   }
 }
 
-@mixin gridwidth($x: 0) {
-  width: 100% * (($column-width + $gutter-width) * $x - $gutter-width) / $gridsystem-width;
+@mixin gridwidth($x: 0, $offset: true) {
+  @if $offset {
+    width: 100% * (($column-width + $gutter-width) * $x - $gutter-width) / $gridsystem-width;
+  }
+  @else {
+    width: 100% * (($column-width + $gutter-width) * $x) / $gridsystem-width;
+  }
 }
 
-@mixin gridposition($x: 0) {
-  margin-left: 100% * (($column-width + $gutter-width) * $x - $gridsystem-width + $margin-width) / $gridsystem-width;
+@mixin gridposition($x: 0, $offset: true) {
+  @if $offset {
+    margin-left: 100% * (($column-width + $gutter-width) * $x - $gridsystem-width + $margin-width) / $gridsystem-width;
+  }
+  @else {
+    margin-left: 100% * (($column-width + $gutter-width) * $x - $gridsystem-width) / $gridsystem-width;
+  }
 }
 
 @for $x from 1 through $columns {
