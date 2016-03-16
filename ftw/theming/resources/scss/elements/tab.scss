@@ -7,7 +7,7 @@ $color-tab-hover: $color-tab-select !default;
   @include no-link();
 
   padding: $padding-vertical $padding-horizontal;
-  background-color: $color-white;
+  background-color: $color-content-background;
   color: $color-text;
   position: relative;
 
