@@ -14,7 +14,7 @@ $color-list-hover: $color-gray-light !default;
 
     > a {
       display: block;
-      padding: $padding-vertical $padding-horizontal;
+      padding: $padding-vertical $padding-horizontal / 2;
     }
   }
 }
