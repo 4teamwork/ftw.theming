@@ -43,7 +43,7 @@ $gridsystem-width: $columns * $column-width + ($columns - 1) * $gutter-width + 2
     width: 100% * (($column-width + $gutter-width) * $x - $gutter-width) / $gridsystem-width;
   }
   @else {
-    width: 100% * (($column-width + $gutter-width) * $x) / $gridsystem-width;
+    width: 100% * (($column-width + $gutter-width) * $x + $gutter-width) / $gridsystem-width;
   }
 }
 
