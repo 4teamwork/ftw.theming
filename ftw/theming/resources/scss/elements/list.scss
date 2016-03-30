@@ -26,6 +26,20 @@ $color-list-hover: $color-gray-light !default;
   }
 }
 
+@mixin horizontal-definition-list() {
+  @include reset-definition-list();
+  > dt {
+    text-align: left;
+    float: left;
+    clear: left;
+  }
+
+  > dd {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
 @mixin list-horizontal($direction: ltr) {
 
   @include list();
