@@ -5,7 +5,20 @@ Changelog
 1.1.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Introduce horizontal definition list mixin.
+  [Kevin Bieri]
+
+- Responsive support for textareas.
+  [Kevin Bieri]
+
+- Introduce portrait mixin.
+  [Kevin Bieri]
+
+- Responsive support for input fields.
+  [Kevin Bieri]
+
+- Introduce active list-group item mixin.
+  [Kevin Bieri]
 
 
 1.1.0 (2016-03-03)
