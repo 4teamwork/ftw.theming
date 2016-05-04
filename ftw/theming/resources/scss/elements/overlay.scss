@@ -38,20 +38,10 @@
   @include overlay-full();
 
   @include screen-small {
-    top: $margin-vertical * 5 !important;
-    bottom: $margin-vertical * 5 !important;
-    right: 5% !important;
-    left: 5% !important;
-  }
-
-  @include screen-medium {
-    right: 10% !important;
-    left: 10% !important;
-  }
-
-  @include screen-large {
-    right: 15% !important;
-    left: 15% !important;
+    top: 2% !important;
+    bottom: 2% !important;
+    right: 2% !important;
+    left: 2% !important;
   }
 }
 
@@ -81,7 +71,7 @@
 
   @include screen-small {
     top: $margin-vertical * 5 !important;
-    height: 40% !important;
+    height: 400px !important;
     right: 20% !important;
     left: 20% !important;
   }

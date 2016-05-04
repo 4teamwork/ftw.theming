@@ -5,6 +5,9 @@ Changelog
 1.2.1 (unreleased)
 ------------------
 
+- Introduce overlay mixin.
+  [Kevin Bieri]
+
 - Extend floatgrid with by-index directive.
   [Kevin Bieri]
 
