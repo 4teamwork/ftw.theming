@@ -5,6 +5,9 @@ Changelog
 1.2.1 (unreleased)
 ------------------
 
+- Extend list-group mixin interface to configure the hover color.
+  [Kevin Bieri]
+
 - Add new variable $color-content-background.
   [mathias.leimgruber]
 
