@@ -19,21 +19,21 @@ $border-color-list-group: $color-gray-dark !default;
   @include auto-text-color($color-list-group-hover);
 }
 
-@mixin list-group-item-interactive-select() {
+@mixin list-group-item-interactive-select($color-list-group-hover: $color-list-group-hover) {
   background-color: $color-list-group-hover;
   @include auto-text-color($color-list-group-hover);
 }
 
-@mixin list-group-item-interactive() {
+@mixin list-group-item-interactive($color-list-group-hover: $color-list-group-hover) {
   @include list-group-item();
   cursor: pointer;
 
   &:hover {
-    @include list-group-item-interactive-select();
+    @include list-group-item-interactive-select($color-list-group-hover);
   }
 
   &:visited:hover {
-    @include list-group-item-interactive-select();
+    @include list-group-item-interactive-select($color-list-group-hover);
   }
 
 }
