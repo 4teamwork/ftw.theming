@@ -5,6 +5,9 @@ Changelog
 1.2.1 (unreleased)
 ------------------
 
+- Introduce ie-only mixin.
+  [Kevin Bieri]
+
 - Extend list-group mixin interface to configure the hover color.
   [Kevin Bieri]
 
