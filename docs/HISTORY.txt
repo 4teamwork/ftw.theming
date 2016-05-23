@@ -11,6 +11,9 @@ Changelog
 1.3.0 (2016-05-20)
 ------------------
 
+- Introduce ie-only mixin.
+  [Kevin Bieri]
+
 - Extend list-group mixin interface to configure the hover color.
   [Kevin Bieri]
 

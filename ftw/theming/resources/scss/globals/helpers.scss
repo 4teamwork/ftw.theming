@@ -93,6 +93,13 @@
   background-image: gradient(#{$args});
 }
 
+// See http://keithclark.co.uk/articles/moving-ie-specific-css-into-media-blocks/media-tests
+@mixin ie-only() {
+  @media screen\0 {
+    @content;
+  }
+}
+
 @function em($pixels: 0, $context: $font-size-base) {
   @return $pixels / $context * 1em;
 }
