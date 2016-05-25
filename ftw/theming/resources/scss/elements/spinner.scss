@@ -1,0 +1,20 @@
+body {
+  // We need to preload the spinner on initial pageload
+  &:after {
+    content: "";
+    background: url('#{$portal_url}/#{$spinner-url}');
+    visibility: hidden;
+  }
+}
+@mixin spinner() {
+  &:before {
+    content: "";
+    background: transparentize($color-gray-light, 40%) url('#{$portal_url}/#{$spinner-url}') no-repeat center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2000;
+  }
+}

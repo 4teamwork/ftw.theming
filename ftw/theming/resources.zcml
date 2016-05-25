@@ -26,6 +26,7 @@
     <theme:scss file="resources/scss/elements/progressbar.scss" slot="mixins" />
     <theme:scss file="resources/scss/elements/portrait.scss" slot="mixins" />
     <theme:scss file="resources/scss/elements/overlay.scss" slot="mixins" />
+    <theme:scss file="resources/scss/elements/spinner.scss" slot="mixins" />
 
 
     <theme:resources profile="ftw.theming:default">
