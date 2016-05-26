@@ -79,6 +79,13 @@ $font-weight-heading: bold !default;
 $max-width-page: 1200px !default;
 $line-height-base: 1.5em !default;
 
+/*
+  Spinner
+  Declare this variable in the policy to define a spinner.
+  Use a resource URL which points to a gif spinner.
+ */
+$spinner-url: "" !default;
+
 @include declare-variables(
   color-primary,
   color-secondary,
@@ -120,7 +127,8 @@ $line-height-base: 1.5em !default;
   font-size-large,
   font-weight-heading,
   max-width-page,
-  line-height-base);
+  line-height-base,
+  spinner-url);
 
 /* Viewports */
 

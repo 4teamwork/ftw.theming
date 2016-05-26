@@ -88,6 +88,11 @@
   }
 }
 
+@mixin filter($args...) {
+  -webkit-filter: $args;
+  filter: $args;
+}
+
 @mixin gradient($args...) {
   background-image: -webkit-gradient(#{$args});
   background-image: gradient(#{$args});
