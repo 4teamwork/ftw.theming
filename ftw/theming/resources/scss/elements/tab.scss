@@ -63,6 +63,12 @@ $color-tab-hover: $color-tab-select !default;
         @include tab-select($color-tab-select);
       }
     }
+
+    > a.selected {
+      @include tab-select($color-tab-select);
+    }
+
+
     > a {
       @include tab($color-tab);
     }
