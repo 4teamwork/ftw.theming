@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.5.1 (unreleased)
+1.5.1 (2016-06-23)
 ------------------
 
 - Support selected state of tab-list on link (a tag) too.
