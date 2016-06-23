@@ -8,6 +8,9 @@ Changelog
 - Support selected state of tab-list on link (a tag) too.
   [mathias.leimgruber]
 
+- ie-only slector now supports ms edge and IE11.
+  [raphael-s]
+
 
 1.5.0 (2016-05-26)
 ------------------
