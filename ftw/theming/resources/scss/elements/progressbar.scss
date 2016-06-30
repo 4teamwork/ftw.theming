@@ -19,14 +19,15 @@ $progressbar-animation: move !default;
     &:after {
       $color-progressbar-inverted: lighten($color-progressbar, 7%);
       @include animation($progressbar-animation, 1s linear infinite);
-      @include gradient(
-        linear, 0 0, 100% 100%,
-        color-stop(.25, $color-progressbar-inverted),
-        color-stop(.25, transparent),
-        color-stop(.5, transparent),
-        color-stop(.5, $color-progressbar-inverted),
-        color-stop(.75, $color-progressbar-inverted),
-        color-stop(.75, transparent), to(transparent)
+      @include linear-gradient(
+        left top,
+        $color-progressbar-inverted 25%,
+        rgba(255,255,255,0) 25%,
+        rgba(255,255,255,0) 50%,
+        $color-progressbar-inverted 50%,
+        $color-progressbar-inverted 75%,
+        rgba(255,255,255,0) 75%,
+        rgba(255,255,255,0) 100%
       );
       content: "";
       position: absolute;

@@ -93,16 +93,16 @@
   filter: $args;
 }
 
-@mixin gradient($args...) {
-  background-image: -webkit-gradient(#{$args});
-  background-image: gradient(#{$args});
+@mixin linear-gradient($args...) {
+  background-image: -webkit-linear-gradient(#{$args});
+  background-image: linear-gradient(#{$args});
 }
 
 // https://jeffclayton.wordpress.com/2015/04/07/css-hacks-for-windows-10-and-spartan-browser-preview/
 @mixin ie-only($selector) {
   _:-ms-lang(x), #{$selector} {
     @content;
-  } 
+  }
 }
 
 @function em($pixels: 0, $context: $font-size-base) {
