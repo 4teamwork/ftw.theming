@@ -32,9 +32,14 @@ $color-content-background: $color-white !default;
 /*
   Typography
  */
+$font-family-primary: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif !default;
+$font-family-heading: $font-family-primary !default;
+$font-family-code: "Courier New", Courier, monospace !default;
+
 $font-weight-link: normal !default;
 $text-decoration-link: none !default;
 $text-decoration-link-hover: underline !default;
+$font-weight-heading: bold !default;
 $margin-heading-vertical: .5em !default;
 $margin-paragraph-vertical: 1.3em !default;
 
@@ -71,7 +76,6 @@ $font-size-small: 0.75rem !default;
 $font-size-medium: $font-size-h4 !default;
 $font-size-large: $font-size-h2 !default;
 
-$font-weight-heading: bold !default;
 /*
   Dimensions
  */
@@ -108,6 +112,9 @@ $spinner-url: "" !default;
   font-weight-link,
   text-decoration-link,
   text-decoration-link-hover,
+  font-family-primary,
+  font-family-heading,
+  font-family-code,
   margin-heading-vertical,
   margin-paragraph-vertical,
   border-radius-primary,
