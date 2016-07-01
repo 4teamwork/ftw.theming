@@ -93,18 +93,53 @@
   filter: $args;
 }
 
-@mixin gradient($args...) {
-  background-image: -webkit-gradient(#{$args});
-  background-image: gradient(#{$args});
+@mixin linear-gradient($args...) {
+  background-image: -webkit-linear-gradient(#{$args});
+  background-image: linear-gradient(#{$args});
 }
 
 // https://jeffclayton.wordpress.com/2015/04/07/css-hacks-for-windows-10-and-spartan-browser-preview/
 @mixin ie-only($selector) {
   _:-ms-lang(x), #{$selector} {
     @content;
-  } 
+  }
 }
 
 @function em($pixels: 0, $context: $font-size-base) {
   @return $pixels / $context * 1em;
+}
+
+@mixin transform($transforms...) {
+  -webkit-transform: #{$transforms};
+          transform: #{$transforms};
+}
+
+@mixin perspective($distance: 0) {
+  @include transform(perspective($distance));
+}
+
+@mixin rotate($deg: 0) {
+  @include transform(rotate(#{$deg}deg));
+}
+
+@mixin scale($scale: 0) {
+   @include transform(scale($scale));
+}
+
+@mixin translate($x: 0, $y: 0) {
+   @include transform(translate($x, $y));
+}
+
+@mixin translate3d($x: 0, $y: 0, $z: 0) {
+   @include translate($x, $y);
+   @include transform(translate3d($x, $y, $z));
+}
+
+@mixin skew($x: 0, $y: 0) {
+   @include transform(skew(#{$x}deg, #{$y}deg));
+}
+
+@mixin transform-origin($origin: 0) {
+  -webkit-transform-origin: $origin;
+          transform-origin: $origin;
 }
