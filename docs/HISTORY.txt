@@ -5,7 +5,8 @@ Changelog
 1.5.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Move zindex system from plonetheme.blueberry
+  [Kevin Bieri]
 
 
 1.5.2 (2016-07-06)

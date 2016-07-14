@@ -1,0 +1,7 @@
+$zindex-base:       100 !default;
+$zindex-header:     $zindex-base !default;
+$zindex-portal-top: $zindex-base + $zindex-header !default;
+$zindex-tooltip:    $zindex-base + $zindex-header + $zindex-portal-top !default;
+$zindex-dropdown:   $zindex-base + $zindex-header + $zindex-portal-top + $zindex-tooltip !default;
+$zindex-overlay:    $zindex-base + $zindex-header + $zindex-portal-top + $zindex-tooltip + $zindex-dropdown !default;
+$zindex-modal:      $zindex-base + $zindex-header + $zindex-portal-top + $zindex-tooltip + $zindex-dropdown + $zindex-overlay !default;
