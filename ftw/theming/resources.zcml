@@ -14,6 +14,7 @@
     <theme:scss file="resources/scss/iconset_font-awesome.scss" slot="bottom" />
 
     <theme:scss file="resources/scss/globals/variables.scss" slot="variables" />
+    <theme:scss file="resources/scss/globals/zindex.scss" slot="variables" />
     <theme:scss file="resources/scss/globals/helpers.scss" slot="mixins" />
     <theme:scss file="resources/scss/globals/grid.scss" slot="mixins" />
 
