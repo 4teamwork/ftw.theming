@@ -5,7 +5,9 @@ Changelog
 1.6.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Reduce tab hover state
+  The current hover state will be always the selected state
+  [Kevin Bieri]
 
 
 1.6.0 (2016-07-18)
