@@ -1,8 +1,7 @@
 $color-tab: $color-gray-dark !default;
 $color-tab-select: $color-primary !default;
-$color-tab-hover: $color-tab-select !default;
 
-@mixin tab($color-tab: $color-tab) {
+@mixin tab($color-tab: $color-tab, $color-tab-select: $color-tab-select) {
 
   @include no-link();
 
@@ -22,14 +21,14 @@ $color-tab-hover: $color-tab-select !default;
   }
 
   &:hover:before {
-    background-color: $color-tab-hover;
+    background-color: $color-tab-select;
   }
 
 
 }
 
 @mixin tab-select($color-tab-select: $color-tab-select) {
-  @include tab($color-tab-select);
+  @include tab($color-tab: $color-tab-select, $color-tab-select: $color-tab-select);
 }
 
 @mixin tab-list($color-tab: $color-tab, $color-tab-select: $color-tab-select) {
@@ -70,7 +69,7 @@ $color-tab-hover: $color-tab-select !default;
 
 
     > a {
-      @include tab($color-tab);
+      @include tab($color-tab, $color-tab-select);
     }
   }
 
