@@ -236,6 +236,97 @@ SCSS resources and the default SCSS variables.
 The controlpanel views are available on any navigation root.
 
 
+Disable standard CSS resources
+==============================
+
+When building a new theme with ``ftw.theming``, we often want to replace
+existing CSS shipped by Plone or addon packages completely and therefore not
+have those CSS resources loaded at all.
+We want to exclude certain resources registered in ``portal_css`` if "our"
+theme is active.
+We should not modify the existing resources though, in order to be able to
+switch between multiple Diazo themes which may have a different configuration.
+
+For solving this problem ``ftw.theming`` extends the resource registry so that
+we can disable certain resoures for a specific Diazo theme.
+This disabling mechanism precedes other conditions such as the "expression" or
+the "authenticated" condition.
+
+
+Disable CSS resources
+---------------------
+
+Disabling CSS resources is done through ZCML:
+
+.. code:: xml
+
+    <configure
+        xmlns:theme="http://namespaces.zope.org/ftw.theming"
+        xmlns:zcml="http://namespaces.zope.org/zcml"
+        i18n_domain="plonetheme.vintage">
+
+        <include package="ftw.theming" />
+
+        <theme:portal_css theme="plonetheme.vintage">
+            <theme:disable_resource id="public.css" />
+            <theme:disable_resource id="authoring.css" />
+            <theme:disable_resource id="++resource++quickupload_static/uploadify.css" />
+        </theme:portal_css>
+
+    </configure>
+
+The CSS resources do not have to be registered in ``portal_css`` yet.
+This allows us to support extras-dependencies.
+
+
+Re-enabled CSS resources
+------------------------
+
+A disabled CSS resource can later be re-enabled, but make sure that the ZCML load
+order is correct by ``<include>``-ing the ZCML which disables the resource:
+
+.. code:: xml
+
+    <configure
+        xmlns:theme="http://namespaces.zope.org/ftw.theming"
+        xmlns:zcml="http://namespaces.zope.org/zcml"
+        i18n_domain="my.app">
+
+        <include package="ftw.theming" />
+
+        <!-- re-enable public.css because of important reasons -->
+        <include package="plonetheme.vintage" />
+        <theme:portal_css theme="plonetheme.vintage">
+            <theme:enable_resource id="public.css" />
+        </theme:portal_css>
+
+    </configure>
+
+
+Disable all Plone standard CSS resources
+----------------------------------------
+
+It is possible to disable all Plone standard CSS resources at once.
+This disables all CSS resources which are registered when installing a fresh
+Plone without dependencies.
+
+.. code:: xml
+
+    <configure
+        xmlns:theme="http://namespaces.zope.org/ftw.theming"
+        xmlns:zcml="http://namespaces.zope.org/zcml"
+        i18n_domain="my.app">
+
+        <include package="ftw.theming" />
+
+        <include package="plonetheme.vintage" />
+        <theme:portal_css theme="plonetheme.vintage">
+            <theme:disable_plone_css_resources />
+        </theme:portal_css>
+
+    </configure>
+
+
 Icons
 =====
 
