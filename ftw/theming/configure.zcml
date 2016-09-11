@@ -9,6 +9,8 @@
 
     <include package="ftw.upgrade" file="meta.zcml" />
 
+    <utility factory=".resource_disabler.ResourceDisablerConfig" />
+
     <include file="meta.zcml" />
     <include file="resources.zcml" />
     <include package=".browser" />

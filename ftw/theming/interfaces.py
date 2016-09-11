@@ -242,3 +242,38 @@ class ISCSSResourceFactory(Interface):
 class ICSSCaching(Interface):
     """Marker interface for enabling plone.app.caching on the theming resource.
     """
+
+
+class IResourceDisablerConfig(Interface):
+    """The resource disabler config holds information about which standard
+    portal_css resource should be disabled for which theme.
+    The resource disabler config is filled by using ZCML statements for each
+    theme.
+    The config can then be asked whether a resource should be enabled when a
+    specific theme is active.
+    """
+
+    def add_css_resource(resource_id, theme_name, enabled):
+        """Let the config know whether a portal_css resource should be enabled
+        for a speicific theme.
+
+        :param resource_id: The id of the resource as registered in portal_css.
+        :type resource_id: string
+        :param theme_id: Theme as declared in the `theme.xml`.
+        :type theme_id: string
+        :param enabled: Whether the resource should be enabled or disabled
+        for this theme.
+        :type enabled: boolean
+        """
+
+    def is_css_resource_enabled(resource_id, theme_name):
+        """Returns whether a css resource is enabled for the current theme.
+
+        :param resource_id: The id of the resource as registered in portal_css.
+        :type resource_id: string
+        :param theme_id: Theme as declared in the `theme.xml`.
+        :type theme_id: string
+        :returns: Whether the resource should be enabled or disabled
+        for this theme.
+        :rtype: boolean
+        """
