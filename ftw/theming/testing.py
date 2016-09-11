@@ -32,6 +32,7 @@ class ThemingLayer(PloneSandboxLayer):
             '  <include package="z3c.autoinclude" file="meta.zcml" />'
             '  <includePlugins package="plone" />'
             '  <includePluginsOverrides package="plone" />'
+            '  <include package="ftw.theming.tests.vintagetheme" />'
             '</configure>',
             context=configurationContext)
 
