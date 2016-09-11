@@ -7,7 +7,6 @@ from path import Path
 from plone.app.layout.navigation.interfaces import INavigationRoot
 from zope.interface import implements
 from zope.interface import Interface
-import hashlib
 
 
 class SCSSResource(object):

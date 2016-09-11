@@ -2,7 +2,6 @@ from ftw.theming.interfaces import ISCSSCompiler
 from ftw.theming.interfaces import ISCSSRegistry
 from ftw.theming.resource import DynamicSCSSResource
 from ftw.theming.tests import FunctionalTestCase
-from Products.CMFCore.utils import getToolByName
 from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.interface.verify import verifyObject
