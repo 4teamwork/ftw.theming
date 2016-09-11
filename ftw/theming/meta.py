@@ -1,8 +1,10 @@
+from ftw.theming.interfaces import IResourceDisablerConfig
 from ftw.theming.interfaces import ISCSSRegistry
 from ftw.theming.interfaces import ISCSSResourceFactory
 from ftw.theming.registry import SCSSRegistry
 from ftw.theming.resource import SCSSFileResource
 from path import Path
+from zope.component import getUtility
 from zope.component import provideUtility
 from zope.component import queryUtility
 from zope.configuration import fields
@@ -114,3 +116,41 @@ def get_or_create_registry():
         registry = SCSSRegistry()
         provideUtility(registry)
     return registry
+
+
+class IResourceRegistryGroupDirective(Interface):
+
+    theme = TextLine(
+        title=u'Theme name',
+        description=u'The name of the theme, as configured in theme.xml',
+        required=True)
+
+
+class IResourceDirective(Interface):
+
+    id = TextLine(
+        title=u'Resource ID',
+        description=u'The ID of the resource as registered in the resource'
+        u'registry (e.g. portal_css).',
+        required=True)
+
+
+class PortalCSS(object):
+
+    def __init__(self, context, theme, disable_plone_resources=False):
+        self.context = context
+        self.theme_name = theme
+        self.config = getUtility(IResourceDisablerConfig)
+
+    def disable_resource(self, context, **kwargs):
+        resource_id = kwargs['id']
+        self.config.add_css_resource(resource_id, self.theme_name,
+                                     enabled=False)
+
+    def enable_resource(self, context, **kwargs):
+        resource_id = kwargs['id']
+        self.config.add_css_resource(resource_id, self.theme_name,
+                                     enabled=True)
+
+    def disable_plone_css_resources(self, context):
+        self.config.disable_plone_resources(self.theme_name)

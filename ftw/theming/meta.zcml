@@ -28,6 +28,28 @@
 
         </meta:complexDirective>
 
+        <meta:complexDirective
+            name="portal_css"
+            schema=".meta.IResourceRegistryGroupDirective"
+            handler=".meta.PortalCSS">
+
+            <meta:subdirective
+                name="disable_resource"
+                schema=".meta.IResourceDirective"
+                />
+
+            <meta:subdirective
+                name="enable_resource"
+                schema=".meta.IResourceDirective"
+                />
+
+            <meta:subdirective
+                name="disable_plone_css_resources"
+                schema="zope.interface.Interface"
+                />
+
+        </meta:complexDirective>
+
     </meta:directives>
 
 </configure>
