@@ -48,6 +48,7 @@ setup(name='ftw.theming',
           'six >= 1.4.0',  # six.unichr
           'setuptools',
           'tarjan',
+          'collective.monkeypatcher',
       ],
       tests_require=tests_require,
       extras_require=dict(tests=tests_require),

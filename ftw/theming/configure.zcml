@@ -2,12 +2,14 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:monkey="http://namespaces.plone.org/monkey"
     xmlns:theme="http://namespaces.zope.org/ftw.theming"
     xmlns:upgrade-step="http://namespaces.zope.org/ftw.upgrade"
     xmlns:zcml="http://namespaces.zope.org/zcml"
     i18n_domain="ftw.theming">
 
     <include package="ftw.upgrade" file="meta.zcml" />
+    <include package="collective.monkeypatcher" />
 
     <utility factory=".resource_disabler.ResourceDisablerConfig" />
 
@@ -17,6 +19,14 @@
     <include package=".viewlets" />
 
     <browser:resourceDirectory name="ftw.theming" directory="resources" />
+
+    <monkey:patch
+        description="Hook into portal_css expression evaulation in order to disable CSS resources depending on activated theme."
+        class="Products.ResourceRegistries.tools.CSSRegistry.CSSRegistryTool"
+        original="evaluate"
+        replacement=".patches.CSSRegistryTool_evaluate"
+        preserveOriginal="True"
+        />
 
     <adapter factory=".compiler.SCSSCompiler" />
 
