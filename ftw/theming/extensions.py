@@ -6,6 +6,7 @@ from scss.calculator import Calculator
 from scss.extension import Extension
 from scss.namespace import Namespace
 from scss.types import Boolean
+from scss.types import List as SCSS_list
 from scss.types import Url
 from zope.dottedname.resolve import resolve
 import inspect
@@ -53,9 +54,18 @@ def find_relative_resource(relpath):
     return path
 
 
+def chunks(l, n):
+    if not l:
+        return []
+    return [l[i:i + n] for i in xrange(0, len(l), n)]
+
+
 def fill_svg(data, fill_css=None, fill_xpath=None):
     doc = etree.fromstring(data)
     expressions = []
+
+    fill_css = chunks(fill_css, 2) if isinstance(fill_css, SCSS_list) else fill_css
+    fill_xpath = chunks(fill_xpath, 2) if isinstance(fill_css, SCSS_list) else fill_xpath
 
     for xpr, color in fill_xpath or ():
         xpath_xpr = xpr.render().strip('"').strip("'")
