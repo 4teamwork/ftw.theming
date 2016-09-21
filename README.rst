@@ -349,11 +349,11 @@ Example:
 .. code:: scss
 
     .foo {
-        background: embed-resource("soccer.svg", $fill-css:['#pentagon': red]);
+        background: embed-resource("soccer.svg", $fill-css:('#pentagon', red));
     }
 
     .bar {
-        background: embed-resource("soccer.svg", $fill-xpath:['//*[@id="black_stuff"]/*[local-name()="g"][1]': red]);
+        background: embed-resource("soccer.svg", $fill-xpath:('//*[@id="black_stuff"]/*[local-name()="g"][1]', red));
     }
 
 

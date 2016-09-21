@@ -5,7 +5,7 @@ Changelog
 1.6.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix embed-resource mixin
 
 
 1.6.1 (2016-08-08)
