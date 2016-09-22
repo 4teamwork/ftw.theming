@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.6.2 (unreleased)
+1.7.0 (2016-09-22)
 ------------------
 
 - Fix multi-fill support of embed-resource mixin,
