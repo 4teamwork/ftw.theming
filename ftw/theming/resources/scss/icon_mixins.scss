@@ -4,13 +4,14 @@
 $icons-portal-type-icons: ();
 
 @mixin portal-type-icon($type, $value, $iconset) {
-  $icons-portal-type-icons: append($icons-portal-type-icons,
-                                   ($type, $value, $iconset));
+  $key: "#{$iconset}:#{$type}";
+  $values: ($type, $value, $iconset);
+  $icons-portal-type-icons: map-merge($icons-portal-type-icons, ($key: $values));
 }
 
 @function get-portal-type-icons-for-iconset($requested-iconset) {
   $result: ();
-  @each $type, $value, $iconset in $icons-portal-type-icons {
+  @each $type, $value, $iconset in map-values($icons-portal-type-icons) {
     @if $iconset == $requested-iconset {
       $result: append($result, ($type, $value));
     }
@@ -40,13 +41,14 @@ $icons-mimetype-portal-types: ();
 $icons-mime-type-icons: ();
 
 @mixin mime-type-icon($classpostfix, $value, $iconset) {
-  $icons-mime-type-icons: append($icons-mime-type-icons,
-                                 ($classpostfix, $value, $iconset));
+  $key: "#{$iconset}:#{$classpostfix}";
+  $values: ($classpostfix, $value, $iconset);
+  $icons-mime-type-icons: map-merge($icons-mime-type-icons, ($key: $values));
 }
 
 @function get-mime-type-icons-for-iconset($requested-iconset) {
   $result: ();
-  @each $classpostfix, $value, $iconset in $icons-mime-type-icons {
+  @each $classpostfix, $value, $iconset in map-values($icons-mime-type-icons) {
     @if $iconset == $requested-iconset {
       $result: append($result, ($classpostfix, $value));
     }
