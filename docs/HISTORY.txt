@@ -5,7 +5,7 @@ Changelog
 1.7.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix support for mimetype icons having long names. [jone, mbaechtold]
 
 
 1.7.0 (2016-09-22)
