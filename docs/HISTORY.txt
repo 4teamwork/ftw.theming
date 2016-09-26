@@ -5,6 +5,8 @@ Changelog
 1.7.1 (unreleased)
 ------------------
 
+- Support replacing portal-type- and mimetype-icons. [jone]
+
 - Fix support for mimetype icons having long names. [jone, mbaechtold]
 
 
