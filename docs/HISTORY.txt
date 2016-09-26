@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.7.1 (unreleased)
+1.7.1 (2016-09-26)
 ------------------
 
 - Support replacing portal-type- and mimetype-icons. [jone]
