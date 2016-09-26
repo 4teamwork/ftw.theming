@@ -1,11 +1,9 @@
+from ftw.theming import utils
 from operator import attrgetter
 from operator import methodcaller
-from plone.i18n.normalizer.interfaces import IIDNormalizer
 from Products.CMFCore.utils import getToolByName
 from Products.CMFDynamicViewFTI.interfaces import IDynamicViewTypeInformation
 from Products.Five import BrowserView
-from zope.component import getUtility
-import re
 
 
 class ThemingIcons(BrowserView):
@@ -20,13 +18,12 @@ class ThemingIcons(BrowserView):
         mimetypes_registry = getToolByName(self.context, 'mimetypes_registry')
         icon_paths = sorted(set(map(attrgetter('icon_path'),
                                     mimetypes_registry.mimetypes())))
-        normalizer = getUtility(IIDNormalizer)
 
         def itemize(filename):
-            name = normalizer.normalize(re.sub(r'\.png$', r'', filename))
+            name = utils.get_mimetype_css_class_from_icon_path(filename)
             return {
                 'filename': filename,
-                'classes': 'mimetype-icon icon-mimetype-img-{}'.format(name),
-                'normalized_name': name}
+                'classes': 'mimetype-icon {}'.format(name),
+                'normalized_name': name.replace('icon-mimetype-img-', '')}
 
         return map(itemize, icon_paths)
