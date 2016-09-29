@@ -143,3 +143,9 @@
   -webkit-transform-origin: $origin;
           transform-origin: $origin;
 }
+
+@mixin appearance($value: none) {
+  -webkit-appearance: $value;
+     -moz-appearance: $value;
+          appearance: $value;
+}
