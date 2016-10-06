@@ -95,7 +95,7 @@ class TestThemingCSSView(FunctionalTestCase):
         self.assertIn('?cachekey=', theming_css_url, 'Missing cachekey param.')
 
         browser.open(theming_css_url)
-        self.assertEquals('private, max-age=31536000',
+        self.assertEquals('public, max-age=31536000',
                           browser.headers['Cache-Control'],
                           'Cache headers should be set.')
 
@@ -111,7 +111,7 @@ class TestThemingCSSView(FunctionalTestCase):
         self.assertIn('?cachekey=', theming_css_url, 'Missing cachekey param.')
 
         browser.open(theming_css_url)
-        self.assertEquals('private, max-age=31536000',
+        self.assertEquals('public, max-age=31536000',
                           browser.headers['Cache-Control'],
                           'Cache headers should be set.')
 

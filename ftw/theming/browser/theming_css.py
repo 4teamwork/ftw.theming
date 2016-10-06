@@ -79,7 +79,7 @@ class ThemingCSSView(BrowserView):
             # Do not set cache headers when no cachekey provided.
             # The cached representation is to be considered fresh for 1 year
             # http://stackoverflow.com/a/3001556/880628
-            response.setHeader('Cache-Control', 'private, max-age=31536000')
+            response.setHeader('Cache-Control', 'public, max-age=31536000')
         return self.get_css()
 
     @ram.cache(ramcachekey)
