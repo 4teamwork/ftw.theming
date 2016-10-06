@@ -5,6 +5,8 @@ Changelog
 1.7.2 (unreleased)
 ------------------
 
+- Fix caching for unpublished navigation roots by not using p.a.caching. [jone]
+
 - Introduce appearance helper
   [Kevin Bieri]
 

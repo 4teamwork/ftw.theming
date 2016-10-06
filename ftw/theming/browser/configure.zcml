@@ -22,11 +22,6 @@
         permission="zope.Public"
         />
 
-    <cache:ruleset
-        for="ftw.theming.interfaces.ICSSCaching"
-        ruleset="plone.stableResource"
-        />
-
     <browser:page
         name="theming-resources"
         for="plone.app.layout.navigation.interfaces.INavigationRoot"
