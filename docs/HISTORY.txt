@@ -5,6 +5,11 @@ Changelog
 1.7.2 (unreleased)
 ------------------
 
+- Switch from "private" to "public" caching, since the CSS does
+  not contain any user specific data. [jone]
+
+- Fix caching for unpublished navigation roots by not using p.a.caching. [jone]
+
 - Introduce appearance helper
   [Kevin Bieri]
 

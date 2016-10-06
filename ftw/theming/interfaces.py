@@ -237,8 +237,3 @@ class ISCSSResourceFactory(Interface):
     def __call__(context, request):
         """Accepts any context and request and returns an SCSSResource object.
         """
-
-
-class ICSSCaching(Interface):
-    """Marker interface for enabling plone.app.caching on the theming resource.
-    """

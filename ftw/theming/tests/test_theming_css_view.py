@@ -95,7 +95,23 @@ class TestThemingCSSView(FunctionalTestCase):
         self.assertIn('?cachekey=', theming_css_url, 'Missing cachekey param.')
 
         browser.open(theming_css_url)
-        self.assertEquals('private, max-age=31536000',
+        self.assertEquals('public, max-age=31536000',
+                          browser.headers['Cache-Control'],
+                          'Cache headers should be set.')
+
+    @browsing
+    def test_caching_active_on_navroot_when_debugmode_disabled(self, browser):
+        self.portal_css.setDebugMode(False)
+        self.grant('Manager')
+        navroot = create(Builder('folder')
+                         .titled('NavRoot')
+                         .providing(INavigationRoot))
+        browser.open(navroot)
+        theming_css_url = self.get_css_url('http://nohost/plone/navroot/theming.css')
+        self.assertIn('?cachekey=', theming_css_url, 'Missing cachekey param.')
+
+        browser.open(theming_css_url)
+        self.assertEquals('public, max-age=31536000',
                           browser.headers['Cache-Control'],
                           'Cache headers should be set.')
 
