@@ -66,10 +66,27 @@
   &:hover {
     @include auto-text-color($color);
   }
+
   &:visited {
     @include auto-text-color($color);
     &:hover {
       @include auto-text-color($color);
+    }
+  }
+}
+
+@mixin link-color($color-link: $color-link, $color-link-hover: $color-link-hover) {
+  color: $color-link;
+
+  &:hover {
+    color: $color-link-hover;
+  }
+
+  &:visited {
+    color: $color-link;
+
+    &:hover {
+      color: $color-link-hover;
     }
   }
 }

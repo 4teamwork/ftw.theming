@@ -5,7 +5,13 @@ Changelog
 1.8.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Introduce new mixins
+
+  - Introduce link-color helper
+  - Introduce font-face helper
+  - Introduce rem helper
+
+  [Kevin Bieri]
 
 
 1.8.0 (2016-10-06)
