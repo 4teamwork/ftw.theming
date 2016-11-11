@@ -109,6 +109,10 @@
   @return $pixels / $context * 1em;
 }
 
+@function rem($pixels: 0, $context: $font-size-base) {
+  @return $pixels / $context * 1rem;
+}
+
 @mixin transform($transforms...) {
   -webkit-transform: #{$transforms};
           transform: #{$transforms};
