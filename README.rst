@@ -387,6 +387,35 @@ Example usage:
         }
     }
 
+Including font faces
+--------------------
+
+.. code:: scss
+
+  @include font-face($name: 'VerdanaRegular', $path: '++resource++nidau.web/fonts/Verdana');
+
+The file-extension for the ``$path`` argument is going to be concatenated automatically.
+Both ``woff`` and ``woff2`` must be provided.
+
+The mixin then produces the following css code:
+
+.. code:: css
+
+  @font-face {
+    font-family: 'VerdanaRegular';
+    font-style: normal;
+    font-weight: normal;
+    src: url("++resource++nidau.web/fonts/Verdana.woff2") format(woff2),
+      url("++resource++nidau.web/fonts/Verdana.woff") format(woff);
+  }
+
+  @font-face {
+    font-family: 'VerdanaBold';
+    font-style: normal;
+    font-weight: bold;
+    src: url("++resource++nidau.web/fonts/Verdana-Bold.woff2") format(woff2),
+      url("++resource++nidau.web/fonts/Verdana-Bold.woff") format(woff);
+  }
 
 Links
 =====
