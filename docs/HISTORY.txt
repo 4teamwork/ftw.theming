@@ -5,6 +5,9 @@ Changelog
 1.8.1 (unreleased)
 ------------------
 
+- Use two columns for print layout.
+  [Kevin Bieri]
+
 - Avoid duplicate (mimetype) icons on "Image" types. [jone]
 
 - Introduce new mixins

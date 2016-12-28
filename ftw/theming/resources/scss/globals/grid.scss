@@ -48,8 +48,17 @@ $gridsystem-width: $columns * $column-width + ($columns - 1) * $gutter-width + 2
   }
 
   @media print {
-    width: 100% !important;
-    margin-right: 0 !important;
+    width: ((100% / $row-width) * $row-split-width-factor) + (($gutter-width-relative / $row-width) * $row-split-width-factor) - $gutter-width-relative;
+    margin-right: $gutter-width-relative;
+    @if $by-index {
+      &:nth-child(#{$row-split-width + $offset}n+#{$row-split-width + $offset}) {
+        margin-right: 0;
+      }
+    } @else {
+      &:nth-of-type(#{$row-split-width + $offset}n+#{$row-split-width + $offset}) {
+        margin-right: 0;
+      }
+    }
   }
 }
 
