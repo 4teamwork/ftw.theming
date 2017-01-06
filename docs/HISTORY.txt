@@ -5,6 +5,8 @@ Changelog
 1.8.1 (unreleased)
 ------------------
 
+- Avoid duplicate (mimetype) icons on "Image" types. [jone]
+
 - Introduce new mixins
 
   - Introduce link-color helper

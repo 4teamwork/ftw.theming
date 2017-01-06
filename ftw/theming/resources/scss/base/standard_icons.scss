@@ -42,6 +42,7 @@
 
 /* MIMETYPES */
 @include mark-portal-type-having-mimetypes(file);
+@include mark-portal-type-having-mimetypes(image);
 
 /* Default */
 @include mime-type-font-awesome-icon(mime, file-o);
