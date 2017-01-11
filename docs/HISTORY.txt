@@ -1,9 +1,11 @@
 Changelog
 =========
 
-
-1.8.1 (unreleased)
+1.8.2 (unreleased)
 ------------------
+
+- 1.8.1 was accidentally released from the wrong branch. Please use 1.8.2 instead.
+  [Kevin Bieri]
 
 - Use two columns for print layout.
   [Kevin Bieri]
