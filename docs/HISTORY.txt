@@ -4,7 +4,7 @@ Changelog
 1.9.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add uninstall profile [raphael-s]
 
 
 1.9.0 (2017-02-09)
