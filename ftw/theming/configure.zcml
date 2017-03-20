@@ -5,9 +5,14 @@
     xmlns:theme="http://namespaces.zope.org/ftw.theming"
     xmlns:upgrade-step="http://namespaces.zope.org/ftw.upgrade"
     xmlns:zcml="http://namespaces.zope.org/zcml"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:profilehook="http://namespaces.zope.org/profilehook"
     i18n_domain="ftw.theming">
 
+    <five:registerPackage package="." initialize=".initialize" />
+
     <include package="ftw.upgrade" file="meta.zcml" />
+    <include package="ftw.profilehook" />
 
     <include file="meta.zcml" />
     <include file="resources.zcml" />
@@ -25,6 +30,19 @@
         description="Setup ftw.theming control panel and SCSS mechanism."
         provides="Products.GenericSetup.interfaces.EXTENSION"
         />
+
+    <genericsetup:registerProfile
+        title="ftw.theming (uninstall)"
+        name="uninstall"
+        directory="profiles/uninstall"
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+        for="Products.CMFPlone.interfaces.IMigratingPloneSiteRoot"
+    />
+
+    <profilehook:hook
+        profile="ftw.theming:uninstall"
+        handler=".hooks.uninstalled"
+    />
 
     <upgrade-step:directory
         profile="ftw.theming:default"
