@@ -130,6 +130,14 @@
   @return $pixels / $context * 1rem;
 }
 
+// https://css-tricks.com/almanac/properties/h/hyphenate/
+@mixin hyphens() {
+  hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+}
+
 @mixin transform($transforms...) {
   -webkit-transform: #{$transforms};
           transform: #{$transforms};
