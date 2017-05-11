@@ -1,13 +1,19 @@
 $color-tab: $color-gray-dark !default;
 $color-tab-select: $color-primary !default;
+$color-tab-background: $color-content-background !default;
+$color-tab-background-select: $color-content-background !default;
 
-@mixin tab($color-tab: $color-tab, $color-tab-select: $color-tab-select) {
+@mixin tab(
+  $color-tab: $color-tab,
+  $color-tab-select: $color-tab-select,
+  $color-tab-background: $color-tab-background,
+  $color-tab-background-select: $color-tab-background-select
+) {
 
-  @include no-link();
+  @include auto-text-color($color-tab-background);
 
+  background-color: $color-tab-background;
   padding: $padding-vertical $padding-horizontal;
-  background-color: $color-content-background;
-  color: $color-text;
   position: relative;
 
   &:before {
@@ -20,18 +26,46 @@ $color-tab-select: $color-primary !default;
     bottom: 0;
   }
 
-  &:hover:before {
-    background-color: $color-tab-select;
+  &:hover {
+    @include auto-text-color($color-tab-background-select);
+    background-color: $color-tab-background-select;
+    text-decoration: none;
+
+    &:before {
+      background-color: $color-tab-select;
+    }
   }
-
-
 }
 
-@mixin tab-select($color-tab-select: $color-tab-select) {
-  @include tab($color-tab: $color-tab-select, $color-tab-select: $color-tab-select);
+@mixin tab-select(
+  $color-tab: $color-tab,
+  $color-tab-select: $color-tab-select,
+  $color-tab-background: $color-tab-background,
+  $color-tab-background-select: $color-tab-background-select
+) {
+  @include tab(
+    $color-tab-select,
+    $color-tab,
+    $color-tab-background-select,
+    $color-tab-background
+  );
+
+  &:hover {
+    background-color: $color-tab-background-select;
+    @include auto-text-color($color-tab-background-select);
+
+    &:before {
+      background-color: $color-tab-select;
+    }
+  }
 }
 
-@mixin tab-list($color-tab: $color-tab, $color-tab-select: $color-tab-select) {
+@mixin tab-list(
+  $color-tab: $color-tab,
+  $color-tab-select: $color-tab-select,
+  $color-tab-background: $color-tab-background,
+  $color-tab-background-select: $color-tab-background-select
+) {
   @include list-horizontal();
 
   position: relative;
@@ -59,17 +93,17 @@ $color-tab-select: $color-primary !default;
 
     &.selected {
       > a {
-        @include tab-select($color-tab-select);
+        @include tab-select($color-tab, $color-tab-select, $color-tab-background, $color-tab-background-select);
       }
     }
 
     > a.selected {
-      @include tab-select($color-tab-select);
+      @include tab-select($color-tab, $color-tab-select, $color-tab-background, $color-tab-background-select);
     }
 
 
     > a {
-      @include tab($color-tab, $color-tab-select);
+      @include tab($color-tab, $color-tab-select, $color-tab-background, $color-tab-background-select);
     }
   }
 
