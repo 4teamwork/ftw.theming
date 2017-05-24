@@ -1,12 +1,13 @@
 @mixin font-face($name, $path, $weight: normal, $style: normal, $formats: woff2 woff) {
   $src: null;
   @each $format in $formats {
-    $src: append($src, url($path + '.' + $format) format($format), comma);
+    $src: append($src, url($path + '.' + $format) format('#{$format}'), comma);
   }
   @font-face {
     font-family: $name;
     font-style: $style;
     font-weight: $weight;
     src: $src;
+    @content;
   }
 }

@@ -4,6 +4,7 @@ Changelog
 1.10.1 (unreleased)
 -------------------
 
+- Fix escaping of font type on fontface mixin. [Kevin Bieri]
 - Provide background option for tab-list mixin. [Kevin Bieri]
 - Introduce hyphenation mixin. [Bieri Kevin]
 
