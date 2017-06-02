@@ -131,11 +131,17 @@
 }
 
 // https://css-tricks.com/almanac/properties/h/hyphenate/
-@mixin hyphens() {
+@mixin hyphens($fallback: true) {
   hyphens: auto;
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   -ms-hyphens: auto;
+
+  @if $fallback {
+    @media screen and (-webkit-min-device-pixel-ratio:0) and (min-resolution:.001dpcm) {
+      word-break: break-all;
+    }
+  }
 }
 
 @mixin transform($transforms...) {
