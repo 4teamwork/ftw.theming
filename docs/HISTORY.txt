@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.10.1 (unreleased)
+1.10.1 (2017-06-02)
 -------------------
 
 - Fix escaping of font type on fontface mixin. [Kevin Bieri]
