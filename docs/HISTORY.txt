@@ -4,7 +4,8 @@ Changelog
 1.10.2 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Change default colors so new pages will look better out of the box.
+  ! This may change the appearance of existing sites ! [raphael-s]
 
 
 1.10.1 (2017-06-02)
