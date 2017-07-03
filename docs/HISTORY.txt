@@ -4,7 +4,7 @@ Changelog
 1.10.2 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Introduce webkit-only mixin. [Kevin Bieri]
 
 
 1.10.1 (2017-06-02)

@@ -122,6 +122,13 @@
   }
 }
 
+// https://stackoverflow.com/questions/15401375/css-media-check-if-not-webkit
+@mixin webkit-only() {
+  @media screen and (-webkit-min-device-pixel-ratio:0) {
+    @content;
+  }
+}
+
 @function em($pixels: 0, $context: $font-size-base) {
   @return $pixels / $context * 1em;
 }
