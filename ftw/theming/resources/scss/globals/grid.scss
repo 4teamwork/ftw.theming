@@ -13,7 +13,7 @@ $gridsystem-width: $columns * $column-width + ($columns - 1) * $gutter-width + 2
   width: 100%;
   float: left;
 
-  @media #{$screen-XXS} {
+  @media (min-width: #{$screen-small}) {
     width: ((100% / $row-width) * $row-split-width-factor) + (($gutter-width-relative / $row-width) * $row-split-width-factor) - $gutter-width-relative;
     margin-right: $gutter-width-relative;
     @if $by-index {
@@ -27,7 +27,7 @@ $gridsystem-width: $columns * $column-width + ($columns - 1) * $gutter-width + 2
     }
   }
 
-  @media #{$screen-S} {
+  @media (min-width: #{$screen-medium}) {
     width: 100% / $row-width + ($gutter-width-relative / $row-width) - $gutter-width-relative;
     margin-right: $gutter-width-relative;
     @if $by-index {

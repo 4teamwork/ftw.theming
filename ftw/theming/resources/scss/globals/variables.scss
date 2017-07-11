@@ -90,6 +90,44 @@ $line-height-base: 1.5em !default;
  */
 $spinner-url: "" !default;
 
+/* Viewports */
+
+$screen-medium: 1024px !default;
+$screen-small: 800px !default;
+$screen-tiny: 480px !default;
+
+@mixin print {
+  @media print {
+    @content;
+  }
+}
+
+@mixin screen-large {
+  @media (min-width: #{$screen-medium}) {
+    @content;
+  }
+}
+
+@mixin screen-medium {
+  @media (min-width: #{$screen-small}) {
+    @content;
+  }
+}
+@mixin screen-small {
+  @media (min-width: #{$screen-tiny}) {
+    @content;
+  }
+}
+
+
+/* ICONS */
+
+$standard-iconset: font-awesome !default;
+$use-font-awesome-mimetype-icons: true !default;
+@include declare-variables(
+  standard-iconset,
+  use-font-awesome-mimetype-icons);
+
 @include declare-variables(
   color-primary,
   color-secondary,
@@ -135,144 +173,7 @@ $spinner-url: "" !default;
   font-weight-heading,
   max-width-page,
   line-height-base,
-  spinner-url);
-
-/* Viewports */
-
-// Taken from http://en.wikipedia.org/wiki/Display_resolution
-$desktop-WQHD-width:   2560px !default;
-$desktop-FHD-width:    1920px !default;
-$desktop-HDPLUS-width: 1600px !default;
-$desktop-HD-width:     1360px !default;
-$desktop-WXGA-width:   1280px !default;
-$desktop-XGA-width:    1024px !default;
-
-// Taken from http://www.ciop.com/common-resolutions-for-mobile-phones-and-tablets
-$mobile-large: 1280px !default;
-$mobile-medium: 1024px !default;
-$mobile-small: 800px !default;
-$mobile-smaller: 600px !default;
-$mobile-tiny: 480px !default;
-
-$screen-XL: "(min-width: #{$desktop-WQHD-width})" !default;
-$screen-L: "(min-width: #{$desktop-HDPLUS-width})" !default;
-$screen-M: "(min-width: #{$desktop-HD-width})" !default;
-$screen-S: "(min-width: #{$desktop-XGA-width})" !default;
-$screen-XS: "(min-width: #{$mobile-small})" !default;
-$screen-XXS: "(min-width: #{$mobile-tiny})" !default;
-
-@include declare-variables(
-  screen-XL,
-  screen-L,
-  screen-M,
-  screen-S,
-  screen-XS);
-
-@mixin desktop-XL {
-  @media #{$screen-XL} {
-    @content;
-  }
-}
-
-@mixin desktop-L {
-  @media #{$screen-L} {
-    @content;
-  }
-}
-
-@mixin desktop-M {
-  @media #{$screen-M} {
-    @content;
-  }
-}
-
-@mixin tablet {
-  @media #{$screen-S} {
-    @content;
-  }
-}
-@mixin phone {
-  @media #{$screen-XS} {
-    @content;
-  }
-}
-@mixin print {
-  @media print {
-    @content;
-  }
-}
-
-@mixin screen-large {
-  @media #{$screen-S} {
-    @content;
-  }
-}
-
-@mixin screen-medium {
-  @media #{$screen-XS} {
-    @content;
-  }
-}
-@mixin screen-small {
-  @media #{$screen-XXS} {
-    @content;
-  }
-}
-/*
-  Deprecated Variables
-  Will be removed in next major version.
- */
-
-
-$primary-color: #205C90 !default;
-$secondary-color: #75ad0a !default;
-
-$gray-base: #403e3d !default;
-$gray-darker: lighten($gray-base, 13.5%) !default;
-$gray-dark: lighten($gray-base, 20%) !default;
-$gray: lighten($gray-base, 33.5%) !default;
-$gray-light: lighten($gray-base, 46.7%) !default;
-$gray-lighter: lighten($gray-base, 70%) !default;
-
-$standalone-color: #fafafa !default;
-$context-color: #337ab7 !default;
-$success-color: #5cb85c !default;
-$warning-color: #f0ad4e !default;
-$danger-color: #d9534f !default;
-
-$page-bg-color: $gray-lighter !default;
-$content-bg-color: #fff !default;
-$text-color: $gray-dark !default;
-$light-text-color: $gray-light !default;
-$link-color: $primary-color !default;
-$link-font-weight: normal !default;
-$link-hover-color: $secondary-color !default;
-$link-focus-color: $secondary-color !default;
-$link-decoration: none !default;
-$link-hover-decoration: underline !default;
-$outline-color: change-color($primary-color, $lightness: 60%) !default;
-
-$button-standalone-color: $standalone-color !default;
-$button-context-color: $context-color !default;
-$button-destructive-color: $danger-color !default;
-$button-success-color: $success-color !default;
-$button-warning-color: $warning-color !default;
-$button-danger-color: $danger-color !default;
-
-$button-standalone-color: $color-secondary !default;
-$button-context-color: $color-default !default;
-$button-destructive-color: $color-danger !default;
-$button-success-color: $color-success !default;
-$button-warning-color: $color-warning !default;
-$button-danger-color: $color-danger !default;
-$button-disabled-color: #ddd !default;
-$button-text-light-color: white !default;
-$button-text-dark-color: black !default;
-
-/* ICONS */
-
-$standard-iconset: font-awesome !default;
-$use-font-awesome-mimetype-icons: true !default;
-@include declare-variables(
-  standard-iconset,
-  use-font-awesome-mimetype-icons);
+  spinner-url,
+  screen-small,
+  screen-medium,
+  screen-tiny);
