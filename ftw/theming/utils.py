@@ -1,8 +1,12 @@
+from pkg_resources import get_distribution
 from plone.i18n.normalizer import IIDNormalizer
 from zope.component import getUtility
 import inspect
 import os
 import re
+
+
+IS_PLONE_5 = get_distribution('Plone').version >= '5'
 
 
 def find_object_in_stack(name, klass):
@@ -20,3 +24,5 @@ def get_mimetype_css_class_from_icon_path(icon_path):
     return 'icon-mimetype-img-{}'.format(
         normalizer.normalize(image_filename, max_length=255)
     )
+
+

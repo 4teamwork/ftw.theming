@@ -4,6 +4,7 @@ from ftw.builder.testing import set_builder_session_factory
 from ftw.testing.layer import COMPONENT_REGISTRY_ISOLATION
 from ftw.testing.layer import ComponentRegistryLayer
 from ftw.testing.layer import TEMP_DIRECTORY
+from ftw.theming.utils import IS_PLONE_5
 from plone.app.testing import applyProfile
 from plone.app.testing import FunctionalTesting
 from plone.app.testing import PloneSandboxLayer
@@ -36,6 +37,10 @@ class ThemingLayer(PloneSandboxLayer):
             context=configurationContext)
 
     def setUpPloneSite(self, portal):
+
+        if IS_PLONE_5:
+            applyProfile(portal, 'plone.app.contenttypes:default')
+
         applyProfile(portal, 'ftw.theming:default')
 
 
