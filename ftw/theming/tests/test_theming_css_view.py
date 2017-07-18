@@ -48,7 +48,7 @@ class TestThemingCSSView(FunctionalTestCase):
     @browsing
     def test_css_included_relative_to_navigation_root(self, browser):
         self.grant('Manager')
-        folder = create(Builder('folder').titled('Folder'))
+        folder = create(Builder('folder').titled(u'Folder'))
 
         browser.login().open(folder)
         self.assert_css_url_present('http://nohost/plone/theming.css')
@@ -104,7 +104,7 @@ class TestThemingCSSView(FunctionalTestCase):
         self.portal_css.setDebugMode(False)
         self.grant('Manager')
         navroot = create(Builder('folder')
-                         .titled('NavRoot')
+                         .titled(u'NavRoot')
                          .providing(INavigationRoot))
         browser.open(navroot)
         theming_css_url = self.get_css_url('http://nohost/plone/navroot/theming.css')
@@ -121,7 +121,7 @@ class TestThemingCSSView(FunctionalTestCase):
             self.portal_css.setDebugMode(False)
             self.grant('Manager')
             navroot = create(Builder('folder')
-                             .titled('Folder')
+                             .titled(u'Folder')
                              .providing(INavigationRoot))
 
             browser.open(navroot)
