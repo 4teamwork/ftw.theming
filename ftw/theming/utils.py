@@ -24,5 +24,3 @@ def get_mimetype_css_class_from_icon_path(icon_path):
     return 'icon-mimetype-img-{}'.format(
         normalizer.normalize(image_filename, max_length=255)
     )
-
-
