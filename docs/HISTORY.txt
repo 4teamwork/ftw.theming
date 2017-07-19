@@ -1,10 +1,11 @@
 Changelog
 =========
 
-1.11.1 (unreleased)
+2.0.0 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Deprecate legacy breakpoint mixins and variables. [Kevin Bieri]
+- Remove deprecated variables. [Kevin Bieri]
 
 
 1.11.0 (2017-12-19)
