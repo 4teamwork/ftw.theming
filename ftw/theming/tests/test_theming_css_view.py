@@ -8,7 +8,9 @@ from ftw.theming.interfaces import ISCSSCompiler
 from ftw.theming.interfaces import ISCSSRegistry
 from ftw.theming.resource import DynamicSCSSResource
 from ftw.theming.tests import FunctionalTestCase
+from ftw.theming.utils import IS_PLONE_5
 from plone.app.layout.navigation.interfaces import INavigationRoot
+from plone.registry.interfaces import IRegistry
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.interfaces.siteroot import IPloneSiteRoot
 from zope.component import adapts
@@ -31,7 +33,7 @@ class TestThemingCSSView(FunctionalTestCase):
 
     def tearDown(self):
         super(TestThemingCSSView, self).tearDown()
-        self.portal_css.setDebugMode(False)
+        self._set_debug_mode(False)
 
     @browsing
     def test_compiles_anonymously(self, browser):
@@ -48,7 +50,7 @@ class TestThemingCSSView(FunctionalTestCase):
     @browsing
     def test_css_included_relative_to_navigation_root(self, browser):
         self.grant('Manager')
-        folder = create(Builder('folder').titled('Folder'))
+        folder = create(Builder('folder').titled(u'Folder'))
 
         browser.login().open(folder)
         self.assert_css_url_present('http://nohost/plone/theming.css')
@@ -75,7 +77,7 @@ class TestThemingCSSView(FunctionalTestCase):
         self.register_compiler_mock()
         self.assertEquals(1, self.view())
         self.assertEquals(1, self.view(), 'Cache does not work...')
-        self.portal_css.setDebugMode(True)
+        self._set_debug_mode(True)
         self.assertEquals(2, self.view(), 'Caching should be disabled in debug mode.')
         self.compiler().imitate_change()
         self.assertEquals(3, self.view(), 'Changing files should change cache')
@@ -84,12 +86,12 @@ class TestThemingCSSView(FunctionalTestCase):
         self.register_compiler_mock()
         self.assertEquals(1, self.view())
         self.assertEquals(1, self.view(), 'Cache does not work...')
-        self.portal_css.cookResources()
+        self._cook_resources()
         self.assertEquals(2, self.view(), 'Recooking portal_css should flush cache.')
 
     @browsing
     def test_caching_active_when_debugmode_disabled(self, browser):
-        self.portal_css.setDebugMode(False)
+        self._set_debug_mode(False)
         browser.open()
         theming_css_url = self.get_css_url('http://nohost/plone/theming.css')
         self.assertIn('?cachekey=', theming_css_url, 'Missing cachekey param.')
@@ -101,10 +103,10 @@ class TestThemingCSSView(FunctionalTestCase):
 
     @browsing
     def test_caching_active_on_navroot_when_debugmode_disabled(self, browser):
-        self.portal_css.setDebugMode(False)
+        self._set_debug_mode(False)
         self.grant('Manager')
         navroot = create(Builder('folder')
-                         .titled('NavRoot')
+                         .titled(u'NavRoot')
                          .providing(INavigationRoot))
         browser.open(navroot)
         theming_css_url = self.get_css_url('http://nohost/plone/navroot/theming.css')
@@ -117,31 +119,29 @@ class TestThemingCSSView(FunctionalTestCase):
 
     @browsing
     def test_cachekey_refreshes_when_navroot_changes(self, browser):
-        with freeze(datetime(2015, 1, 2, 3, 4)) as clock:
-            self.portal_css.setDebugMode(False)
-            self.grant('Manager')
-            navroot = create(Builder('folder')
-                             .titled('Folder')
-                             .providing(INavigationRoot))
+        self._set_debug_mode(False)
+        self.grant('Manager')
+        navroot = create(Builder('folder')
+                         .titled(u'Folder')
+                         .providing(INavigationRoot))
 
-            browser.open(navroot)
-            css_base_url = 'http://nohost/plone/folder/theming.css'
-            self.assert_css_url_present(css_base_url)
-            theming_css_url = self.get_css_url(css_base_url)
+        browser.open(navroot)
+        css_base_url = 'http://nohost/plone/folder/theming.css'
+        self.assert_css_url_present(css_base_url)
+        theming_css_url = self.get_css_url(css_base_url)
 
-            clock.forward(hours=1)
-            navroot.reindexObject()  # updates modified date
-            transaction.commit()
-            browser.reload()
-            self.assertNotEqual(theming_css_url, self.get_css_url(css_base_url),
-                                'Cachekey should be refreshed when navroot changes.')
+        navroot.reindexObject()  # updates modified date
+        transaction.commit()
+        browser.reload()
+        self.assertNotEqual(theming_css_url, self.get_css_url(css_base_url),
+                            'Cachekey should be refreshed when navroot changes.')
 
     @browsing
     def test_cachekey_changes_when_dynamic_resource_cachekey_changes(self, browser):
         resource = DynamicSCSSResource('foo', cachekey='foo')
         getUtility(ISCSSRegistry).add_resource(resource)
 
-        self.portal_css.setDebugMode(False)
+        self._set_debug_mode(False)
         browser.open()
         theming_css_url = self.get_css_url('http://nohost/plone/theming.css')
         self.assertIn('?cachekey=', theming_css_url, 'Missing cachekey param.')
@@ -167,7 +167,7 @@ class TestThemingCSSView(FunctionalTestCase):
         a cachkey param when necessary.
         """
         self.grant('Manager')
-        self.portal_css.setDebugMode(False)
+        self._set_debug_mode(False)
         folder = create(Builder('folder'))
         page = create(Builder('page').within(folder))
 
@@ -189,14 +189,15 @@ class TestThemingCSSView(FunctionalTestCase):
         """For internal use in templates, the view should provide the theming
         css URL.
         """
+        self.grant('Manager')
+        folder = create(Builder('folder'))
+
         portal_css_url = self.portal.restrictedTraverse('theming.css').get_url()
         self.assertRegexpMatches(
             portal_css_url,
             r'^{}'.format(
                 re.escape('http://nohost/plone/theming.css?cachekey=')))
 
-        self.grant('Manager')
-        folder = create(Builder('folder'))
         folder_css_url = folder.restrictedTraverse('theming.css').get_url()
         self.assertEquals(portal_css_url, folder_css_url,
                           'The CSS should always be relative to the root.')
@@ -243,3 +244,20 @@ class TestThemingCSSView(FunctionalTestCase):
     def assert_css_url_present(self, url):
         assert self.get_css_url(url), \
             'No CSS URL "{0}" found in {1}'.format(url, self.list_css_urls())
+
+    def _set_debug_mode(self, value):
+        if IS_PLONE_5:
+            getUtility(IRegistry)['plone.resources.development'] = value
+        else:
+            getToolByName(self.portal, 'portal_css').setDebugMode(value)
+
+    def _cook_resources(self):
+        if IS_PLONE_5:
+            registry = getUtility(IRegistry)
+            for key in filter(
+                    lambda key: (key.startswith('plone.bundles/')
+                                 and key.endswith('.last_compilation')),
+                    registry.records.keys()):
+                registry[key] = None
+        else:
+            getToolByName(self.portal, 'portal_css').cookResources()

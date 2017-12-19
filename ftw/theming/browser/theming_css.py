@@ -1,8 +1,10 @@
 from ftw.theming.interfaces import ISCSSCompiler
+from ftw.theming.utils import IS_PLONE_5
 from operator import methodcaller
 from plone.app.layout.navigation.root import getNavigationRootObject
 from plone.memoize import ram
 from plone.memoize.interfaces import ICacheChooser
+from plone.registry.interfaces import IRegistry
 from Products.CMFCore.utils import getToolByName
 from Products.Five import BrowserView
 from zope.component import getMultiAdapter
@@ -12,24 +14,42 @@ import hashlib
 
 
 def compute_css_bundle_hash(context):
-    """This method creates a hash of the current CSS resource registry.
+    """For Plone 4 this method creates a hash of the current CSS resource registry.
     We need this in order to detect a bundle recook and flush our caches.
     We do this by using the hash of the currently cooked bundles as part of
     our cache key.
+
+    For Plone 5 this method creates a hash of all last_compilation timestamps
+    stored in plone.bundles
     """
-    portal_css = getToolByName(context, 'portal_css')
-    theme_resources = dict(
-        reduce(list.__add__,
-               map(methodcaller('items'),
-                   portal_css.concatenatedResourcesByTheme.values())))
-    keys = theme_resources.keys()
-    map(keys.extend, theme_resources.values())
-    return str(hash(frozenset(keys)))
+
+    if IS_PLONE_5:
+        registry = getUtility(IRegistry)
+        timestamps = []
+        for key in filter(
+                lambda key: (key.startswith('plone.bundles/')
+                             and key.endswith('.last_compilation')),
+                registry.records.keys()):
+            timestamps.append(str(registry[key]))
+        return str(hash(frozenset(timestamps)))
+    else:
+        portal_css = getToolByName(context, 'portal_css')
+        theme_resources = dict(
+            reduce(list.__add__,
+                   map(methodcaller('items'),
+                       portal_css.concatenatedResourcesByTheme.values())))
+        keys = theme_resources.keys()
+        map(keys.extend, theme_resources.values())
+        return str(hash(frozenset(keys)))
 
 
 def is_debug_mode_enabled():
-    cssregistry = getToolByName(getSite(), 'portal_css')
-    return bool(cssregistry.getDebugMode())
+    if IS_PLONE_5:
+        registry = getUtility(IRegistry)
+        return registry.records['plone.resources.development'].value
+    else:
+        cssregistry = getToolByName(getSite(), 'portal_css')
+        return bool(cssregistry.getDebugMode())
 
 
 def get_css_cache_key(context, debug_mode_caching=True):
