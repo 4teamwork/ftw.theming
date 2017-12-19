@@ -119,24 +119,22 @@ class TestThemingCSSView(FunctionalTestCase):
 
     @browsing
     def test_cachekey_refreshes_when_navroot_changes(self, browser):
-        with freeze(datetime(2015, 1, 2, 3, 4)) as clock:
-            self._set_debug_mode(False)
-            self.grant('Manager')
-            navroot = create(Builder('folder')
-                             .titled(u'Folder')
-                             .providing(INavigationRoot))
+        self._set_debug_mode(False)
+        self.grant('Manager')
+        navroot = create(Builder('folder')
+                         .titled(u'Folder')
+                         .providing(INavigationRoot))
 
-            browser.open(navroot)
-            css_base_url = 'http://nohost/plone/folder/theming.css'
-            self.assert_css_url_present(css_base_url)
-            theming_css_url = self.get_css_url(css_base_url)
+        browser.open(navroot)
+        css_base_url = 'http://nohost/plone/folder/theming.css'
+        self.assert_css_url_present(css_base_url)
+        theming_css_url = self.get_css_url(css_base_url)
 
-            clock.forward(hours=1)
-            navroot.reindexObject()  # updates modified date
-            transaction.commit()
-            browser.reload()
-            self.assertNotEqual(theming_css_url, self.get_css_url(css_base_url),
-                                'Cachekey should be refreshed when navroot changes.')
+        navroot.reindexObject()  # updates modified date
+        transaction.commit()
+        browser.reload()
+        self.assertNotEqual(theming_css_url, self.get_css_url(css_base_url),
+                            'Cachekey should be refreshed when navroot changes.')
 
     @browsing
     def test_cachekey_changes_when_dynamic_resource_cachekey_changes(self, browser):

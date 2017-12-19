@@ -4,6 +4,9 @@ Changelog
 1.10.3 (unreleased)
 -------------------
 
+- Avoid using freeze in test_cachekey_refreshes_when_navroot_changes
+  for plone 5.1, since we get a ReadConflictError. The value of the test does not change if we remove the freeze context manager. [mathias.leimgruber]
+
 - Implement Plone 5.1 compatibility [mathias.leimgruber]
 
 
