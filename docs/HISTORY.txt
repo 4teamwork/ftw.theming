@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.10.3 (unreleased)
+1.11.0 (2017-12-19)
 -------------------
 
 - Avoid using freeze in test_cachekey_refreshes_when_navroot_changes
