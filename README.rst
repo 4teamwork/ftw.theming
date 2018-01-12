@@ -366,11 +366,9 @@ Using media queries Mixins
 
 ``ftw.theming`` provides mixins for most common media queries:
 
-- phone (800px)
-- tablet (1024px)
-- desktop-M (1360px) - HD
-- desktop-L (1920px) - Full HD
-- desktop-XL (2560px) - WQHD
+- small (480px)
+- medium (800px)
+- large (1024)
 
 Example usage:
 
@@ -379,10 +377,10 @@ Example usage:
     #container {
         width: 1600px;
 
-        @include tablet {
+        @include screen-medium {
             width:1000px;
         }
-        @include phone {
+        @include screen-small {
             width:500px;
         }
     }
