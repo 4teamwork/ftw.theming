@@ -17,6 +17,8 @@
     <theme:scss file="resources/scss/globals/zindex.scss" slot="variables" />
     <theme:scss file="resources/scss/globals/helpers.scss" slot="mixins" />
     <theme:scss file="resources/scss/globals/grid.scss" slot="mixins" />
+    <theme:scss file="resources/scss/globals/flex.scss" slot="mixins" />
+    <theme:scss file="resources/scss/globals/flex-grid.scss" slot="mixins" />
     <theme:scss file="resources/scss/globals/fontface.scss" slot="mixins" />
 
     <theme:scss file="resources/scss/elements/button.scss" slot="mixins" />
