@@ -1,29 +1,20 @@
-$flexboxgrid-breakpoints: xxs $screen-XXS,
-xs $screen-XS,
-s $screen-S,
-m $screen-M,
-l $screen-L,
-xl $screen-XL;
+$flexboxgrid-breakpoints: s $screen-XXS,
+m $screen-XS,
+l $screen-S;
 
 $gutter-compensation: $flexboxgrid-gutter-width * .5 * -1;
 $half-gutter-width: $flexboxgrid-gutter-width * .5;
 
-.flex-row {
+@mixin flex-row($gutter-compensation: $gutter-compensation) {
   box-sizing: border-box;
+
   @include flexbox();
   @include flex(0, 1, auto);
   @include flex-direction(row);
   @include flex-wrap(wrap);
+
   margin-right: $gutter-compensation;
   margin-left: $gutter-compensation;
-}
-
-.flex-row.reverse {
-  @include flex-direction(row-reverse);
-}
-
-.flex-col.reverse {
-  @include flex-direction(column-reverse);
 }
 
 @mixin flexboxgrid-sass-col-common {
@@ -41,10 +32,58 @@ $half-gutter-width: $flexboxgrid-gutter-width * .5;
   padding-left: $half-gutter-width;
 }
 
+@mixin flex-column($gridsystem-column-amount: 0) {
+  @include flexboxgrid-sass-col-common();
+  @include flex-basis(auto);
+  @include flex-grow(1);
+  @include flex-basis(0);
+  max-width: 100%;
+
+  @if ($gridsystem-column-amount != 0) {
+
+    @each $breakpoint in $flexboxgrid-breakpoints {
+      $name: nth($breakpoint, 1);
+      $size: nth($breakpoint, 2);
+
+      @media #{$size} {
+        $width: 100% / $gridsystem-column-amount;
+
+        @if $name == 's' {
+          $width: 100% / ceil($gridsystem-column-amount / 2 / 2);
+        } @else if $name == 'm' {
+          $width: 100% / ceil($gridsystem-column-amount / 2);
+        } // else use width defined above
+
+        @include flex-basis($width);
+        max-width: $width;
+      }
+    }
+  }
+}
+
+@mixin flex-grid($gridsystem-column-amount: 0, $gutter-compensation: $gutter-compensation) {
+  @include flex-row($gutter-compensation);
+
+  > * {
+    @include flex-column($gridsystem-column-amount);
+  }
+}
+
+.flex-row {
+  @include flex-row()
+}
+
+.flex-row.reverse {
+  @include flex-direction(row-reverse);
+}
+
+.flex-col.reverse {
+  @include flex-direction(column-reverse);
+}
+
 $name: nth($flexboxgrid-breakpoints, 1);
 .flex-col {
-  @include flexboxgrid-sass-col-common;
-  @include flex-basis(auto);
+  @include flex-column();
 }
 
 @for $i from 1 through $flexboxgrid-grid-columns {
@@ -64,12 +103,6 @@ $name: nth($flexboxgrid-breakpoints, 1);
       margin-left: 100% / $flexboxgrid-grid-columns * $i;
     }
   }
-}
-
-.flex-col {
-  @include flex-grow(1);
-  @include flex-basis(0);
-  max-width: 100%;
 }
 
 .flex-start {
@@ -121,8 +154,7 @@ $name: nth($flexboxgrid-breakpoints, 1);
 
   @media #{$size} {
     .flex-col-#{$name} {
-      @include flexboxgrid-sass-col-common;
-      @include flex-basis(auto);
+      @include flex-column()
     }
     @for $i from 1 through $flexboxgrid-grid-columns {
       .flex-col-#{$name}-#{$i} {
