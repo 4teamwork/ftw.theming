@@ -3,7 +3,7 @@ from plone.app.layout.icons import icons
 from plone.memoize.instance import memoize
 
 
-WRAPPER_TEMPLATE = '<span class="{classes}">{content}</span>'
+WRAPPER_TEMPLATE = u'<span class="{classes}">{content}</span>'
 
 
 class CatalogBrainContentIcon(icons.CatalogBrainContentIcon):
