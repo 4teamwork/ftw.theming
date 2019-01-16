@@ -4,7 +4,7 @@ Changelog
 2.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix UnicodeEncodeError error for content types names with unicode characters [Nachtalb]
 
 
 2.0.0 (2018-01-17)
