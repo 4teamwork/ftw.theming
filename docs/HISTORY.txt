@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.0.2 (unreleased)
+2.0.2 (2019-03-19)
 ------------------
 
 - plone.browserlayer subscriber must be registered before our subscriber [Nachtalb]
