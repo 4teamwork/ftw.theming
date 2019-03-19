@@ -62,6 +62,9 @@
         directory="upgrades/base"
         />
 
+    <!-- The set_ftw_theming_header subscriber relies on the browserlayer to be applied to the request, in order to
+         guarantee that, the plone.browserlayer subscriber must be registered first.-->
+    <include package="plone.browserlayer" />
     <subscriber
         for="Products.CMFCore.interfaces.ISiteRoot
              zope.traversing.interfaces.IBeforeTraverseEvent"
