@@ -45,9 +45,12 @@
 @include mark-portal-type-having-mimetypes(image);
 
 /* Default */
-@include mime-type-font-awesome-icon(mime, file-o);
+@include mime-type-font-awesome-icon(mime, envelope-o);
 @include mime-type-font-awesome-icon(application, file-o);
 @include mime-type-font-awesome-icon(unknown, file-o);
+@include mime-type-font-awesome-icon-mt(message-rfc822, envelope-o);
+@include mime-type-font-awesome-icon-mt(application-vnd-hp-pcl, file-o);
+@include mime-type-font-awesome-icon-mt(inode-symlink, file-o);
 
 /* ms office */
 @include mime-type-font-awesome-icon(doc, file-word-o);
@@ -56,6 +59,13 @@
 @include mime-type-font-awesome-icon(xlsx, file-excel-o);
 @include mime-type-font-awesome-icon(ppt, file-powerpoint-o);
 @include mime-type-font-awesome-icon(pptx, file-powerpoint-o);
+@include mime-type-font-awesome-icon-mt(application-msword, file-word-o);
+@include mime-type-font-awesome-icon-mt(application-vnd-openxmlformats-officedocument-wordprocessingml-document, file-word-o);
+@include mime-type-font-awesome-icon-mt(application-vnd-ms-excel, file-excel-o);
+@include mime-type-font-awesome-icon-mt(application-vnd-openxmlformats-officedocument-spreadsheetml-sheet, file-excel-o);
+@include mime-type-font-awesome-icon-mt(application-vnd-ms-powerpoint, file-powerpoint-o);
+@include mime-type-font-awesome-icon-mt(application-vnd-openxmlformats-officedocument-presentationml-presentation, file-powerpoint-o);
+
 
 /* open office */
 @include mime-type-font-awesome-icon(sxc, file-excel-o);
@@ -76,12 +86,34 @@
 @include mime-type-font-awesome-icon(resource-mtr-icons-otp, file-powerpoint-o);
 @include mime-type-font-awesome-icon(resource-mtr-icons-ots, file-excel-o);
 @include mime-type-font-awesome-icon(resource-mtr-icons-ott, file-word-o);
+@include mime-type-font-awesome-icon-mt(application-vnd-sun-xml-calc, file-excel-o);
+@include mime-type-font-awesome-icon-mt(application-vnd-sun-xml-draw, file-image-o);
+@include mime-type-font-awesome-icon-mt(application-vnd-sun-xml-impress, file-powerpoint-o);
+@include mime-type-font-awesome-icon-mt(application-vnd-openxmlformats-officedocument-presentationml-slide, file-powerpoint-o);
+@include mime-type-font-awesome-icon-mt(application-vnd-sun-xml-math, file-excel-o);
+@include mime-type-font-awesome-icon-mt(application-vnd-sun-xml-writer-global, file-word-o);
+@include mime-type-font-awesome-icon-mt(application-vnd-sun-xml-writer, file-word-o);
+@include mime-type-font-awesome-icon-mt(application-vnd-ms-word-template-macroEnabled-12, file-word-o);
 
 
 /* images */
 @include mime-type-font-awesome-icon(image, file-image-o);
 @include mime-type-font-awesome-icon(ps, file-image-o);
 @include mime-type-font-awesome-icon(png, file-image-o);
+@include mime-type-font-awesome-icon-mt(image-x-coreldraw, file-image-o);
+@include mime-type-font-awesome-icon-mt(application-postscript, file-image-o);
+@include mime-type-font-awesome-icon-mt(image-bmp, file-image-o);
+@include mime-type-font-awesome-icon-mt(image-gif, file-image-o);
+@include mime-type-font-awesome-icon-mt(image-ief, file-image-o);
+@include mime-type-font-awesome-icon-mt(image-jp2, file-image-o);
+@include mime-type-font-awesome-icon-mt(image-jpeg, file-image-o);
+@include mime-type-font-awesome-icon-mt(image-png, file-image-o);
+@include mime-type-font-awesome-icon-mt(image-psd, file-image-o);
+@include mime-type-font-awesome-icon-mt(image-svg, file-image-o);
+@include mime-type-font-awesome-icon-mt(image-svg-xml, file-image-o);
+@include mime-type-font-awesome-icon-mt(image-tiff, file-image-o);
+@include mime-type-font-awesome-icon-mt(image-vnd-adobe-photoshop, file-image-o);
+@include mime-type-font-awesome-icon-mt(image-xiff, file-image-o);
 
 /* archives */
 @include mime-type-font-awesome-icon(rar, file-archive-o);
@@ -91,6 +123,14 @@
 @include mime-type-font-awesome-icon(deb, file-archive-o);
 @include mime-type-font-awesome-icon(iso, file-archive-o);
 @include mime-type-font-awesome-icon(pk, file-archive-o);
+@include mime-type-font-awesome-icon-mt(application-rar, file-archive-o);
+@include mime-type-font-awesome-icon-mt(application-x-rpm, file-archive-o);
+@include mime-type-font-awesome-icon-mt(application-x-tar, file-archive-o);
+@include mime-type-font-awesome-icon-mt(application-zip, file-archive-o);
+@include mime-type-font-awesome-icon-mt(application-vnd-debian-binary-package, file-archive-o);
+@include mime-type-font-awesome-icon-mt(application-x-cd-image, file-archive-o);
+@include mime-type-font-awesome-icon-mt(application-x-tex-pk, file-archive-o);
+
 
 /* media */
 @include mime-type-font-awesome-icon(audio, file-audio-o);
@@ -98,6 +138,11 @@
 @include mime-type-font-awesome-icon(wav, file-audio-o);
 @include mime-type-font-awesome-icon(video, file-video-o);
 @include mime-type-font-awesome-icon(avi, file-video-o);
+@include mime-type-font-awesome-icon-mt(audio-vnd-lucent-voice, file-audio-o);
+@include mime-type-font-awesome-icon-mt(audio-midi, file-audio-o);
+@include mime-type-font-awesome-icon-mt(audio-x-wav, file-audio-o);
+@include mime-type-font-awesome-icon-mt(video-vnd-dvb-file, file-video-o);
+@include mime-type-font-awesome-icon-mt(video-x-msvideo, file-video-o);
 
 /* generic / various */
 @include mime-type-font-awesome-icon(dvi, file-o);
@@ -109,6 +154,16 @@
 @include mime-type-font-awesome-icon(font, font);
 @include mime-type-font-awesome-icon(gf, font);
 @include mime-type-font-awesome-icon(vcard, user);
+@include mime-type-font-awesome-icon-mt(application-x-dvi, file-o);
+@include mime-type-font-awesome-icon-mt(application-pdf, file-pdf-o);
+@include mime-type-font-awesome-icon-mt(text-plain, file-text-o);
+@include mime-type-font-awesome-icon-mt(text-x-web-intelligent, file-text-o);
+@include mime-type-font-awesome-icon-mt(application-x-troff-man, file-text-o);
+@include mime-type-font-awesome-icon-mt(message-x-gnu-rmail, envelope-o);
+@include mime-type-font-awesome-icon-mt(font-truetype, font);
+@include mime-type-font-awesome-icon-mt(application-x-tex-gf, font);
+@include mime-type-font-awesome-icon-mt(text-vcard, user);
+
 
 /* code */
 @include mime-type-font-awesome-icon(sh, file-code-o);
@@ -123,3 +178,15 @@
 @include mime-type-font-awesome-icon(html, file-code-o);
 @include mime-type-font-awesome-icon(pl, file-code-o);
 @include mime-type-font-awesome-icon(tex, file-code-o);
+@include mime-type-font-awesome-icon-mt(application-x-shellscript, file-code-o);
+@include mime-type-font-awesome-icon-mt(text-x-java, file-code-o);
+@include mime-type-font-awesome-icon-mt(text-x-csrc, file-code-o);
+@include mime-type-font-awesome-icon-mt(text-x-chdr, file-code-o);
+@include mime-type-font-awesome-icon-mt(text-x-python, file-code-o);
+@include mime-type-font-awesome-icon-mt(text-x-c--src, file-code-o);
+@include mime-type-font-awesome-icon-mt(application-x-msdos-program, file-code-o);
+@include mime-type-font-awesome-icon-mt(text-x-fortran, file-code-o);
+@include mime-type-font-awesome-icon-mt(application-x-object, file-code-o);
+@include mime-type-font-awesome-icon-mt(text-html, file-code-o);
+@include mime-type-font-awesome-icon-mt(text-x-perl, file-code-o);
+@include mime-type-font-awesome-icon-mt(text-x-tex, file-code-o);

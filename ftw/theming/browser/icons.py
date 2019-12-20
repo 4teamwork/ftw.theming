@@ -1,5 +1,4 @@
 from ftw.theming import utils
-from operator import attrgetter
 from operator import methodcaller
 from Products.CMFCore.utils import getToolByName
 from Products.CMFDynamicViewFTI.interfaces import IDynamicViewTypeInformation
@@ -16,14 +15,24 @@ class ThemingIcons(BrowserView):
 
     def get_mime_types(self):
         mimetypes_registry = getToolByName(self.context, 'mimetypes_registry')
-        icon_paths = sorted(set(map(attrgetter('icon_path'),
-                                    mimetypes_registry.mimetypes())))
+        result = []
+        seen_path = set()
 
-        def itemize(filename):
-            name = utils.get_mimetype_css_class_from_icon_path(filename)
-            return {
-                'filename': filename,
-                'classes': 'mimetype-icon {}'.format(name),
-                'normalized_name': name.replace('icon-mimetype-img-', '')}
+        for mimetype in mimetypes_registry.mimetypes():
+            if not mimetype.icon_path or not mimetype.mimetypes:
+                continue
+            if mimetype.icon_path in seen_path:
+                continue
+            seen_path.add(mimetype.icon_path)
 
-        return map(itemize, icon_paths)
+            img_class = utils.get_mimetype_css_class_from_icon_path(mimetype.icon_path)
+            mime_type_class = utils.get_mimetype_css_class_from_mime_type(
+                mimetype.mimetypes[0])
+            result.append({
+                'filename': mimetype.icon_path,
+                'getIcon_based_classes': 'mimetype-icon {}'.format(img_class),
+                'normalized_name': img_class.replace('icon-mimetype-img-', ''),
+                'mime_type_based_classes': 'mimetype-icon {}'.format(mime_type_class),
+                'normalized_mime_type': mime_type_class.replace('icon-mimetype-mt-', '')})
+
+        return result

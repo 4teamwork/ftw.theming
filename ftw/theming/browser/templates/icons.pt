@@ -85,12 +85,16 @@
             <colgroup>
                 <col width="10%" />
                 <col width="10%" />
-                <col width="80%" />
+                <col width="10%" />
+                <col width="30%" />
+                <col width="40%" />
             </colgroup>
             <thead>
                 <tr>
                     <th i18n:translate="">Original</th>
-                    <th i18n:translate="">Icon</th>
+                    <th i18n:translate="">getIcon based</th>
+                    <th i18n:translate="">mime_type based</th>
+                    <th i18n:translate="">normalized mime_type</th>
                     <th i18n:translate="">Name</th>
                 </tr>
             </thead>
@@ -102,8 +106,12 @@
                             <img tal:attributes="src string:${here/portal_url}/${item/filename}" />
                         </td>
                         <td>
-                            <span tal:attributes="class item/classes" />
+                            <span tal:attributes="class item/getIcon_based_classes" />
                         </td>
+                        <td>
+                            <span tal:attributes="class item/mime_type_based_classes" />
+                        </td>
+                        <td tal:content="item/normalized_mime_type" />
                         <td tal:content="item/normalized_name" />
                     </tr>
                 </tal:MIMETYPE>
