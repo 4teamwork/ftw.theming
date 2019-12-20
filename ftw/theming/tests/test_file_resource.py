@@ -6,7 +6,7 @@ from ftw.theming.tests.stubs import REQUEST
 from ftw.theming.tests.stubs import Stub
 from path import Path
 from plone.app.layout.navigation.interfaces import INavigationRoot
-from unittest2 import TestCase
+from unittest import TestCase
 from zope.interface.verify import verifyObject
 from zope.publisher.interfaces.browser import IDefaultBrowserLayer
 

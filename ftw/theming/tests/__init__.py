@@ -2,7 +2,7 @@ from ftw.theming.interfaces import ISCSSRegistry
 from ftw.theming.testing import THEMING_FUNCTIONAL
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
-from unittest2 import TestCase
+from unittest import TestCase
 from zope.component import getUtility
 import transaction
 

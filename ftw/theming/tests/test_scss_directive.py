@@ -8,7 +8,7 @@ from ftw.theming.tests.stubs import REQUEST
 from operator import attrgetter
 from plone.app.layout.navigation.interfaces import INavigationRoot
 from Products.CMFPlone.interfaces.siteroot import IPloneSiteRoot
-from unittest2 import TestCase
+from unittest import TestCase
 from zope.component import getUtility
 from zope.configuration.xmlconfig import ZopeXMLConfigurationError
 from zope.interface import Interface

@@ -9,7 +9,7 @@ from ftw.theming.tests.stubs import CONTEXT
 from ftw.theming.tests.stubs import ProfileInfoStub
 from ftw.theming.tests.stubs import REQUEST
 from operator import attrgetter
-from unittest2 import TestCase
+from unittest import TestCase
 from zope.interface import provider
 from zope.interface.verify import verifyObject
 
