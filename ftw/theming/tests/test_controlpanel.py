@@ -1,5 +1,6 @@
 from ftw.testbrowser import browsing
 from ftw.theming.tests import FunctionalTestCase
+from ftw.theming.utils import IS_PLONE_5
 from plone.app.testing import SITE_OWNER_NAME
 
 
@@ -78,4 +79,23 @@ class TestControlpanel(FunctionalTestCase):
     def test_theming_icons_lists_mime_type_icons(self, browser):
         browser.login(SITE_OWNER_NAME).open(view='theming-icons')
         icons = browser.css('table.theming-mime-type-icons').first.dicts()
-        self.assertIn({'Name': 'pdf', 'Original': '', 'Icon': ''}, icons)
+        self.assertIn({
+            'Original': '',
+            'getIcon based': '',
+            'mime_type based': '',
+            'Name': 'pdf',
+            'normalized mime_type': 'application-pdf'}, icons)
+
+        row = browser.css('table.theming-mime-type-icons').first.find('pdf').parent('tr')
+        if IS_PLONE_5:
+            icon_image_html = u'<img src="http://nohost/plone/++resource++mimetype.icons/pdf.png">'
+        else:
+            icon_image_html = u'<img src="http://nohost/plone/pdf.png">'
+
+        self.assertEqual(
+            [icon_image_html,
+             u'<span class="mimetype-icon icon-mimetype-img-pdf"></span>',
+             u'<span class="mimetype-icon icon-mimetype-mt-application-pdf"></span>',
+             u'application-pdf',
+             u'pdf'],
+            [cell.innerHTML.strip() for cell in row.cells])

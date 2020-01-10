@@ -38,17 +38,17 @@ $icons-mimetype-portal-types: ();
 
 /* Mime type icons registry */
 
-$icons-mime-type-icons: ();
+$icons-mime-img-type-icons: ();
 
 @mixin mime-type-icon($classpostfix, $value, $iconset) {
   $key: "#{$iconset}:#{$classpostfix}";
   $values: ($classpostfix, $value, $iconset);
-  $icons-mime-type-icons: map-merge($icons-mime-type-icons, ($key: $values));
+  $icons-mime-img-type-icons: map-merge($icons-mime-img-type-icons, ($key: $values));
 }
 
 @function get-mime-type-icons-for-iconset($requested-iconset) {
   $result: ();
-  @each $classpostfix, $value, $iconset in map-values($icons-mime-type-icons) {
+  @each $classpostfix, $value, $iconset in map-values($icons-mime-img-type-icons) {
     @if $iconset == $requested-iconset {
       $result: append($result, ($classpostfix, $value));
     }
@@ -58,4 +58,52 @@ $icons-mime-type-icons: ();
 
 @mixin mime-type-font-awesome-icon($classpostfix, $value) {
   @include mime-type-icon($classpostfix, $value, font-awesome);
+}
+
+/* Mime type icons registry; getIcon based */
+
+$icons-mime-img-type-icons: ();
+
+@mixin mime-type-icon($classpostfix, $value, $iconset) {
+  $key: "#{$iconset}:#{$classpostfix}";
+  $values: ($classpostfix, $value, $iconset);
+  $icons-mime-img-type-icons: map-merge($icons-mime-img-type-icons, ($key: $values));
+}
+
+@function get-mime-type-icons-for-iconset($requested-iconset) {
+  $result: ();
+  @each $classpostfix, $value, $iconset in map-values($icons-mime-img-type-icons) {
+    @if $iconset == $requested-iconset {
+      $result: append($result, ($classpostfix, $value));
+    }
+  }
+  @return $result;
+}
+
+@mixin mime-type-font-awesome-icon($classpostfix, $value) {
+  @include mime-type-icon($classpostfix, $value, font-awesome);
+}
+
+/* Mime type icons registry mime_type based */
+
+$icons-mime-mt-type-icons: ();
+
+@mixin mime-type-icon-mt($classpostfix, $value, $iconset) {
+  $key: "#{$iconset}:#{$classpostfix}";
+  $values: ($classpostfix, $value, $iconset);
+  $icons-mime-mt-type-icons: map-merge($icons-mime-mt-type-icons, ($key: $values));
+}
+
+@function get-mime-type-mt-icons-for-iconset($requested-iconset) {
+  $result: ();
+  @each $classpostfix, $value, $iconset in map-values($icons-mime-mt-type-icons) {
+    @if $iconset == $requested-iconset {
+      $result: append($result, ($classpostfix, $value));
+    }
+  }
+  @return $result;
+}
+
+@mixin mime-type-font-awesome-icon-mt($classpostfix, $value) {
+  @include mime-type-icon-mt($classpostfix, $value, font-awesome);
 }

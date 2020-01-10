@@ -4,7 +4,7 @@ Changelog
 2.0.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Improve mimetype icons support for better Plone 5 support. [jone]
 
 
 2.0.2 (2019-03-19)

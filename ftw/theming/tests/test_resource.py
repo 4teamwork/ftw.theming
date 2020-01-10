@@ -4,7 +4,7 @@ from ftw.theming.resource import DynamicSCSSResource
 from ftw.theming.resource import SCSSResource
 from ftw.theming.tests.stubs import CONTEXT
 from ftw.theming.tests.stubs import REQUEST
-from unittest2 import TestCase
+from unittest import TestCase
 from zope.interface.verify import verifyObject
 
 

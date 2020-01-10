@@ -3,7 +3,7 @@ from plone.app.layout.icons import icons
 from plone.memoize.instance import memoize
 
 
-WRAPPER_TEMPLATE = u'<span class="{classes}">{content}</span>'
+WRAPPER_TEMPLATE = u'<span class="mimetype-icon {cssclass}">{content}</span>'
 
 
 class CatalogBrainContentIcon(icons.CatalogBrainContentIcon):
@@ -11,12 +11,11 @@ class CatalogBrainContentIcon(icons.CatalogBrainContentIcon):
     @memoize
     def html_tag(self):
         image_tag = super(CatalogBrainContentIcon, self).html_tag()
-        if image_tag is None:
-            return None
-        return WRAPPER_TEMPLATE.format(classes=self.wrapper_classes(),
-                                       content=image_tag)
-
-    def wrapper_classes(self):
-        return 'mimetype-icon {}'.format(
-            utils.get_mimetype_css_class_from_icon_path(self.url)
-        )
+        if image_tag is not None:
+            return WRAPPER_TEMPLATE.format(
+                cssclass=utils.get_mimetype_css_class_from_icon_path(self.url),
+                content=image_tag)
+        else:
+            return WRAPPER_TEMPLATE.format(
+                cssclass=utils.get_mimetype_css_class_from_mime_type(self.brain.mime_type),
+                content='')

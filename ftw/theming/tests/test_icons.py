@@ -3,7 +3,7 @@ from ftw.builder import create
 from ftw.testbrowser import browsing
 from ftw.theming.tests import FunctionalTestCase
 from ftw.theming.utils import IS_PLONE_5
-from unittest2 import skipIf
+from unittest import skipIf
 
 
 @skipIf(IS_PLONE_5, 'Plone 5 no longer uses the IContentIcon interface for brains')

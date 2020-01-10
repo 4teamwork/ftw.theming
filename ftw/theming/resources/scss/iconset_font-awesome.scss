@@ -78,5 +78,19 @@
       }
     }
 
+    body.icons-on span.mimetype-icon {
+      &[class^="icon-mimetype-mt-"], &[class*=" icon-mimetype-mt-"] {
+        @extend .fa-icon;
+        @extend .#{$fa-css-prefix}-file-o;
+      }
+    }
+
+    @each $classpostfix, $value in get-mime-type-mt-icons-for-iconset(font-awesome) {
+      body.icons-on span.mimetype-icon.icon-mimetype-mt-$classpostfix {
+        @extend .fa-icon;
+        @extend .#{$fa-css-prefix}-#{$value};
+      }
+    }
+
   }
 }
