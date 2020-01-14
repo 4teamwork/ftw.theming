@@ -4,7 +4,7 @@ Changelog
 2.1.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix mimetype icon problem for Plone 4 when there is no icon defined. [jone]
 
 
 2.1.0 (2020-01-10)
