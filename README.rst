@@ -357,6 +357,16 @@ Example:
     }
 
 
+It is also possible to fill multiple different colors at once by
+repeating the ``selector, color`` pattern.
+
+.. code:: css
+
+    .foo {
+        background: embed-resource("soccer.svg", $fill-css:('.black-stuff', black, '.red-stuff', red, '.white-stuff', white));
+    }
+
+
 
 SCSS Mixins
 ===========
