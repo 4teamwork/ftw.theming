@@ -5,6 +5,7 @@ Changelog
 ------------------
 
 - Extend readme about how use embed-resource with multiple coulors [Nachtalb]
+- Make getting icon from brain/solr flare more robust. [mathias.leimgruber]
 
 
 2.1.1 (2020-01-14)
