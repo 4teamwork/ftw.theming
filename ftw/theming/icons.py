@@ -16,7 +16,7 @@ class CatalogBrainContentIcon(icons.CatalogBrainContentIcon):
             return WRAPPER_TEMPLATE.format(
                 cssclass=utils.get_mimetype_css_class_from_icon_path(self.url),
                 content=image_tag)
-        elif hasattr(aq_base(self.brain), 'mime_type'):
+        elif getattr(aq_base(self.brain), 'mime_type', False):
             return WRAPPER_TEMPLATE.format(
                 cssclass=utils.get_mimetype_css_class_from_mime_type(self.brain.mime_type),
                 content='')
